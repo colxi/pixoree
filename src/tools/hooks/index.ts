@@ -1,7 +1,13 @@
-import { useCallback, useRef, useState, useInsertionEffect } from 'react'
+import {
+  useCallback,
+  useRef,
+  useState,
+  useInsertionEffect,
+  useEffect,
+} from 'react'
 
 // The useEvent API has not yet been added to React,
-// so this is a temporary shim to make this sandbox work.
+// so this is a temporary shim to make this work.
 export function useEvent<T extends (...args: any[]) => void>(fn: T): T {
   const ref = useRef(fn)
   useInsertionEffect(() => {
@@ -19,11 +25,31 @@ export const useLocalContext = <T extends Record<string, any>>(data: T): T => {
   return ctx
 }
 
+/**
+ *
+ * A hook that forces a component to re-render.
+ *
+ */
 export const useForceUpdate = () => {
-  const [value, setValue] = useState(0)
+  const [forceUpdateCount, setForceUpdateCount] = useState<number>(0)
+  const afterUpdateCallback = useRef<(() => void) | null>(null)
+
+  const afterForceUpdate = (callback: () => void) => {
+    afterUpdateCallback.current = callback
+  }
+
   const forceUpdate = useEvent(() => {
-    const newValue = value > 1000 ? 0 : value + 1
-    setValue(newValue)
+    const newValue = forceUpdateCount > 1000 ? 0 : forceUpdateCount + 1
+    setForceUpdateCount(newValue)
   })
-  return { forceUpdate }
+
+  useEffect(() => {
+    if (!afterUpdateCallback.current) return
+    afterUpdateCallback.current()
+  }, [forceUpdateCount])
+
+  return {
+    forceUpdate,
+    afterForceUpdate,
+  }
 }

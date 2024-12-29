@@ -8,83 +8,82 @@ import {
   setColorInCoordinates,
   getCoordinatesFromImageByteIndex,
 } from '@/tools/utils/image'
-import { RgbaColor } from '@/pages/sprite-editor/types'
-import {
-  CanvasMouseEvent,
-  getCanvasClickMouseCoords,
-} from '../../../presentation/utils'
-import { EditorHistory } from '../../action-history'
-import { CanvasMouse } from '../../canvas-mouse'
+import { Coordinates, RgbaColor } from '@/pages/sprite-editor/types'
+import { EditorHistory } from '../../editor-history'
 import { EditorImage } from '../../editor-image'
 import { EditorColor } from '../../editor-color'
 import { EditorTool } from '../types'
+import { FillDripIcon } from '@/tools/ui-components/icons'
 
-interface PaintBucketToolOptions {
+interface PaintBucketToolDependencies {
   color: EditorColor
   image: EditorImage
   history: EditorHistory
-  mouse: CanvasMouse
 }
 
 export class PaintBucketTool implements EditorTool {
-  constructor({ image, mouse, history, color }: PaintBucketToolOptions) {
-    this.#image = image
-    this.#mouse = mouse
-    this.#history = history
-    this.#color = color
+  constructor({ image, history, color }: PaintBucketToolDependencies) {
+    this.#dependencies = { image, history, color }
+
+    this.#isMouseDown = false
     this.#isEyeDropperModeEnabled = false
   }
 
-  #color: EditorColor
-  #image: EditorImage
-  #mouse: CanvasMouse
-  #history: EditorHistory
+  #dependencies: PaintBucketToolDependencies
+
+  #isMouseDown: boolean
   #isEyeDropperModeEnabled: boolean
 
-  private fill(x: number, y: number) {
+  public icon = FillDripIcon
+
+  private fill(coordinates: Coordinates) {
     // If eye-dropper mode is enabled, get the color instead of painting it
     if (this.#isEyeDropperModeEnabled) {
-      this.pickColorFromPixel(x, y)
+      this.pickColorFromPixel(coordinates)
       return
     }
 
     const pixelColor = getColorFromCoordinates(
-      x,
-      y,
-      this.#image.size.w,
-      this.#image.imageBuffer
+      coordinates.x,
+      coordinates.y,
+      this.#dependencies.image.size.w,
+      this.#dependencies.image.imageBuffer
     )
     // if is same color, no action is needed, return
-    if (isColorEqual(pixelColor, this.#color.primaryColor)) return
-    this.floodFill(x, y, pixelColor)
-    this.#history.register('Fill')
+    if (isColorEqual(pixelColor, this.#dependencies.color.primaryColor)) return
+    this.floodFill(coordinates, pixelColor)
+    this.#dependencies.history.register('Fill', this.icon())
   }
 
-  private floodFill = (x: number, y: number, targetColor: RgbaColor) => {
+  private floodFill = (coordinates: Coordinates, targetColor: RgbaColor) => {
     const canFillPixel = (byteIndex: number) => {
       const pixelColor = getColorFromByteIndex(
         byteIndex,
-        this.#image.imageBuffer
+        this.#dependencies.image.imageBuffer
       )
       return isColorEqual(pixelColor, targetColor)
     }
 
     const stack: number[] = [
-      getImageByteIndexFromCoordinates(x, y, this.#image.size.w),
+      getImageByteIndexFromCoordinates(
+        coordinates.x,
+        coordinates.y,
+        this.#dependencies.image.size.w
+      ),
     ]
 
     while (stack.length) {
       let byteIndex = stack.pop()!
       const { x, y } = getCoordinatesFromImageByteIndex(
         byteIndex,
-        this.#image.size.w
+        this.#dependencies.image.size.w
       )
       setColorInCoordinates(
         x,
         y,
-        this.#image.size.w,
-        this.#image.imageBuffer,
-        this.#color.primaryColor
+        this.#dependencies.image.size.w,
+        this.#dependencies.image.imageBuffer,
+        this.#dependencies.color.primaryColor
       )
 
       // evaluate all directions
@@ -92,22 +91,22 @@ export class PaintBucketTool implements EditorTool {
       if (canFillPixel(rightPixelIndex)) stack.push(rightPixelIndex)
       const leftPixelIndex = byteIndex - 4
       if (canFillPixel(leftPixelIndex)) stack.push(leftPixelIndex)
-      const topPixelIndex = byteIndex - this.#image.size.w * 4
+      const topPixelIndex = byteIndex - this.#dependencies.image.size.w * 4
       if (canFillPixel(topPixelIndex)) stack.push(topPixelIndex)
-      const bottomPixelIndex = byteIndex + this.#image.size.w * 4
+      const bottomPixelIndex = byteIndex + this.#dependencies.image.size.w * 4
       if (canFillPixel(bottomPixelIndex)) stack.push(bottomPixelIndex)
     }
   }
 
-  private pickColorFromPixel(x: number, y: number) {
+  private pickColorFromPixel(coordinates: Coordinates) {
     const color = getColorFromCoordinates(
-      x,
-      y,
-      this.#image.size.w,
-      this.#image.imageBuffer
+      coordinates.x,
+      coordinates.y,
+      this.#dependencies.image.size.w,
+      this.#dependencies.image.imageBuffer
     )
     if (isTransparentColor(color)) return
-    this.#color.setPrimaryColor(color)
+    this.#dependencies.color.setPrimaryColor(color)
   }
 
   private onKeyDown = (e: KeyboardEvent) => {
@@ -123,6 +122,8 @@ export class PaintBucketTool implements EditorTool {
   }
 
   public enable = () => {
+    this.#isMouseDown = false
+    this.#isEyeDropperModeEnabled = false
     window.addEventListener('keydown', this.onKeyDown)
     window.addEventListener('keyup', this.onKeyUp)
   }
@@ -132,19 +133,17 @@ export class PaintBucketTool implements EditorTool {
     window.removeEventListener('keyup', this.onKeyUp)
   }
 
-  public onMouseMove(e: CanvasMouseEvent) {
-    if (!this.#mouse.isMouseDown || !this.#isEyeDropperModeEnabled) return
-    const { x, y } = getCanvasClickMouseCoords(e, this.#image.zoom)
-    this.pickColorFromPixel(x, y)
+  public onMouseMove(coordinates: Coordinates) {
+    if (!this.#isMouseDown) return
+    if (this.#isEyeDropperModeEnabled) this.pickColorFromPixel(coordinates)
   }
 
-  public onMouseDown(e: CanvasMouseEvent) {
-    const clickCoords = getCanvasClickMouseCoords(e, this.#image.zoom)
-    this.fill(
-      clickCoords.x + this.#image.viewBox.position.x,
-      clickCoords.y + this.#image.viewBox.position.y
-    )
+  public onMouseDown(coordinates: Coordinates) {
+    this.#isMouseDown = true
+    this.fill(coordinates)
   }
 
-  public onMouseUp(_e: CanvasMouseEvent) {}
+  public onMouseUp(_coordinates: Coordinates) {
+    this.#isMouseDown = false
+  }
 }

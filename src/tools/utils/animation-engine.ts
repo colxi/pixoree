@@ -1,13 +1,8 @@
-/**
- *
- *
- *
- */
 export class AnimationEngine {
   constructor(instanceId: string) {
     this.instanceId = instanceId
     this.requestAnimationFrameId = -1
-    console.log('AnimationEngine instance:', instanceId)
+    console.log(`[AnimationEngine]: Start instance '${instanceId}'`)
   }
 
   private requestAnimationFrameId: number
@@ -19,16 +14,11 @@ export class AnimationEngine {
   }
 
   public stop() {
-    console.log('AnimationEngine instance:', this.instanceId)
+    console.log(`[AnimationEngine]: Stop instance '${this.instanceId}'`)
     cancelAnimationFrame(this.requestAnimationFrameId)
   }
 }
 
-/**
- *
- *
- *
- */
 export class FramerateMonitor {
   constructor() {
     this.animationEngine = new AnimationEngine('fpsMonitor')

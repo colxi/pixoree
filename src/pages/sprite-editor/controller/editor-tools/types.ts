@@ -1,24 +1,25 @@
-import { CanvasMouseEvent } from '../../presentation/utils'
-import { EditorHistory } from '../action-history'
-import { CanvasMouse } from '../canvas-mouse'
+import { Coordinates } from '../../types'
+import { EditorHistory } from '../editor-history'
 import { EditorColor } from '../editor-color'
 import { EditorImage } from '../editor-image'
+import { EditorViewport } from '../editor-viewport'
 import { EditorEventBus } from '../event-bus'
 
-export interface EditorToolsOptions {
+export interface EditorToolsDependencies {
   image: EditorImage
-  mouse: CanvasMouse
   history: EditorHistory
   eventBus: EditorEventBus
   color: EditorColor
+  viewport: EditorViewport
 }
 
 export type EditorTool = {
+  icon: () => JSX.Element
   enable: () => void
   disable: () => void
-  onMouseMove: (e: CanvasMouseEvent) => void | Promise<void>
-  onMouseDown: (e: CanvasMouseEvent) => void | Promise<void>
-  onMouseUp: (e: CanvasMouseEvent) => void | Promise<void>
+  onMouseMove: (coordinates: Coordinates) => void | Promise<void>
+  onMouseDown: (coordinates: Coordinates) => void | Promise<void>
+  onMouseUp: (coordinates: Coordinates) => void | Promise<void>
 }
 
 export type ToolsMap = Record<SpriteEditorTool, EditorTool>

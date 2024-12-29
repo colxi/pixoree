@@ -1,0 +1,19 @@
+@use '/styles';
+
+.imageEditor {
+  border: 1px solid styles.$color-background;
+  border-bottom: 0px;
+  background-color: styles.$color-background;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 50px 1fr 250px;
+
+  .middleColumn {
+    display: grid;
+    grid-template-rows: 1fr 20px;
+  }
+
+  * {
+    user-select: none;
+  }
+}

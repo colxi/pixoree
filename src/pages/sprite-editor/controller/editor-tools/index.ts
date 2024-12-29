@@ -1,36 +1,38 @@
-import { CanvasMouse } from '../canvas-mouse'
-import { EditorHistory } from '../action-history'
-import { EditorImage } from '../editor-image'
 import { BrushTool } from './tools/brush'
-import { noOpTool } from './tools/noop'
 import { HandTool } from './tools/hand'
-import { EditorToolsOptions, SpriteEditorTool, ToolsMap } from './types'
-import { EditorEventBus } from '../event-bus'
-import { EditorColor } from '../editor-color'
+import { EditorToolsDependencies, SpriteEditorTool, ToolsMap } from './types'
 import { EyeDropperTool } from './tools/eye-dropper'
 import { hasKeyModifiers } from '@/tools/utils/keyboard'
 import { PaintBucketTool } from './tools/paint-bucket'
 import { EraserTool } from './tools/eraser'
+import { ZoomTool } from './tools/zoom'
+import { MoveTool } from './tools/move'
 
 export class EditorTools {
-  constructor({ image, mouse, history, eventBus, color }: EditorToolsOptions) {
+  constructor({
+    image,
+    history,
+    eventBus,
+    color,
+    viewport,
+  }: EditorToolsDependencies) {
+    this.#dependencies = {
+      image,
+      history,
+      eventBus,
+      color,
+      viewport,
+    }
+
     this.#activeToolName = SpriteEditorTool.BRUSH
-    this.#image = image
-    this.#mouse = mouse
-    this.#history = history
-    this.#eventBus = eventBus
-    this.#color = color
     this.#tools = this.getToolsMap()
     this.onKeyDown = this.onKeyDown.bind(this)
     window.addEventListener('keydown', this.onKeyDown)
     this.activeTool.enable()
   }
 
-  #image: EditorImage
-  #mouse: CanvasMouse
-  #color: EditorColor
-  #history: EditorHistory
-  #eventBus: EditorEventBus
+  #dependencies: EditorToolsDependencies
+
   #activeToolName = SpriteEditorTool.BRUSH
   #tools: ToolsMap
 
@@ -44,36 +46,39 @@ export class EditorTools {
     return this.#activeToolName
   }
 
+  public getToolIcon(tool: SpriteEditorTool): JSX.Element {
+    return this.#tools[tool].icon()
+  }
+
   private getToolsMap(): ToolsMap {
     return {
       [SpriteEditorTool.BRUSH]: new BrushTool({
-        color: this.#color,
-        image: this.#image,
-        mouse: this.#mouse,
-        history: this.#history,
-      }),
-      [SpriteEditorTool.EYE_DROPPER]: new EyeDropperTool({
-        color: this.#color,
-        image: this.#image,
-        mouse: this.#mouse,
-      }),
-      [SpriteEditorTool.PAINT_BUCKET]: new PaintBucketTool({
-        color: this.#color,
-        image: this.#image,
-        mouse: this.#mouse,
-        history: this.#history,
+        color: this.#dependencies.color,
+        image: this.#dependencies.image,
+        history: this.#dependencies.history,
       }),
       [SpriteEditorTool.ERASER]: new EraserTool({
-        image: this.#image,
-        mouse: this.#mouse,
-        history: this.#history,
+        image: this.#dependencies.image,
+        history: this.#dependencies.history,
+      }),
+      [SpriteEditorTool.EYE_DROPPER]: new EyeDropperTool({
+        color: this.#dependencies.color,
+        image: this.#dependencies.image,
       }),
       [SpriteEditorTool.HAND]: new HandTool({
-        image: this.#image,
-        mouse: this.#mouse,
+        viewport: this.#dependencies.viewport,
       }),
-      [SpriteEditorTool.MOVE]: noOpTool(),
-      [SpriteEditorTool.ZOOM]: noOpTool(),
+      [SpriteEditorTool.PAINT_BUCKET]: new PaintBucketTool({
+        color: this.#dependencies.color,
+        image: this.#dependencies.image,
+        history: this.#dependencies.history,
+      }),
+      [SpriteEditorTool.MOVE]: new MoveTool({
+        image: this.#dependencies.image,
+      }),
+      [SpriteEditorTool.ZOOM]: new ZoomTool({
+        image: this.#dependencies.image,
+      }),
     }
   }
 
@@ -121,6 +126,9 @@ export class EditorTools {
     this.activeTool.disable()
     this.#activeToolName = tool
     this.activeTool.enable()
-    this.#eventBus.dispatch(this.#eventBus.Event.TOOL_CHANGE, {})
+    this.#dependencies.eventBus.dispatch(
+      this.#dependencies.eventBus.Event.TOOL_CHANGE,
+      {}
+    )
   }
 }

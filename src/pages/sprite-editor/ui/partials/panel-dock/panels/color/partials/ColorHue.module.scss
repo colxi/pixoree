@@ -1,0 +1,22 @@
+@use '/styles';
+
+.rainbowContainer {
+  position: relative;
+}
+
+.pointer {
+  position: absolute;
+  width: 15px;
+  height: 0px;
+  pointer-events: none;
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    right: -12px;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-right: 8px solid styles.$color-background-brightest;
+  }
+}

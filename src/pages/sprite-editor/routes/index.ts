@@ -1,6 +1,6 @@
 import { AppRoutesCollection } from '../../../global-contexts/app-router/types'
-import { SpriteEditor } from '../presentation/SpriteEditor'
+import { ImageEditor } from '../ui/ImageEditor'
 
 export const spritesEditorRoutes = {
-  '/project/sprites': { component: SpriteEditor }
+  '/project/sprites': { component: ImageEditor },
 } satisfies AppRoutesCollection

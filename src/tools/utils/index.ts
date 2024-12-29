@@ -1,14 +1,13 @@
 // Error
 
-import fs from '@zenfs/core'
-
 export const throwError = (e: unknown) => {
   throw e
 }
 
 // Time
 
-export const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
+export const sleep = (ms: number) =>
+  new Promise((resolve) => setTimeout(resolve, ms))
 
 // Array
 

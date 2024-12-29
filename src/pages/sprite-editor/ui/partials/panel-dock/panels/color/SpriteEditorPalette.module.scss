@@ -1,0 +1,9 @@
+@use '/styles';
+
+.colorPicker {
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 1fr 28px;
+  gap: 10px;
+  height: 120px;
+}

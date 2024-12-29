@@ -53,6 +53,9 @@ importers:
       styled-components:
         specifier: ^6.1.12
         version: 6.1.12(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      uuid:
+        specifier: ^11.0.3
+        version: 11.0.3
       vite-tsconfig-paths:
         specifier: ^5.0.1
         version: 5.0.1(typescript@5.5.4)(vite@5.3.5(@types/node@20.17.3)(sass@1.77.8))
@@ -1539,6 +1542,10 @@ packages:
 
   utilium@1.0.4:
     resolution: {integrity: sha512-EGesAFASk3rUTA60heHpw9aspYzRbKe5+3+QO3bS/MoXdEZr0WbMI8SQ6PgI9aEXEUKiKdWnLv4zbArbAW8ohQ==}
+
+  uuid@11.0.3:
+    resolution: {integrity: sha512-d0z310fCWv5dJwnX1Y/MncBAqGMKEzlBb1AOf7z9K8ALnd0utBX/msg/fA0+sbyN1ihbMsLhrBlnl1ak7Wa0rg==}
+    hasBin: true
 
   vite-tsconfig-paths@5.0.1:
     resolution: {integrity: sha512-yqwv+LstU7NwPeNqajZzLEBVpUFU6Dugtb2P84FXuvaoYA+/70l9MHE+GYfYAycVyPSDYZ7mjOFuYBRqlEpTig==}
@@ -3038,6 +3045,8 @@ snapshots:
       eventemitter3: 5.0.1
     optionalDependencies:
       '@xterm/xterm': 5.5.0
+
+  uuid@11.0.3: {}
 
   vite-tsconfig-paths@5.0.1(typescript@5.5.4)(vite@5.3.5(@types/node@20.17.3)(sass@1.77.8)):
     dependencies:
