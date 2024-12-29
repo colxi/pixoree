@@ -1,47 +1,65 @@
 import { Coordinates } from '@/pages/sprite-editor/types'
-import {
-  CanvasMouseEvent,
-  getCanvasClickMouseCoords,
-} from '../../../presentation/utils'
-import { CanvasMouse } from '../../canvas-mouse'
-import { EditorImage } from '../../editor-image'
 import { EditorTool } from '../types'
+import { EditorViewport } from '../../editor-viewport'
+import { HandIcon } from '@/tools/ui-components/icons'
 
-interface HandToolOptions {
-  image: EditorImage
-  mouse: CanvasMouse
+interface HandToolDependencies {
+  viewport: EditorViewport
 }
 
 export class HandTool implements EditorTool {
-  constructor({ image, mouse }: HandToolOptions) {
-    this.#image = image
-    this.#mouse = mouse
+  constructor({ viewport }: HandToolDependencies) {
+    this.#dependencies = { viewport }
+    this.#isMouseDown = false
+    this.#handLastCoords = null
   }
 
-  #image: EditorImage
-  #mouse: CanvasMouse
-  #lastMouseCoords: Coordinates = { x: 0, y: 0 }
+  #dependencies: HandToolDependencies
 
-  public async onMouseMove(event: CanvasMouseEvent) {
-    if (!this.#mouse.isMouseDown) return
-    const coords = getCanvasClickMouseCoords(event, this.#image.zoom)
-    const xDiff = this.#lastMouseCoords.x - coords.x
-    const yDiff = this.#lastMouseCoords.y - coords.y
-    this.#image.setViewBoxPosition({
-      x: this.#image.viewBox.position.x + xDiff,
-      y: this.#image.viewBox.position.y + yDiff,
+  #isMouseDown: boolean
+  #handLastCoords: Coordinates | null = { x: 0, y: 0 }
+
+  public icon = HandIcon
+
+  private viewportScroll = (coordinates: Coordinates) => {
+    const diff: Coordinates = this.#handLastCoords
+      ? {
+          x: this.#handLastCoords.x - coordinates.x,
+          y: this.#handLastCoords.y - coordinates.y,
+        }
+      : {
+          x: 0,
+          y: 0,
+        }
+
+    this.#dependencies.viewport.setScroll({
+      x: this.#dependencies.viewport.scroll.x + diff.x,
+      y: this.#dependencies.viewport.scroll.y + diff.y,
     })
-    this.#lastMouseCoords = coords
+    this.#handLastCoords = coordinates
   }
 
-  public onMouseDown(event: CanvasMouseEvent) {
-    const coords = getCanvasClickMouseCoords(event, this.#image.zoom)
-    this.#lastMouseCoords = coords
+  public enable = () => {
+    this.#handLastCoords = null
+    this.#isMouseDown = false
   }
 
-  public enable = () => {}
+  public disable = () => {
+    // NOOP
+  }
 
-  public disable = () => {}
+  public onMouseDown(coordinates: Coordinates) {
+    this.#isMouseDown = true
+    this.#handLastCoords = coordinates
+  }
 
-  public onMouseUp(_event: CanvasMouseEvent) {}
+  public onMouseUp(_coordinates: Coordinates) {
+    this.#isMouseDown = false
+    this.#handLastCoords = null
+  }
+
+  public async onMouseMove(coordinates: Coordinates) {
+    if (!this.#isMouseDown) return
+    this.viewportScroll(coordinates)
+  }
 }

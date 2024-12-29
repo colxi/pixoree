@@ -5,6 +5,12 @@ export type RgbaColor = {
   a: number
 }
 
+export type HslColor = {
+  h: number
+  s: number
+  l: number
+}
+
 export type HexColor = `#${string}`
 
 export interface Coordinates {

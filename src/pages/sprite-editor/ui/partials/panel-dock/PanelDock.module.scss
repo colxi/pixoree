@@ -1,0 +1,12 @@
+@use '/styles';
+
+.panelDock {
+  display: grid;
+  grid-template-columns: 100%;
+  place-content: start;
+  height: 100%;
+  gap: 2px;
+  padding: 2px;
+  background-color: styles.$color-background-dark;
+  border: 1px solid styles.$color-background-darker;
+}

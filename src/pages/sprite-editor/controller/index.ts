@@ -1,35 +1,31 @@
-import { EditorHistory } from './action-history'
-import { CanvasMouse } from './canvas-mouse'
+import { EditorHistory } from './editor-history'
 import { EditorColor } from './editor-color'
 import { EditorImage } from './editor-image'
 import { EditorTools } from './editor-tools'
+import { EditorViewport } from './editor-viewport'
 import { EditorEventBus } from './event-bus'
 
 export class ImageEditor {
   static eventBus = new EditorEventBus()
-  static color = new EditorColor({ eventBus: this.eventBus })
-  static image = new EditorImage({ eventBus: this.eventBus })
-  static mouse = new CanvasMouse()
+  static color = new EditorColor({
+    eventBus: this.eventBus,
+  })
+  static image = new EditorImage({
+    eventBus: this.eventBus,
+  })
+  static viewport = new EditorViewport({
+    eventBus: this.eventBus,
+    image: this.image,
+  })
   static history = new EditorHistory({
     eventBus: this.eventBus,
-    onAdd: (action) => {
-      const arrayBuffer = new ArrayBuffer(
-        this.image.size.w * this.image.size.h * 4
-      )
-      const imageData = new Uint8ClampedArray(arrayBuffer)
-      imageData.set(this.image.imageBuffer)
-      return { action: action, data: imageData }
-    },
-    onChange: (entry) => {
-      this.image.imageBuffer.set(entry.data)
-    },
+    image: this.image,
   })
-
   static tools = new EditorTools({
     image: this.image,
-    mouse: this.mouse,
     history: this.history,
     eventBus: this.eventBus,
     color: this.color,
+    viewport: this.viewport,
   })
 }

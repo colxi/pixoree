@@ -6,22 +6,31 @@ import { EditorEventBus } from '../event-bus'
 import { EditorImageOptions } from './types'
 
 const BYTES_PER_PIXEL = 4
-const INITIAL_ZOOM = 10
+const INITIAL_ZOOM = 1
 const ZOOM_DECIMALS_RESOLUTION = 2
 
 export class EditorImage {
   constructor({ eventBus }: EditorImageOptions) {
     this.#eventBus = eventBus
+    this.#zoom = INITIAL_ZOOM
+    this.#size = { w: 500, h: 500 }
+    const arrayBuffer = new Uint8ClampedArray(
+      new ArrayBuffer(this.#size.w * this.#size.h * BYTES_PER_PIXEL)
+    )
+    arrayBuffer.fill(255)
+    this.#imageBuffer = arrayBuffer
   }
 
   #eventBus: EditorEventBus
-  #size: Size = { w: 500, h: 500 }
-  #zoom: number = INITIAL_ZOOM
-  #viewBoxPosition: Coordinates = { x: 0, y: 0 }
-  #imageBuffer = new Uint8ClampedArray(
-    new ArrayBuffer(this.#size.w * this.#size.h * BYTES_PER_PIXEL)
-  )
+  #imageBuffer: Uint8ClampedArray
+  #size: Size
 
+  /** @deprecated */
+  #zoom: number
+  /** @deprecated */
+  #viewBoxPosition: Coordinates = { x: 0, y: 0 }
+
+  /** @deprecated */
   public get viewBox(): DeepReadonly<Box> {
     const boxWidth = Math.floor(this.#size.w / this.#zoom)
     const boxHeight = Math.floor(this.#size.h / this.#zoom)
@@ -38,6 +47,13 @@ export class EditorImage {
     return this.#size
   }
 
+  public setImageSize(size: Size) {
+    this.#size = size
+    // TODO: update image buffer
+    this.#eventBus.dispatch(this.#eventBus.Event.IMAGE_SIZE_CHANGE, {})
+  }
+
+  /** @deprecated */
   public get zoom() {
     return this.#zoom
   }
@@ -46,6 +62,7 @@ export class EditorImage {
     return this.#imageBuffer
   }
 
+  /** @deprecated */
   public setViewBoxPosition(coords: Coordinates) {
     this.#viewBoxPosition.x = coords.x
     this.#viewBoxPosition.y = coords.y
@@ -55,6 +72,7 @@ export class EditorImage {
     )
   }
 
+  /** @deprecated */
   public setZoom(zoomLevel: number, zoomAt?: Coordinates): void {
     const zoomNew = toFixed(
       minMax({ value: zoomLevel, min: 1, max: 30 }),

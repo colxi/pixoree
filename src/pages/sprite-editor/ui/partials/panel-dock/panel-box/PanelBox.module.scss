@@ -1,0 +1,39 @@
+@use '/styles';
+
+.panelBox {
+  display: grid;
+  grid-template-columns: 1fr;
+  place-content: start;
+}
+
+.titleRow {
+  display: grid;
+  grid-template-columns: auto 1fr;
+
+  .title {
+    height: 30px;
+    font-weight: 800;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: grid;
+    place-content: center center;
+    background-color: styles.$color-background;
+    border-left: 1px solid styles.$color-background-darker;
+    border-right: 1px solid styles.$color-background-darker;
+    border-top: 1px solid styles.$color-background-darker;
+  }
+
+  .titleUnusedSpace {
+    height: 30px;
+    border-bottom: 1px solid styles.$color-background-darker;
+  }
+}
+
+.body {
+  background-color: styles.$color-background;
+  overflow-y: scroll;
+  height: auto;
+  border-left: 1px solid styles.$color-background-darker;
+  border-right: 1px solid styles.$color-background-darker;
+  border-bottom: 1px solid styles.$color-background-darker;
+}

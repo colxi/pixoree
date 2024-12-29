@@ -1,0 +1,36 @@
+@use '/styles';
+
+.historyEntries {
+  height: 200px;
+  overflow-y: scroll;
+  border-bottom: 1px solid styles.$color-background-darker;
+
+  .historyRow {
+    place-items: center start;
+    display: grid;
+    grid-template-columns: 20px auto;
+    gap: 5px;
+    padding: 5px 10px;
+    border-bottom: 1px solid styles.$color-background-darker;
+    cursor: pointer;
+
+    &[data-active='true'] {
+      background-color: styles.$color-background-bright;
+    }
+  }
+
+  .historyRowIcon {
+    width: 100%;
+    text-align: center;
+  }
+
+  .historyRowAction {
+    text-align: left;
+  }
+}
+
+.statusBar {
+  padding: 5px;
+  display: grid;
+  grid-template-columns: auto 20px;
+}

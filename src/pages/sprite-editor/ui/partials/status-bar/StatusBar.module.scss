@@ -1,0 +1,21 @@
+@use '/styles' as styles;
+
+.statusBar {
+  display: flex;
+  gap: 10px;
+
+  background: styles.$color-background-dark;
+  font-size: 12px;
+  height: 100%;
+  vertical-align: middle;
+
+  .zoom {
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: styles.$color-background-darker;
+  }
+
+  > section {
+    align-self: center;
+  }
+}

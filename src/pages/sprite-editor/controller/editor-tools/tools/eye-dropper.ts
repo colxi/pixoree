@@ -1,64 +1,60 @@
+import { Coordinates } from '@/pages/sprite-editor/types'
 import { EditorImage } from '../../editor-image'
 import { EditorColor } from '../../editor-color'
 import { EditorTool } from '../types'
 import {
-  CanvasMouseEvent,
-  getCanvasClickMouseCoords,
-} from '../../../presentation/utils'
-import { CanvasMouse } from '../../canvas-mouse'
-import {
   getColorFromCoordinates,
   isTransparentColor,
 } from '@/tools/utils/image'
+import { EyeDropperIcon } from '@/tools/ui-components/icons'
 
-interface EyeDropperToolOptions {
+interface EyeDropperToolDependencies {
   color: EditorColor
   image: EditorImage
-  mouse: CanvasMouse
 }
 
 export class EyeDropperTool implements EditorTool {
-  constructor({ image, color, mouse }: EyeDropperToolOptions) {
-    this.#image = image
-    this.#color = color
-    this.#mouse = mouse
+  constructor({ image, color }: EyeDropperToolDependencies) {
+    this.#dependencies = { image, color }
+    this.#isMOuseDown = false
   }
 
-  #color: EditorColor
-  #image: EditorImage
-  #mouse: CanvasMouse
+  #dependencies: EyeDropperToolDependencies
 
-  private pickColorFromPixel(x: number, y: number) {
+  #isMOuseDown: boolean
+
+  public icon = EyeDropperIcon
+
+  private pickColorFromPixel(coordinates: Coordinates) {
     const color = getColorFromCoordinates(
-      x,
-      y,
-      this.#image.size.w,
-      this.#image.imageBuffer
+      coordinates.x,
+      coordinates.y,
+      this.#dependencies.image.size.w,
+      this.#dependencies.image.imageBuffer
     )
     if (isTransparentColor(color)) return
-    this.#color.setPrimaryColor(color)
+    this.#dependencies.color.setPrimaryColor(color)
   }
 
-  public onMouseDown(event: CanvasMouseEvent) {
-    const clickCoords = getCanvasClickMouseCoords(event, this.#image.zoom)
-    this.pickColorFromPixel(
-      clickCoords.x + this.#image.viewBox.position.x,
-      clickCoords.y + this.#image.viewBox.position.y
-    )
+  public enable = () => {
+    this.#isMOuseDown = false
   }
 
-  public onMouseMove(event: CanvasMouseEvent) {
-    if (!this.#mouse.isMouseDown) return
-    const clickCoords = getCanvasClickMouseCoords(event, this.#image.zoom)
-    this.pickColorFromPixel(
-      clickCoords.x + this.#image.viewBox.position.x,
-      clickCoords.y + this.#image.viewBox.position.y
-    )
+  public disable = () => {
+    // NOOP
   }
 
-  public onMouseUp(_: CanvasMouseEvent) {}
+  public onMouseDown(coordinates: Coordinates) {
+    this.#isMOuseDown = true
+    this.pickColorFromPixel(coordinates)
+  }
 
-  public enable = () => {}
+  public onMouseUp(_coordinates: Coordinates) {
+    this.#isMOuseDown = false
+  }
 
-  public disable = () => {}
+  public onMouseMove(coordinates: Coordinates) {
+    if (!this.#isMOuseDown) return
+    this.pickColorFromPixel(coordinates)
+  }
 }
