@@ -2,7 +2,7 @@ import { PersistentPixelatedCanvas } from '@/tools/ui-components/persistent-pixe
 import { getElementCoordinatesFromMouseEvent } from '@/tools/utils/event'
 import { FC, useEffect, useRef, useState } from 'react'
 import { getCanvasContextColorFromCoordinates, findCanvasClosestColorCoordinates } from '@/tools/utils/canvas'
-import { Coordinates, Size } from '@/pages/sprite-editor/types'
+import { Coordinates, Size } from '@/types'
 import { getHueFromRgba, getRgbaColorFromHue } from '@/tools/utils/color'
 import styles from './HuePickerBox.module.scss'
 

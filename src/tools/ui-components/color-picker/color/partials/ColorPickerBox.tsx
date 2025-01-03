@@ -1,4 +1,4 @@
-import { Coordinates, RgbaColor, Size } from '@/pages/sprite-editor/types'
+import { Coordinates, RgbaColor, Size } from '@/types'
 import { PersistentPixelatedCanvas } from '@/tools/ui-components/persistent-pixelated-canvas/PersistentPixelatedCanvas'
 import { findCanvasClosestColorCoordinates, getCanvasContextColorFromCoordinates } from '@/tools/utils/canvas'
 import { FC, useEffect, useRef, useState } from 'react'

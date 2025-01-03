@@ -1,9 +1,4 @@
-import {
-  CmykColor,
-  HexColor,
-  HslColor,
-  RgbaColor,
-} from '@/pages/sprite-editor/types'
+import { CmykColor, HexColor, HslColor, RgbaColor } from '@/types'
 
 /**
  *

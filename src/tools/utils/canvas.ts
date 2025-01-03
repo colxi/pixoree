@@ -1,4 +1,4 @@
-import { Coordinates, RgbaColor } from '@/pages/sprite-editor/types'
+import { Coordinates, RgbaColor } from '@/types'
 import { getColorDistance } from './color'
 import { getImageCoordinatesFromByteIndex } from './image'
 

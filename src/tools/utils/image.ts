@@ -1,9 +1,4 @@
-import {
-  Coordinates,
-  HexColor,
-  RgbaColor,
-  Size,
-} from '@/pages/sprite-editor/types'
+import { Coordinates, HexColor, RgbaColor, Size } from '@/types'
 import { formatHexColorAsRgba } from './formatters'
 
 export const getImageByteIndexFromCoordinates = (
