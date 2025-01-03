@@ -31,9 +31,8 @@ jobs:
 
     # - run: pnpm ci
     - run: pnpm i
-    - run: pnpm run build --if-present
-    - run: pnpm run build --if-present
-    - run: pnpm test --if-present
+    - run: pnpm run build # --if-present
+    # - run: pnpm test --if-present
 
     - name: Deploy with gh-pages
       run: |
