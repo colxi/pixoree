@@ -27,6 +27,9 @@ jobs:
         with:
           node-version: ${{steps.get-node-version.outputs.node}}
 
+      - name: Test
+        uses: ./shared/test.yml
+
       - name: Install PNPM ${{steps.get-pnpm-version.outputs.node}}
         run: npm i -g pnpm@${{steps.get-pnpm-version.outputs.node}}
 
