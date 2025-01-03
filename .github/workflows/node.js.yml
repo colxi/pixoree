@@ -29,9 +29,9 @@ jobs:
     - name: Install PNPM
       run: npm i -g pnpm
 
-    - run: pnpm ci
+    # - run: pnpm ci
     - run: pnpm run build --if-present
-    - run: pnpm test
+    - run: pnpm test --if-present
 
     - name: Deploy with gh-pages
       run: |
