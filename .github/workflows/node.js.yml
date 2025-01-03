@@ -32,6 +32,7 @@ jobs:
       - name: Build app
         run: |
           pnpm i
+          pnpm i gh-pages
           pnpm run build
       # - run: pnpm test --if-present
       - name: Deploy with gh-pages

@@ -24,7 +24,6 @@
     "vite-tsconfig-paths": "^5.0.1"
   },
   "devDependencies": {
-    "gh-pages": "^6.3.0",
     "@stylistic/eslint-plugin": "^2.1.0",
     "@types/lodash-es": "^4.17.12",
     "@types/react": "^18.3.3",
