@@ -20,17 +20,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-        # extract `engines.node` from package.json and save it to output
       - name: Get Node.JS version from package.json
         id: get-node-version
         run: echo ::set-output name=node::$(jq -r .engines.node ./package.json)
 
-        # extract `engines.pnpm` from package.json and save it to output
       - name: Get Pnpm version from package.json
         id: get-pnpm-version
         run: echo ::set-output name=node::$(jq -r .engines.pnpm ./package.json)
 
-        # set extracted node version
       - name: Use Node.js ${{steps.get-node-version.outputs.node}}
         uses: actions/setup-node@v4
         with:
@@ -44,7 +41,10 @@ jobs:
           pnpm i
           pnpm i gh-pages
           pnpm run build
-      # - run: pnpm test --if-present
+
+      - name: Run tests
+        run: pnpm test
+
       - name: Deploy with gh-pages
         run: |
           git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
