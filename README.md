@@ -1,13 +1,10 @@
 # Pixoree (WPI)
 
- Browser-based image editor that attempts to feel familiar to its users, by providing:
-- Adobe Photoshop ® alike UI.
-- Adobe Photoshop ® keybindings.
-- Image editor essential/key features
+Pixoree is a Browser-based image editor that provides an Adobe Photoshop® look and feel.
+> This project has NO relation with Adobe, and its name/products are only referenced for descriptive purposes
 
 ![Screenshot 2025-01-02 at 02 17 01](https://github.com/user-attachments/assets/68fc9ea9-7a13-4757-b2f0-4029856765b7)
 
-> This project has NO relation with Adobe, and its name/products are only referenced for descriptive purposes
 
 
 # React + TypeScript + Vite
