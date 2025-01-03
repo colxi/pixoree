@@ -2,11 +2,11 @@ import { hasKeyModifiers } from '@/tools/utils/keyboard'
 import { getColorFromByteIndex } from '@/tools/utils/image'
 import {
   getImageByteIndexFromCoordinates,
-  getColorFromCoordinates,
+  getImageColorFromCoordinates,
   isColorEqual,
   isTransparentColor,
   setColorInCoordinates,
-  getCoordinatesFromImageByteIndex,
+  getImageCoordinatesFromByteIndex,
 } from '@/tools/utils/image'
 import { Coordinates, RgbaColor } from '@/pages/sprite-editor/types'
 import { EditorHistory } from '../../editor-history'
@@ -43,10 +43,9 @@ export class PaintBucketTool implements EditorTool {
       return
     }
 
-    const pixelColor = getColorFromCoordinates(
-      coordinates.x,
-      coordinates.y,
-      this.#dependencies.image.size.w,
+    const pixelColor = getImageColorFromCoordinates(
+      coordinates,
+      this.#dependencies.image.size,
       this.#dependencies.image.imageBuffer
     )
     // if is same color, no action is needed, return
@@ -74,9 +73,9 @@ export class PaintBucketTool implements EditorTool {
 
     while (stack.length) {
       let byteIndex = stack.pop()!
-      const { x, y } = getCoordinatesFromImageByteIndex(
+      const { x, y } = getImageCoordinatesFromByteIndex(
         byteIndex,
-        this.#dependencies.image.size.w
+        this.#dependencies.image.size
       )
       setColorInCoordinates(
         x,
@@ -99,10 +98,9 @@ export class PaintBucketTool implements EditorTool {
   }
 
   private pickColorFromPixel(coordinates: Coordinates) {
-    const color = getColorFromCoordinates(
-      coordinates.x,
-      coordinates.y,
-      this.#dependencies.image.size.w,
+    const color = getImageColorFromCoordinates(
+      coordinates,
+      this.#dependencies.image.size,
       this.#dependencies.image.imageBuffer
     )
     if (isTransparentColor(color)) return

@@ -26,13 +26,3 @@ export function formatHexColorAsRgba(hex: HexColor) {
 
   return { r, g, b, a }
 }
-
-export function formatRgbaColorAsHex(rgbaColor: RgbaColor): HexColor {
-  // Convert each component to a two-digit hex value
-  const red = rgbaColor.r.toString(16).padStart(2, '0')
-  const green = rgbaColor.g.toString(16).padStart(2, '0')
-  const blue = rgbaColor.b.toString(16).padStart(2, '0')
-  const alpha = rgbaColor.a.toString(16).padStart(2, '0')
-
-  return `#${red}${green}${blue}${alpha}`
-}

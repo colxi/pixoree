@@ -2,15 +2,6 @@ import { useEffect, type FC } from 'react'
 import { ImageEditor } from '@/pages/sprite-editor/controller'
 import { useForceUpdate } from '@/tools/hooks'
 import { SpriteEditorTool } from '@/pages/sprite-editor/controller/editor-tools/types'
-import {
-  CrossIcon,
-  BrushIcon,
-  EraserIcon,
-  HandIcon,
-  MagnifyingGlassIcon,
-  EyeDropperIcon,
-  FillDripIcon,
-} from '@/tools/ui-components/icons'
 import styles from './EditorToolsPalette.module.scss'
 
 export const EditorToolsPalette: FC = () => {

@@ -1,6 +1,4 @@
 import { useEffect, type FC } from 'react'
-import { ColorPicker } from './ColorPicker'
-import styles from './SpriteEditorPalette.module.scss'
 import { PanelBox } from '@/pages/sprite-editor/ui/partials/panel-dock/panel-box/PanelBox'
 import { DropDown, DropDownItem, DropDownOptions } from '@/tools/ui-components/dropdown/DropDown'
 import { ImageEditor } from '@/pages/sprite-editor/controller'
@@ -8,9 +6,9 @@ import { useForceUpdate } from '@/tools/hooks'
 import { HexColor } from '@/pages/sprite-editor/types'
 import { formatHexColorAsRgba } from '@/tools/utils/formatters'
 import { isColorEqual } from '@/tools/utils/image'
-import { ColorPickerRainbow } from './partials/ColorPickerRainbow'
+import styles from './PalettePanel.module.scss'
 
-export const SpriteEditorPalette: FC = () => {
+export const PalettePanel: FC = () => {
   const { forceUpdate } = useForceUpdate()
 
   const colors = ImageEditor.color.palettes[0].colors
@@ -62,10 +60,6 @@ export const SpriteEditorPalette: FC = () => {
   return (
     <>
       <PanelBox title="Palette">
-        <section>
-          <ColorPicker />
-          <ColorPickerRainbow />
-        </section>
         <DropDown options={options} rowRenderer={rowRenderer} />
         <section className={styles.container}>
           {colors.map(

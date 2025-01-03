@@ -13,7 +13,7 @@ import { LocalProjectNewSchema } from './schemas'
 //   // Enable Data persistence
 //   // https://developer.mozilla.org/en-US/docs/Web/API/Storage_API/Storage_quotas_and_eviction_criteria#does_browser-stored_data_persist
 //   navigator.storage.persist().then((granted) => {
-//     console.log('🔥 persistence granted:', granted)
+//     console.log('persistence granted:', granted)
 //   })
 // } else {
 //   console.log()

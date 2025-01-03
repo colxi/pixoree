@@ -1,0 +1,27 @@
+@use '/styles';
+
+.container {
+  display: grid;
+  grid-template-columns: 350px 250px;
+  gap: 17px;
+}
+
+.topBlock {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 17px;
+  margin-bottom: 20px;
+}
+
+.bottomBlock {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr;
+  gap: 6px;
+}
+
+.action {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+}

@@ -1,0 +1,17 @@
+@use '/styles';
+
+.colorPreview {
+  width: 75px;
+  height: 75px;
+  border: 2px solid styles.$color-border;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+
+.colorType {
+  font-size: 10px;
+  height: 100%;
+  place-items: center;
+  place-content: center;
+  display: grid;
+}

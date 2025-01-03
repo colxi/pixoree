@@ -1,4 +1,9 @@
-import { Coordinates, HexColor, RgbaColor } from '@/pages/sprite-editor/types'
+import {
+  Coordinates,
+  HexColor,
+  RgbaColor,
+  Size,
+} from '@/pages/sprite-editor/types'
 import { formatHexColorAsRgba } from './formatters'
 
 export const getImageByteIndexFromCoordinates = (
@@ -13,11 +18,11 @@ export const getImageByteIndexFromCoordinates = (
   return byteOffset
 }
 
-export const getCoordinatesFromImageByteIndex = (
+export const getImageCoordinatesFromByteIndex = (
   byteIndex: number,
-  imageWidth: number
+  imageSize: Size
 ): Coordinates => {
-  const bytesPerRow = imageWidth * 4
+  const bytesPerRow = imageSize.w * 4
   const y = Math.floor(byteIndex / bytesPerRow)
   const x = (byteIndex % bytesPerRow) / 4
   return { x, y }
@@ -28,13 +33,16 @@ export const isTransparentColor = (color: RgbaColor | HexColor): boolean => {
   return color.a === 0
 }
 
-export const getColorFromCoordinates = (
-  x: number,
-  y: number,
-  imageWidth: number,
+export const getImageColorFromCoordinates = (
+  coordinates: Coordinates,
+  size: Size,
   imageBuffer: Uint8ClampedArray
 ): RgbaColor => {
-  const byteIndex = getImageByteIndexFromCoordinates(x, y, imageWidth)
+  const byteIndex = getImageByteIndexFromCoordinates(
+    coordinates.x,
+    coordinates.y,
+    size.w
+  )
   const color = {
     r: imageBuffer[byteIndex + 0],
     g: imageBuffer[byteIndex + 1],

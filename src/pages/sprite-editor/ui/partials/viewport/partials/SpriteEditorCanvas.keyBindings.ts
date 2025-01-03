@@ -13,6 +13,9 @@ export const useSpriteEditorCanvasKeyBindings = (
   const [lastTool, setLastTool] = useState(ImageEditor.tools.Tool.BRUSH)
 
   const handleKeyDown = useEvent(async (e: KeyboardEvent) => {
+    // do nothing when the target of the event is an input field
+    if (e.target instanceof HTMLInputElement) return
+
     // allow page reload with metaKey+R, but disable the rest of browser shortcuts
     if (e.code === 'KeyR' && e.metaKey) return
     else e.preventDefault()

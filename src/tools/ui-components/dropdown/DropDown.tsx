@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import { FC, useState } from 'react'
 import styles from './DropDown.module.scss'
 
-interface Props {
+type Props = {
   options: DropDownOptions
   rowRenderer: (item: DropDownItem, index: number, group: number) => JSX.Element
 }
