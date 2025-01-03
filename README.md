@@ -1,3 +1,13 @@
+# Pixoree (WPI)
+
+Browser based image editor that attempts to be familiar to its users by providing:
+- Adobe Photoshop alike UI
+- Adobe Photoshop keybindings
+
+![Screenshot 2025-01-02 at 02 17 01](https://github.com/user-attachments/assets/68fc9ea9-7a13-4757-b2f0-4029856765b7)
+
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
