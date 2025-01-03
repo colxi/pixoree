@@ -1,21 +1,19 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
-
-name: Node.js CI
+name: pr-check
 
 on:
-  push:
-    branches: ['main']
-  # pull_request:
-  #   branches: ['main']
+  pull_request_target:
+    branches:
+      - main
 
 jobs:
-  build:
-    if: github.event.pull_request.merged == true
+  deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout from PR branch
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.ref }}
 
       - name: Get Node.JS version from package.json
         id: get-node-version
@@ -38,15 +36,5 @@ jobs:
           pnpm i
           pnpm i gh-pages
 
-      - name: Build app
-        run: pnpm run build
-
       - name: Run tests
         run: pnpm test
-
-      - name: Deploy with gh-pages
-        run: |
-          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          pnpm run deploy -u "github-actions-bot <support+actions@github.com>"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
