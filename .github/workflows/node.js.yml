@@ -30,6 +30,8 @@ jobs:
       run: npm i -g pnpm
 
     # - run: pnpm ci
+    - run: pnpm i
+    - run: pnpm run build --if-present
     - run: pnpm run build --if-present
     - run: pnpm test --if-present
 
