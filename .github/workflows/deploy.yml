@@ -35,11 +35,11 @@ jobs:
           pnpm i
           pnpm i gh-pages
 
-      - name: Build app
-        run: pnpm run build
-
       - name: Run tests
         run: pnpm test
+
+      - name: Build app
+        run: pnpm run build
 
       - name: Deploy with gh-pages
         run: |
