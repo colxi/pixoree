@@ -28,7 +28,7 @@ jobs:
         # extract `engines.pnpm` from package.json and save it to output
       - name: Get Pnpm version from package.json
         id: get-pnpm-version
-        run: echo ::set-output name=pnpm::$(jq -r .engines.pnpm ./package.json)
+        run: echo ::set-output name=node::$(jq -r .engines.pnpm ./package.json)
 
         # set extracted node version
       - name: Use Node.js ${{steps.get-node-version.outputs.node}}
