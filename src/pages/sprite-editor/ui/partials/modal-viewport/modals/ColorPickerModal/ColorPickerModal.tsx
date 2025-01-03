@@ -2,23 +2,16 @@ import { RgbaColor } from '@/pages/sprite-editor/types'
 import { ColorPicker } from '@/tools/ui-components/color-picker/color/ColorPicker'
 import { FC, useEffect, useState } from 'react'
 import styles from './ColorPickerModal.module.scss'
-import { useImageEditorUi } from '@/pages/sprite-editor/ui/hook'
-import { ColorPreview } from './partials/ColorPreview'
-import { RgbForm } from './partials/form/RgbForm'
+import { ColorPreview } from './partials/color-preview/ColorPreview'
+import { RgbForm } from './partials/color-form/RgbForm'
 import { Button } from '@/tools/ui-components/button/Button'
-import { HslForm } from './partials/form/HslForm'
-import { CmykForm } from './partials/form/CmykForm'
-import { HexForm } from './partials/form/HexForm'
+import { HslForm } from './partials/color-form/HslForm'
+import { CmykForm } from './partials/color-form/CmykForm'
+import { HexForm } from './partials/color-form/HexForm'
 import { ImageEditor } from '@/pages/sprite-editor/controller'
+import { ModalCatalog } from '@/pages/sprite-editor/controller/editor-modal/types'
 
-type Props = {
-  type: 'primary' | 'secondary'
-  allowSecondary: false
-  color: RgbaColor
-}
-
-export const ColorPickerModal: FC<Props> = ({ type, color, allowSecondary }) => {
-  const { setModalTitle, closeModal } = useImageEditorUi()
+export const ColorPickerModal: FC<ModalCatalog['colorPicker']> = ({ type, color, allowSecondary }) => {
   const [newColor, setNewColor] = useState<RgbaColor>(color)
 
   const handleOnSelect = (color: RgbaColor) => {
@@ -32,15 +25,20 @@ export const ColorPickerModal: FC<Props> = ({ type, color, allowSecondary }) => 
   const handleAcceptClick = () => {
     if (type === 'primary') ImageEditor.color.setPrimaryColor(newColor)
     if (type === 'secondary') ImageEditor.color.setSecondaryColor(newColor)
-    closeModal()
+    ImageEditor.modal.closeModal()
   }
 
   const handleCancelClick = () => {
-    closeModal()
+    ImageEditor.modal.closeModal()
   }
 
   useEffect(() => {
-    setModalTitle('Color Picker')
+    ImageEditor.modal.setModalTitle('Color Picker')
+    ImageEditor.eventBus.subscribe(ImageEditor.eventBus.Event.MODAL_CLOSE_REQUEST, handleCancelClick)
+
+    return () => {
+      ImageEditor.eventBus.unsubscribe(ImageEditor.eventBus.Event.MODAL_CLOSE_REQUEST, handleCancelClick)
+    }
   }, [])
 
   return (

@@ -10,6 +10,10 @@ export enum ImageEditorEvent {
   VIEWPORT_SCROLL_CHANGE = 'VIEWPORT_SCROLL_CHANGE',
   VIEWPORT_ZOOM_CHANGE = 'VIEWPORT_ZOOM_CHANGE',
   VIEWPORT_SIZE_CHANGE = 'VIEWPORT_SIZE_CHANGE',
+  MODAL_OPEN = 'MODAL_OPEN',
+  MODAL_CLOSE = 'MODAL_CLOSE',
+  MODAL_CLOSE_REQUEST = 'MODAL_CLOSE_REQUEST',
+  MODAL_TITLE_CHANGE = 'MODAL_TITLE_CHANGE',
 
   // @deprecated
   IMAGE_VIEW_BOX_POSITION_CHANGE = 'IMAGE_VIEW_BOX_POSITION_CHANGE',
@@ -27,6 +31,10 @@ export type ImageEditorEvents = {
   [ImageEditorEvent.VIEWPORT_ZOOM_CHANGE]: {}
   [ImageEditorEvent.VIEWPORT_SIZE_CHANGE]: {}
   [ImageEditorEvent.IMAGE_SIZE_CHANGE]: {}
+  [ImageEditorEvent.MODAL_OPEN]: {}
+  [ImageEditorEvent.MODAL_CLOSE]: {}
+  [ImageEditorEvent.MODAL_CLOSE_REQUEST]: {}
+  [ImageEditorEvent.MODAL_TITLE_CHANGE]: {}
 
   // @deprecated
   [ImageEditorEvent.IMAGE_VIEW_BOX_POSITION_CHANGE]: {}

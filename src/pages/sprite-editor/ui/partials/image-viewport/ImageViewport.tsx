@@ -1,10 +1,10 @@
 import { useEffect, useRef, type FC } from 'react'
-import styles from './Viewport.module.scss'
 import { InteractiveCanvas } from './partials/InteractiveCanvas'
 import { ImageCanvas } from './partials/ImageCanvas'
 import { ImageEditor } from '@/pages/sprite-editor/controller'
+import styles from './ImageViewport.module.scss'
 
-export const Viewport: FC = () => {
+export const ImageViewport: FC = () => {
   const viewportRef = useRef<HTMLElement>(null)
 
   const onViewportSizeChange = (entries: ResizeObserverEntry[]) => {

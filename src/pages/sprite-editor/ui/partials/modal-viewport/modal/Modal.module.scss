@@ -21,6 +21,10 @@
   outline: 1px solid styles.$color-border-darkest;
   overflow: hidden;
   box-shadow: 0px 2px 20px 0px styles.$color-background-darker;
+
+  &[data-visible='false'] {
+    opacity: 0;
+  }
 }
 
 .modalTitle {
