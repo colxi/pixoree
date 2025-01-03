@@ -3,11 +3,9 @@ import { ImageEditor } from '@/pages/sprite-editor/controller'
 import { useForceUpdate } from '@/tools/hooks'
 import { SwitchIcon } from '@/tools/ui-components/icons'
 import styles from './EditorToolsColor.module.scss'
-import { useImageEditorUi } from '../../../hook'
 import { getHexColorFromRgba } from '@/tools/utils/color'
 
 export const EditorToolsColor: FC = () => {
-  const { openModal } = useImageEditorUi()
   const { forceUpdate } = useForceUpdate()
 
   const handleBlackAndWhiteClick = () => {
@@ -23,7 +21,7 @@ export const EditorToolsColor: FC = () => {
   }
 
   const handlePrimaryColorClick = () => {
-    openModal('colorPicker', {
+    ImageEditor.modal.openModal('colorPicker', {
       type: 'primary',
       allowSecondary: false,
       color: ImageEditor.color.primaryColor
@@ -31,7 +29,7 @@ export const EditorToolsColor: FC = () => {
   }
 
   const handleSecondaryColorClick = () => {
-    openModal('colorPicker', {
+    ImageEditor.modal.openModal('colorPicker', {
       type: 'secondary',
       allowSecondary: false,
       color: ImageEditor.color.secondaryColor

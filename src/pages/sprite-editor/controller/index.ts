@@ -4,6 +4,7 @@ import { EditorImage } from './editor-image'
 import { EditorTools } from './editor-tools'
 import { EditorViewport } from './editor-viewport'
 import { EditorEventBus } from './event-bus'
+import { EditorModal } from './editor-modal'
 
 export class ImageEditor {
   static eventBus = new EditorEventBus()
@@ -27,5 +28,8 @@ export class ImageEditor {
     eventBus: this.eventBus,
     color: this.color,
     viewport: this.viewport,
+  })
+  static modal = new EditorModal({
+    eventBus: this.eventBus,
   })
 }
