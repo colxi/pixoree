@@ -38,6 +38,7 @@ jobs:
 
       - name: Build app
         run: |
+          node --version
           pnpm i
           pnpm i gh-pages
           pnpm run build
