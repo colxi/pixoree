@@ -1,4 +1,4 @@
-import { HexColor, RgbaColor } from '@/types'
+import { HexColor } from '@/types'
 
 export function formatBytes(bytes: number, decimals: number = 2) {
   if (!+bytes) return '0 Bytes'

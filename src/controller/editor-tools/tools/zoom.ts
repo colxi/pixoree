@@ -20,7 +20,9 @@ export class ZoomTool implements EditorTool {
 
   public disable = () => {}
 
-  public onMouseMove(_coordinates: Coordinates) {}
+  public onMouseMove(_coordinates: Coordinates) {
+    this.#dependencies
+  }
 
   public onMouseDown(_coordinates: Coordinates) {}
 
