@@ -1,19 +1,19 @@
 import React from 'react'
 
-interface Props {
+type Props = {
   width: number
   height: number
   id?: string
   className?: string
   willReadFrequently?: boolean
   contextRef: (a: CanvasRenderingContext2D | null) => void
-  onMouseDown?: (e: React.MouseEvent<HTMLCanvasElement>) => void
-  onMouseUp?: (e: React.MouseEvent<HTMLCanvasElement>) => void
-  onMouseMove?: (e: React.MouseEvent<HTMLCanvasElement>) => void
-  onMouseOut?: (e: React.MouseEvent<HTMLCanvasElement>) => void
-  onWheel?: (e: React.WheelEvent<HTMLCanvasElement>) => void
-  onClick?: (e: React.MouseEvent<HTMLCanvasElement>) => void
-  onContextMenu?: (e: React.MouseEvent<HTMLCanvasElement>) => void
+  onMouseDown?: (e: React.MouseEvent<HTMLCanvasElement> | MouseEvent) => void
+  onMouseUp?: (e: React.MouseEvent<HTMLCanvasElement> | MouseEvent) => void
+  onMouseMove?: (e: React.MouseEvent<HTMLCanvasElement> | MouseEvent) => void
+  onMouseOut?: (e: React.MouseEvent<HTMLCanvasElement> | MouseEvent) => void
+  onClick?: (e: React.MouseEvent<HTMLCanvasElement> | MouseEvent) => void
+  onContextMenu?: (e: React.MouseEvent<HTMLCanvasElement> | MouseEvent) => void
+  onWheel?: (e: React.WheelEvent<HTMLCanvasElement> | WheelEvent) => void
 }
 
 /**
@@ -31,6 +31,24 @@ export class PersistentPixelatedCanvas extends React.Component<Props> {
   static defaultProps = {
     className: 'PersistentPixelatedCanvas',
     willReadFrequently: false
+  }
+
+  /** 
+   * 
+   * Track mouseUp event on the document and treat it as a mouseUp event on the canvas
+   * 
+   */
+  componentDidMount(): void {
+    document.addEventListener('mouseup', this.handleOnMouseUp)
+  }
+
+  /**
+   * 
+   * Remove the document mouseUp event listener
+   * 
+   */
+  componentWillUnmount() {
+    document.removeEventListener('mouseup', this.handleOnMouseUp)
   }
 
   /** 
@@ -86,7 +104,7 @@ export class PersistentPixelatedCanvas extends React.Component<Props> {
     if (this.props.onMouseDown) this.props.onMouseDown(e)
   }
 
-  handleOnMouseUp = (e: React.MouseEvent<HTMLCanvasElement, MouseEvent>) => {
+  handleOnMouseUp = (e: React.MouseEvent<HTMLCanvasElement, MouseEvent> | MouseEvent) => {
     if (this.props.onMouseUp) this.props.onMouseUp(e)
   }
 

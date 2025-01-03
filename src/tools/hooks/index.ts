@@ -6,8 +6,14 @@ import {
   useEffect,
 } from 'react'
 
-// The useEvent API has not yet been added to React,
-// so this is a temporary shim to make this work.
+/**
+ *
+ * The code inside useEvent sees the props/state values at the time of the.
+ * Very handy for event listeners callbacks, as by default the have access to the state/props
+ * value, at the time of the event listener creation.
+ * This hook is inspired by this RFC: https://github.com/reactjs/rfcs/blob/useevent/text/0000-useevent.md
+ *
+ */
 export function useEvent<T extends (...args: any[]) => void>(fn: T): T {
   const ref = useRef(fn)
   useInsertionEffect(() => {
@@ -19,15 +25,10 @@ export function useEvent<T extends (...args: any[]) => void>(fn: T): T {
   }, []) as T
 }
 
-export const useLocalContext = <T extends Record<string, any>>(data: T): T => {
-  const [ctx] = useState<T>(data)
-  for (const key in data) ctx[key] = data[key]
-  return ctx
-}
-
 /**
  *
- * A hook that forces a component to re-render.
+ * A hook that forces a component to re-render. by calling"forceUpdate"
+ * A callback to be executed after the component forced is re-rendered, can be passed with "afterForceUpdate"
  *
  */
 export const useForceUpdate = () => {
@@ -49,7 +50,13 @@ export const useForceUpdate = () => {
   }, [forceUpdateCount])
 
   return {
+    /**
+     * Forces the component to re-render
+     */
     forceUpdate,
+    /**
+     * Set a callback that is executed after the component is forced to re-render
+     */
     afterForceUpdate,
   }
 }

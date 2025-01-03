@@ -3,7 +3,7 @@ import { EditorImage } from '../../editor-image'
 import { EditorColor } from '../../editor-color'
 import { EditorTool } from '../types'
 import {
-  getColorFromCoordinates,
+  getImageColorFromCoordinates,
   isTransparentColor,
 } from '@/tools/utils/image'
 import { EyeDropperIcon } from '@/tools/ui-components/icons'
@@ -26,10 +26,9 @@ export class EyeDropperTool implements EditorTool {
   public icon = EyeDropperIcon
 
   private pickColorFromPixel(coordinates: Coordinates) {
-    const color = getColorFromCoordinates(
-      coordinates.x,
-      coordinates.y,
-      this.#dependencies.image.size.w,
+    const color = getImageColorFromCoordinates(
+      coordinates,
+      this.#dependencies.image.size,
       this.#dependencies.image.imageBuffer
     )
     if (isTransparentColor(color)) return

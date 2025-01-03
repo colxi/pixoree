@@ -2,7 +2,7 @@ import { getLinePoints, isDistanceGreaterThanOne } from '@/tools/utils/geometry'
 import { hasKeyModifiers } from '@/tools/utils/keyboard'
 import {
   getImageByteIndexFromCoordinates,
-  getColorFromCoordinates,
+  getImageColorFromCoordinates,
   isTransparentColor,
 } from '@/tools/utils/image'
 import { Coordinates } from '@/pages/sprite-editor/types'
@@ -65,10 +65,9 @@ export class BrushTool implements EditorTool {
   }
 
   private pickColorFromPixel(coordinates: Coordinates) {
-    const color = getColorFromCoordinates(
-      coordinates.x,
-      coordinates.y,
-      this.#dependencies.image.size.w,
+    const color = getImageColorFromCoordinates(
+      coordinates,
+      this.#dependencies.image.size,
       this.#dependencies.image.imageBuffer
     )
     if (isTransparentColor(color)) return

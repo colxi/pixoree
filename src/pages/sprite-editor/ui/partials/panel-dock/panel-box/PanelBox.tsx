@@ -1,7 +1,7 @@
 import styles from './PanelBox.module.scss'
 import type { FC } from 'react'
 
-interface Props {
+type Props = {
   children: React.ReactNode
   title: string
   height?: number | 'auto'

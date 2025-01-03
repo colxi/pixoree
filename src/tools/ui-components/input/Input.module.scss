@@ -1,0 +1,8 @@
+@use '/styles';
+
+.input {
+  border: 1px solid styles.$color-border-brighter;
+  background: styles.$color-background-dark;
+  color: styles.$primitive-color-grey-brightest;
+  display: inline-block;
+}

@@ -8,7 +8,7 @@ export class EditorColor {
     this.#eventBus = eventBus
     this.#palettes = palettes
     this.#paletteId = this.#palettes[0].id
-    this.#primaryColor = { r: 0, g: 0, b: 0, a: 255 }
+    this.#primaryColor = { r: 0, g: 100, b: 98, a: 255 }
     this.#secondaryColor = { r: 255, g: 255, b: 255, a: 255 }
   }
 

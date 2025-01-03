@@ -1,0 +1,28 @@
+@use '/styles';
+
+$pointer-size: 10px;
+
+.colorPickerContainer {
+  position: relative;
+}
+
+.pointer {
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  pointer-events: none;
+  border-color: red;
+
+  &:after {
+    content: '';
+    position: absolute;
+    width: $pointer-size;
+    height: $pointer-size;
+    top: -($pointer-size/2);
+    right: -($pointer-size/2);
+    border-radius: 100%;
+    border-width: 1px;
+    border-style: solid;
+    border-color: inherit;
+  }
+}

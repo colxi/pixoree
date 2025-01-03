@@ -2,13 +2,12 @@ import type { FC } from 'react'
 import { useEffect, useMemo, useState } from 'react'
 import styles from './InteractiveCanvas.module.scss'
 import { useSpriteEditorCanvasKeyBindings } from './SpriteEditorCanvas.keyBindings'
-import { CanvasMouseEvent } from '../../../utils'
 import { AnimationEngine } from '@/tools/utils/animation-engine'
 import { PersistentPixelatedCanvas } from '@/tools/ui-components/persistent-pixelated-canvas/PersistentPixelatedCanvas'
 import { ImageEditor } from '@/pages/sprite-editor/controller'
 import { useEvent, useForceUpdate } from '@/tools/hooks'
 import { clearCanvas } from '@/tools/utils/canvas'
-import { getElementCoordsFromMouseEvent } from '@/tools/utils/event'
+import { getElementCoordinatesFromMouseEvent } from '@/tools/utils/event'
 
 enum ScrollMode {
   NORMAL = 1,
@@ -29,31 +28,31 @@ export const InteractiveCanvas: FC = () => {
   const scrollMode = ScrollMode.INVERTED
 
 
-  const handleOnMouseOut = async (_: CanvasMouseEvent) => {
+  const handleOnMouseOut = async (_: React.MouseEvent | MouseEvent) => {
     setIsMOuseOverCanvas(false)
   }
 
-  const handleCanvasMouseMove = async (e: CanvasMouseEvent) => {
-    const eventCoords = getElementCoordsFromMouseEvent(e)
+  const handleCanvasMouseMove = async (e: React.MouseEvent | MouseEvent) => {
+    const eventCoords = getElementCoordinatesFromMouseEvent(e)
     setCanvasMouseCoords(eventCoords)
     setIsMOuseOverCanvas(true)
     const imageCoords = ImageEditor.viewport.mapToImageCoordinateSystem(canvasMouseCoords)
     ImageEditor.tools.activeTool.onMouseMove(imageCoords)
   }
 
-  const handleCanvasClick = async (_e: CanvasMouseEvent) => {
+  const handleCanvasClick = async (_e: React.MouseEvent | MouseEvent) => {
     const imageCoords = ImageEditor.viewport.mapToImageCoordinateSystem(canvasMouseCoords)
     ImageEditor.tools.activeTool.onMouseDown(imageCoords)
   }
 
-  const handleZoomGesture = (event: React.WheelEvent<HTMLCanvasElement>) => {
+  const handleZoomGesture = (event: React.WheelEvent | WheelEvent) => {
     if (!canvasContext) return
     const zoomAmount = event.deltaY > 0 ? -0.05 : 0.05
     const newZoom = ImageEditor.viewport.zoom + zoomAmount
     ImageEditor.viewport.setZoom(newZoom)
   }
 
-  const handleScrollGesture = (event: React.WheelEvent<HTMLCanvasElement>) => {
+  const handleScrollGesture = (event: React.WheelEvent | WheelEvent) => {
     if (!canvasContext) return
     ImageEditor.viewport.setScroll({
       x: ImageEditor.viewport.scroll.x + ((event.deltaX / ImageEditor.viewport.zoom) * scrollMode),
@@ -61,7 +60,7 @@ export const InteractiveCanvas: FC = () => {
     })
   }
 
-  const handleWheelGesture = (event: React.WheelEvent<HTMLCanvasElement>) => {
+  const handleWheelGesture = (event: React.WheelEvent | WheelEvent) => {
     if (event.ctrlKey) handleZoomGesture(event)
     else handleScrollGesture(event)
   }

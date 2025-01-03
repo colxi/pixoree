@@ -1,0 +1,15 @@
+.formRow {
+  display: grid;
+  grid-template-columns: 15px 65px 10px;
+  margin-bottom: 5px;
+  gap: 5px;
+
+  > span {
+    font-weight: 800;
+  }
+}
+
+.formRowTitle {
+  font-weight: 800;
+  margin-bottom: 5px;
+}

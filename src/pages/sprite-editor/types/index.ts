@@ -4,6 +4,12 @@ export type RgbaColor = {
   b: number
   a: number
 }
+export type CmykColor = {
+  c: number
+  m: number
+  y: number
+  k: number
+}
 
 export type HslColor = {
   h: number

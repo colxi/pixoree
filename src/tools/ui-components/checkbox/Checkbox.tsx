@@ -1,7 +1,7 @@
 import { FC, useState } from 'react'
 import styles from './Checkbox.module.scss'
 
-interface Props {
+type Props = {
   checked: boolean
   label?: string
   size?: 's' | 'm' | 'l'

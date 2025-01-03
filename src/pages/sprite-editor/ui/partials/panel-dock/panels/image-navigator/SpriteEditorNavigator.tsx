@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState, type FC } from 'react'
 import { PanelBox } from '../../panel-box/PanelBox'
-import { CanvasMouseEvent, getCanvasClickMouseCoords } from '../../../../utils'
 import styles from './SpriteEditorNavigator.module.css'
 import { useEvent, useForceUpdate } from '../../../../../../../tools/hooks'
 import { PersistentPixelatedCanvas } from '../../../../../../../tools/ui-components/persistent-pixelated-canvas/PersistentPixelatedCanvas'
@@ -8,6 +7,20 @@ import { Coordinates, Size } from '../../../../../types'
 import { AnimationEngine } from '../../../../../../../tools/utils/animation-engine'
 import { minMax } from '../../../../../../../tools/utils/math'
 import { ImageEditor } from '@/pages/sprite-editor/controller'
+
+const getCanvasClickMouseCoords = (
+  e: React.MouseEvent | MouseEvent,
+  canvasZoom: number
+): Coordinates => {
+  if (!e.target) throw new Error('Target not found')
+  const targetElement = e.target as HTMLCanvasElement
+  // const zoom = getCanvasCurrentZoom(targetElement)
+  const rect = targetElement.getBoundingClientRect()
+  const x = Math.floor((e.clientX - rect.left) / canvasZoom)
+  const y = Math.floor((e.clientY - rect.top) / canvasZoom)
+  return { x, y }
+}
+
 
 const ZOOM_STEP = 0.20
 const NAVIGATOR_CANVAS_SIZE: Size = {
@@ -69,7 +82,7 @@ export const SpriteEditorNavigator: FC = () => {
   }
 
 
-  const handleMouseMove = (e: CanvasMouseEvent) => {
+  const handleMouseMove = (e: React.MouseEvent | MouseEvent) => {
     if (!isMouseDown) return
     const clickCoords = getCanvasClickMouseCoords(e, navigatorCanvasZoom)
     const effectiveCords = {
@@ -79,7 +92,7 @@ export const SpriteEditorNavigator: FC = () => {
     updateViewBoxCoordinates(effectiveCords)
   }
 
-  const handleOnClick = (e: CanvasMouseEvent) => {
+  const handleOnClick = (e: React.MouseEvent | MouseEvent) => {
     const clickCoords = getCanvasClickMouseCoords(e, navigatorCanvasZoom)
     const effectiveCords = {
       x: clickCoords.x - (ImageEditor.image.viewBox.size.w / 2),

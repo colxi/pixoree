@@ -3,9 +3,11 @@ import { ImageEditor } from '@/pages/sprite-editor/controller'
 import { useForceUpdate } from '@/tools/hooks'
 import { SwitchIcon } from '@/tools/ui-components/icons'
 import styles from './EditorToolsColor.module.scss'
-import { formatRgbaColorAsHex } from '@/tools/utils/formatters'
+import { useImageEditorUi } from '../../../hook'
+import { getHexColorFromRgba } from '@/tools/utils/color'
 
 export const EditorToolsColor: FC = () => {
+  const { openModal } = useImageEditorUi()
   const { forceUpdate } = useForceUpdate()
 
   const handleBlackAndWhiteClick = () => {
@@ -18,6 +20,22 @@ export const EditorToolsColor: FC = () => {
     const secondaryColor = ImageEditor.color.secondaryColor
     ImageEditor.color.setPrimaryColor(secondaryColor)
     ImageEditor.color.setSecondaryColor(primaryColor)
+  }
+
+  const handlePrimaryColorClick = () => {
+    openModal('colorPicker', {
+      type: 'primary',
+      allowSecondary: false,
+      color: ImageEditor.color.primaryColor
+    })
+  }
+
+  const handleSecondaryColorClick = () => {
+    openModal('colorPicker', {
+      type: 'secondary',
+      allowSecondary: false,
+      color: ImageEditor.color.secondaryColor
+    })
   }
 
   useEffect(() => {
@@ -46,11 +64,11 @@ export const EditorToolsColor: FC = () => {
       </section>
 
       <section className={styles.colors}>
-        <div>
-          <div style={{ backgroundColor: formatRgbaColorAsHex(ImageEditor.color.primaryColor) }} />
+        <div onClick={handlePrimaryColorClick}>
+          <div style={{ backgroundColor: getHexColorFromRgba(ImageEditor.color.primaryColor) }} />
         </div>
-        <div>
-          <div style={{ backgroundColor: formatRgbaColorAsHex(ImageEditor.color.secondaryColor) }} />
+        <div onClick={handleSecondaryColorClick}>
+          <div style={{ backgroundColor: getHexColorFromRgba(ImageEditor.color.secondaryColor) }} />
         </div>
       </section>
     </main>
