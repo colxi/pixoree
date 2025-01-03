@@ -2,7 +2,7 @@
   "name": "pixoree",
   "private": false,
   "homepage": "https://colxi.github.io/pixoree",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
