@@ -1,6 +1,7 @@
 {
   "name": "pixoree",
   "private": false,
+  "license": "MIT-advertising",
   "homepage": "https://colxi.info/pixoree/",
   "version": "0.0.2",
   "type": "module",
