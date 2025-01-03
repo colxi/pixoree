@@ -1,6 +1,6 @@
 import { EventBus } from '@/tools/utils/event-bus'
 
-export enum ImageEditorEvent {
+export enum PixoreeEvent {
   HISTORY_CHANGE = 'HISTORY_CHANGE',
   IMAGE_SIZE_CHANGE = 'IMAGE_SIZE_CHANGE',
   TOOL_CHANGE = 'TOOL_CHANGE',
@@ -21,29 +21,29 @@ export enum ImageEditorEvent {
   IMAGE_ZOOM_CHANGE = 'IMAGE_ZOOM_CHANGE',
 }
 
-export type ImageEditorEvents = {
-  [ImageEditorEvent.HISTORY_CHANGE]: {}
-  [ImageEditorEvent.TOOL_CHANGE]: {}
-  [ImageEditorEvent.COLOR_PALETTE_CHANGE]: {}
-  [ImageEditorEvent.PRIMARY_COLOR_CHANGE]: {}
-  [ImageEditorEvent.SECONDARY_COLOR_CHANGE]: {}
-  [ImageEditorEvent.VIEWPORT_SCROLL_CHANGE]: {}
-  [ImageEditorEvent.VIEWPORT_ZOOM_CHANGE]: {}
-  [ImageEditorEvent.VIEWPORT_SIZE_CHANGE]: {}
-  [ImageEditorEvent.IMAGE_SIZE_CHANGE]: {}
-  [ImageEditorEvent.MODAL_OPEN]: {}
-  [ImageEditorEvent.MODAL_CLOSE]: {}
-  [ImageEditorEvent.MODAL_CLOSE_REQUEST]: {}
-  [ImageEditorEvent.MODAL_TITLE_CHANGE]: {}
+export type PixoreeEvents = {
+  [PixoreeEvent.HISTORY_CHANGE]: {}
+  [PixoreeEvent.TOOL_CHANGE]: {}
+  [PixoreeEvent.COLOR_PALETTE_CHANGE]: {}
+  [PixoreeEvent.PRIMARY_COLOR_CHANGE]: {}
+  [PixoreeEvent.SECONDARY_COLOR_CHANGE]: {}
+  [PixoreeEvent.VIEWPORT_SCROLL_CHANGE]: {}
+  [PixoreeEvent.VIEWPORT_ZOOM_CHANGE]: {}
+  [PixoreeEvent.VIEWPORT_SIZE_CHANGE]: {}
+  [PixoreeEvent.IMAGE_SIZE_CHANGE]: {}
+  [PixoreeEvent.MODAL_OPEN]: {}
+  [PixoreeEvent.MODAL_CLOSE]: {}
+  [PixoreeEvent.MODAL_CLOSE_REQUEST]: {}
+  [PixoreeEvent.MODAL_TITLE_CHANGE]: {}
 
   // @deprecated
-  [ImageEditorEvent.IMAGE_VIEW_BOX_POSITION_CHANGE]: {}
+  [PixoreeEvent.IMAGE_VIEW_BOX_POSITION_CHANGE]: {}
   // @deprecated
-  [ImageEditorEvent.IMAGE_ZOOM_CHANGE]: {}
+  [PixoreeEvent.IMAGE_ZOOM_CHANGE]: {}
 }
 
-export class EditorEventBus extends EventBus<ImageEditorEvents> {
+export class EditorEventBus extends EventBus<PixoreeEvents> {
   constructor() {
-    super(ImageEditorEvent)
+    super(PixoreeEvent)
   }
 }

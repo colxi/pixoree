@@ -1,7 +1,7 @@
 import { useEffect, type FC } from 'react'
 import { PanelBox } from '@/pages/sprite-editor/ui/partials/panel-dock/panel-box/PanelBox'
 import { DropDown, DropDownItem, DropDownOptions } from '@/tools/ui-components/dropdown/DropDown'
-import { ImageEditor } from '@/pages/sprite-editor/controller'
+import { Pixoree } from '@/pages/sprite-editor/controller'
 import { useForceUpdate } from '@/tools/hooks'
 import { HexColor } from '@/pages/sprite-editor/types'
 import { formatHexColorAsRgba } from '@/tools/utils/formatters'
@@ -11,12 +11,12 @@ import styles from './PalettePanel.module.scss'
 export const PalettePanel: FC = () => {
   const { forceUpdate } = useForceUpdate()
 
-  const colors = ImageEditor.color.palettes[0].colors
+  const colors = Pixoree.color.palettes[0].colors
   const options: DropDownOptions = {
     groups: [
       {
         name: 'Editor',
-        items: ImageEditor.color.palettes.map((palette) => ({ key: palette.name, value: palette.id }))
+        items: Pixoree.color.palettes.map((palette) => ({ key: palette.name, value: palette.id }))
       }, {
         name: 'Project',
         items: []
@@ -25,7 +25,7 @@ export const PalettePanel: FC = () => {
   }
 
   const rowRenderer = (item: DropDownItem) => {
-    const palette = ImageEditor.color.palettes.find((palette) => palette.id === item.value)
+    const palette = Pixoree.color.palettes.find((palette) => palette.id === item.value)
     if (!palette) throw new Error('Palette not found')
     return <>
       <div>{palette.name}</div>
@@ -42,18 +42,18 @@ export const PalettePanel: FC = () => {
 
   const handleColorLeftClick = (color: HexColor) => {
     const rgbaColor = formatHexColorAsRgba(color)
-    ImageEditor.color.setPrimaryColor(rgbaColor)
+    Pixoree.color.setPrimaryColor(rgbaColor)
   }
 
   const handleColorRightClick = (color: HexColor) => {
     const rgbaColor = formatHexColorAsRgba(color)
-    ImageEditor.color.setSecondaryColor(rgbaColor)
+    Pixoree.color.setSecondaryColor(rgbaColor)
   }
 
   useEffect(() => {
-    ImageEditor.eventBus.subscribe(ImageEditor.eventBus.Event.PRIMARY_COLOR_CHANGE, forceUpdate)
+    Pixoree.eventBus.subscribe(Pixoree.eventBus.Event.PRIMARY_COLOR_CHANGE, forceUpdate)
     return () => {
-      ImageEditor.eventBus.unsubscribe(ImageEditor.eventBus.Event.PRIMARY_COLOR_CHANGE, forceUpdate)
+      Pixoree.eventBus.unsubscribe(Pixoree.eventBus.Event.PRIMARY_COLOR_CHANGE, forceUpdate)
     }
   })
 
@@ -66,7 +66,7 @@ export const PalettePanel: FC = () => {
             (color, i) => (
               <div
                 className={styles.item}
-                data-active={isColorEqual(color, ImageEditor.color.primaryColor)}
+                data-active={isColorEqual(color, Pixoree.color.primaryColor)}
                 style={{ backgroundColor: color }}
                 key={i}
                 onClick={() => handleColorLeftClick(color)}

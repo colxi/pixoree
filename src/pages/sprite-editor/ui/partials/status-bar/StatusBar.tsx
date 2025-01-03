@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 import { useEffect } from 'react'
 import styles from './StatusBar.module.scss'
-import { ImageEditor } from '@/pages/sprite-editor/controller'
+import { Pixoree } from '@/pages/sprite-editor/controller'
 import { useForceUpdate } from '@/tools/hooks'
 import { toFixed } from '@/tools/utils/math'
 
@@ -9,29 +9,29 @@ export const StatusBar: FC = () => {
   const { forceUpdate } = useForceUpdate()
 
   const zoomPercentage = toFixed(
-    ImageEditor.viewport.zoom * 100,
-    ImageEditor.viewport.zoomResolution
+    Pixoree.viewport.zoom * 100,
+    Pixoree.viewport.zoomResolution
   )
 
   const scrollFormatted = {
-    x: Math.floor(ImageEditor.viewport.scroll.x * ImageEditor.viewport.zoom),
-    y: Math.floor(ImageEditor.viewport.scroll.y * ImageEditor.viewport.zoom)
+    x: Math.floor(Pixoree.viewport.scroll.x * Pixoree.viewport.zoom),
+    y: Math.floor(Pixoree.viewport.scroll.y * Pixoree.viewport.zoom)
   }
 
   useEffect(() => {
-    ImageEditor.eventBus.subscribe([
-      ImageEditor.eventBus.Event.VIEWPORT_ZOOM_CHANGE,
-      ImageEditor.eventBus.Event.VIEWPORT_SCROLL_CHANGE,
-      ImageEditor.eventBus.Event.VIEWPORT_SIZE_CHANGE,
-      ImageEditor.eventBus.Event.IMAGE_SIZE_CHANGE
+    Pixoree.eventBus.subscribe([
+      Pixoree.eventBus.Event.VIEWPORT_ZOOM_CHANGE,
+      Pixoree.eventBus.Event.VIEWPORT_SCROLL_CHANGE,
+      Pixoree.eventBus.Event.VIEWPORT_SIZE_CHANGE,
+      Pixoree.eventBus.Event.IMAGE_SIZE_CHANGE
     ], forceUpdate)
 
     return () => {
-      ImageEditor.eventBus.unsubscribe([
-        ImageEditor.eventBus.Event.VIEWPORT_ZOOM_CHANGE,
-        ImageEditor.eventBus.Event.VIEWPORT_SCROLL_CHANGE,
-        ImageEditor.eventBus.Event.VIEWPORT_SIZE_CHANGE,
-        ImageEditor.eventBus.Event.IMAGE_SIZE_CHANGE
+      Pixoree.eventBus.unsubscribe([
+        Pixoree.eventBus.Event.VIEWPORT_ZOOM_CHANGE,
+        Pixoree.eventBus.Event.VIEWPORT_SCROLL_CHANGE,
+        Pixoree.eventBus.Event.VIEWPORT_SIZE_CHANGE,
+        Pixoree.eventBus.Event.IMAGE_SIZE_CHANGE
       ], forceUpdate)
     }
   }, [])
@@ -40,8 +40,8 @@ export const StatusBar: FC = () => {
     <main className={styles.statusBar}>
       <section className={styles.zoom}>Zoom: {zoomPercentage}%</section>
       <section>Scroll: x={scrollFormatted.x} y={scrollFormatted.y}</section>
-      <section>Image: {ImageEditor.image.size.w}px/{ImageEditor.image.size.h}px</section>
-      <section>Viewport: {ImageEditor.viewport.size.w}px/{ImageEditor.viewport.size.h}px</section>
+      <section>Image: {Pixoree.image.size.w}px/{Pixoree.image.size.h}px</section>
+      <section>Viewport: {Pixoree.viewport.size.w}px/{Pixoree.viewport.size.h}px</section>
     </main>
   )
 }

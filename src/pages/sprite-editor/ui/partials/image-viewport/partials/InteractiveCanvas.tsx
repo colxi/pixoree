@@ -4,7 +4,7 @@ import styles from './InteractiveCanvas.module.scss'
 import { useSpriteEditorCanvasKeyBindings } from './SpriteEditorCanvas.keyBindings'
 import { AnimationEngine } from '@/tools/utils/animation-engine'
 import { PersistentPixelatedCanvas } from '@/tools/ui-components/persistent-pixelated-canvas/PersistentPixelatedCanvas'
-import { ImageEditor } from '@/pages/sprite-editor/controller'
+import { Pixoree } from '@/pages/sprite-editor/controller'
 import { useEvent, useForceUpdate } from '@/tools/hooks'
 import { clearCanvas } from '@/tools/utils/canvas'
 import { getElementCoordinatesFromMouseEvent } from '@/tools/utils/event'
@@ -16,8 +16,8 @@ enum ScrollMode {
 
 export const InteractiveCanvas: FC = () => {
   useSpriteEditorCanvasKeyBindings({
-    undo: ImageEditor.history.undo,
-    redo: ImageEditor.history.redo
+    undo: Pixoree.history.undo,
+    redo: Pixoree.history.redo
   })
 
   const { forceUpdate } = useForceUpdate()
@@ -36,27 +36,27 @@ export const InteractiveCanvas: FC = () => {
     const eventCoords = getElementCoordinatesFromMouseEvent(e)
     setCanvasMouseCoords(eventCoords)
     setIsMOuseOverCanvas(true)
-    const imageCoords = ImageEditor.viewport.mapToImageCoordinateSystem(canvasMouseCoords)
-    ImageEditor.tools.activeTool.onMouseMove(imageCoords)
+    const imageCoords = Pixoree.viewport.mapToImageCoordinateSystem(canvasMouseCoords)
+    Pixoree.tools.activeTool.onMouseMove(imageCoords)
   }
 
   const handleCanvasClick = async (_e: React.MouseEvent | MouseEvent) => {
-    const imageCoords = ImageEditor.viewport.mapToImageCoordinateSystem(canvasMouseCoords)
-    ImageEditor.tools.activeTool.onMouseDown(imageCoords)
+    const imageCoords = Pixoree.viewport.mapToImageCoordinateSystem(canvasMouseCoords)
+    Pixoree.tools.activeTool.onMouseDown(imageCoords)
   }
 
   const handleZoomGesture = (event: React.WheelEvent | WheelEvent) => {
     if (!canvasContext) return
     const zoomAmount = event.deltaY > 0 ? -0.05 : 0.05
-    const newZoom = ImageEditor.viewport.zoom + zoomAmount
-    ImageEditor.viewport.setZoom(newZoom)
+    const newZoom = Pixoree.viewport.zoom + zoomAmount
+    Pixoree.viewport.setZoom(newZoom)
   }
 
   const handleScrollGesture = (event: React.WheelEvent | WheelEvent) => {
     if (!canvasContext) return
-    ImageEditor.viewport.setScroll({
-      x: ImageEditor.viewport.scroll.x + ((event.deltaX / ImageEditor.viewport.zoom) * scrollMode),
-      y: ImageEditor.viewport.scroll.y + ((event.deltaY / ImageEditor.viewport.zoom) * scrollMode)
+    Pixoree.viewport.setScroll({
+      x: Pixoree.viewport.scroll.x + ((event.deltaX / Pixoree.viewport.zoom) * scrollMode),
+      y: Pixoree.viewport.scroll.y + ((event.deltaY / Pixoree.viewport.zoom) * scrollMode)
     })
   }
 
@@ -72,15 +72,15 @@ export const InteractiveCanvas: FC = () => {
 
   const renderCursor = (canvasContext: CanvasRenderingContext2D) => {
     if (!isMOuseOverCanvas) return
-    const pixelSize = Math.trunc(ImageEditor.viewport.zoom)
+    const pixelSize = Math.trunc(Pixoree.viewport.zoom)
     canvasContext.strokeStyle = 'red'
     const cursorCoord = {
-      x: Math.floor((canvasMouseCoords.x / ImageEditor.viewport.zoom)),
-      y: Math.floor(canvasMouseCoords.y / ImageEditor.viewport.zoom)
+      x: Math.floor((canvasMouseCoords.x / Pixoree.viewport.zoom)),
+      y: Math.floor(canvasMouseCoords.y / Pixoree.viewport.zoom)
     }
     canvasContext.strokeRect(
-      Math.floor(cursorCoord.x * ImageEditor.viewport.zoom),
-      Math.floor(cursorCoord.y * ImageEditor.viewport.zoom),
+      Math.floor(cursorCoord.x * Pixoree.viewport.zoom),
+      Math.floor(cursorCoord.y * Pixoree.viewport.zoom),
       pixelSize,
       pixelSize
     )
@@ -95,30 +95,30 @@ export const InteractiveCanvas: FC = () => {
   })
 
   const handleMouseUp = () => {
-    const imageCoords = ImageEditor.viewport.mapToImageCoordinateSystem(canvasMouseCoords)
-    ImageEditor.tools.activeTool.onMouseUp(imageCoords)
+    const imageCoords = Pixoree.viewport.mapToImageCoordinateSystem(canvasMouseCoords)
+    Pixoree.tools.activeTool.onMouseUp(imageCoords)
   }
 
   useEffect(() => {
     window.addEventListener('mouseup', handleMouseUp)
-    ImageEditor.eventBus.subscribe([
-      ImageEditor.eventBus.Event.VIEWPORT_ZOOM_CHANGE,
-      ImageEditor.eventBus.Event.VIEWPORT_SCROLL_CHANGE,
-      ImageEditor.eventBus.Event.HISTORY_CHANGE,
+    Pixoree.eventBus.subscribe([
+      Pixoree.eventBus.Event.VIEWPORT_ZOOM_CHANGE,
+      Pixoree.eventBus.Event.VIEWPORT_SCROLL_CHANGE,
+      Pixoree.eventBus.Event.HISTORY_CHANGE,
     ], render)
-    ImageEditor.eventBus.subscribe([
-      ImageEditor.eventBus.Event.VIEWPORT_SIZE_CHANGE,
+    Pixoree.eventBus.subscribe([
+      Pixoree.eventBus.Event.VIEWPORT_SIZE_CHANGE,
     ], forceUpdate)
 
     return () => {
       animation.stop()
-      ImageEditor.eventBus.unsubscribe([
-        ImageEditor.eventBus.Event.VIEWPORT_ZOOM_CHANGE,
-        ImageEditor.eventBus.Event.VIEWPORT_SCROLL_CHANGE,
-        ImageEditor.eventBus.Event.HISTORY_CHANGE,
+      Pixoree.eventBus.unsubscribe([
+        Pixoree.eventBus.Event.VIEWPORT_ZOOM_CHANGE,
+        Pixoree.eventBus.Event.VIEWPORT_SCROLL_CHANGE,
+        Pixoree.eventBus.Event.HISTORY_CHANGE,
       ], render)
-      ImageEditor.eventBus.unsubscribe([
-        ImageEditor.eventBus.Event.VIEWPORT_SIZE_CHANGE
+      Pixoree.eventBus.unsubscribe([
+        Pixoree.eventBus.Event.VIEWPORT_SIZE_CHANGE
       ], forceUpdate)
       window.removeEventListener('mouseup', handleMouseUp)
     }
@@ -133,8 +133,8 @@ export const InteractiveCanvas: FC = () => {
         onMouseDown={handleCanvasClick}
         onMouseOut={handleOnMouseOut}
         onWheel={handleWheelGesture}
-        width={ImageEditor.viewport.size.w}
-        height={ImageEditor.viewport.size.h}
+        width={Pixoree.viewport.size.w}
+        height={Pixoree.viewport.size.h}
       />
     </>
   )

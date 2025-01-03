@@ -3,7 +3,7 @@ import { EditorPalette } from './types'
 export const palettes: EditorPalette[] = [
   {
     id: '1',
-    name: 'PixelHurt',
+    name: 'Pixoree',
     colors: [
       '#167288',
       '#8cdaec',

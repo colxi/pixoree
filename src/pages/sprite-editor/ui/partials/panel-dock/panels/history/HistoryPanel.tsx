@@ -2,9 +2,9 @@ import { useEffect, useRef, type FC } from 'react'
 import { useForceUpdate } from '@/tools/hooks'
 import { formatBytes } from '@/tools/utils/formatters'
 import { PanelBox } from '../../panel-box/PanelBox'
-import { ImageEditor } from '../../../../../controller'
 import styles from './HistoryPanel.module.scss'
 import { TrashCanIcon } from '@/tools/ui-components/icons'
+import { Pixoree } from '@/pages/sprite-editor/controller'
 
 export const HistoryPanel: FC = () => {
   const { forceUpdate, afterForceUpdate } = useForceUpdate()
@@ -12,22 +12,22 @@ export const HistoryPanel: FC = () => {
 
   const getHistorySize = () => {
     let totalSize = 0
-    ImageEditor.history.entries.forEach(item => totalSize += item.data.length)
+    Pixoree.history.entries.forEach(item => totalSize += item.data.length)
     return formatBytes(totalSize)
   }
 
   const updateScrollPosition = () => {
     if (!entriesContainerElementRef.current) return
-    if (ImageEditor.history.currentIndex === ImageEditor.history.entries.length - 1) {
+    if (Pixoree.history.currentIndex === Pixoree.history.entries.length - 1) {
       entriesContainerElementRef.current.scrollTop = entriesContainerElementRef.current.scrollHeight
     }
   }
 
   useEffect(() => {
     afterForceUpdate(updateScrollPosition)
-    ImageEditor.eventBus.subscribe(ImageEditor.eventBus.Event.HISTORY_CHANGE, forceUpdate)
+    Pixoree.eventBus.subscribe(Pixoree.eventBus.Event.HISTORY_CHANGE, forceUpdate)
 
-    return () => ImageEditor.eventBus.unsubscribe(ImageEditor.eventBus.Event.HISTORY_CHANGE, forceUpdate)
+    return () => Pixoree.eventBus.unsubscribe(Pixoree.eventBus.Event.HISTORY_CHANGE, forceUpdate)
   }, [])
 
   return (
@@ -37,13 +37,13 @@ export const HistoryPanel: FC = () => {
           className={styles.historyEntries}
           ref={entriesContainerElementRef}
         >
-          {ImageEditor.history.entries.map(
+          {Pixoree.history.entries.map(
             (item, index) =>
               <div
                 key={index}
-                onClick={() => ImageEditor.history.load(index)}
+                onClick={() => Pixoree.history.load(index)}
                 className={styles.historyRow}
-                data-active={index === ImageEditor.history.currentIndex ? 'true' : 'false'}
+                data-active={index === Pixoree.history.currentIndex ? 'true' : 'false'}
               >
                 <div className={styles.historyRowIcon}>{item.icon}</div>
                 <div className={styles.historyRowAction}>{item.action}</div>
@@ -52,7 +52,7 @@ export const HistoryPanel: FC = () => {
         </section>
         <section className={styles.statusBar}>
           <div>History size: {getHistorySize()}</div>
-          <div onClick={() => ImageEditor.history.deleteEntry(ImageEditor.history.currentIndex)}>
+          <div onClick={() => Pixoree.history.deleteEntry(Pixoree.history.currentIndex)}>
             <TrashCanIcon />
           </div>
         </section>

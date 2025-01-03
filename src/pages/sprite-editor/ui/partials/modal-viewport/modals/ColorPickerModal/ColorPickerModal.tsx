@@ -8,7 +8,7 @@ import { Button } from '@/tools/ui-components/button/Button'
 import { HslForm } from './partials/color-form/HslForm'
 import { CmykForm } from './partials/color-form/CmykForm'
 import { HexForm } from './partials/color-form/HexForm'
-import { ImageEditor } from '@/pages/sprite-editor/controller'
+import { Pixoree } from '@/pages/sprite-editor/controller'
 import { ModalCatalog } from '@/pages/sprite-editor/controller/editor-modal/types'
 
 export const ColorPickerModal: FC<ModalCatalog['colorPicker']> = ({ type, color, allowSecondary }) => {
@@ -23,21 +23,21 @@ export const ColorPickerModal: FC<ModalCatalog['colorPicker']> = ({ type, color,
   }
 
   const handleAcceptClick = () => {
-    if (type === 'primary') ImageEditor.color.setPrimaryColor(newColor)
-    if (type === 'secondary') ImageEditor.color.setSecondaryColor(newColor)
-    ImageEditor.modal.closeModal()
+    if (type === 'primary') Pixoree.color.setPrimaryColor(newColor)
+    if (type === 'secondary') Pixoree.color.setSecondaryColor(newColor)
+    Pixoree.modal.closeModal()
   }
 
   const handleCancelClick = () => {
-    ImageEditor.modal.closeModal()
+    Pixoree.modal.closeModal()
   }
 
   useEffect(() => {
-    ImageEditor.modal.setModalTitle('Color Picker')
-    ImageEditor.eventBus.subscribe(ImageEditor.eventBus.Event.MODAL_CLOSE_REQUEST, handleCancelClick)
+    Pixoree.modal.setModalTitle('Color Picker')
+    Pixoree.eventBus.subscribe(Pixoree.eventBus.Event.MODAL_CLOSE_REQUEST, handleCancelClick)
 
     return () => {
-      ImageEditor.eventBus.unsubscribe(ImageEditor.eventBus.Event.MODAL_CLOSE_REQUEST, handleCancelClick)
+      Pixoree.eventBus.unsubscribe(Pixoree.eventBus.Event.MODAL_CLOSE_REQUEST, handleCancelClick)
     }
   }, [])
 

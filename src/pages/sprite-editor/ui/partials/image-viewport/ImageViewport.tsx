@@ -1,7 +1,7 @@
 import { useEffect, useRef, type FC } from 'react'
 import { InteractiveCanvas } from './partials/InteractiveCanvas'
 import { ImageCanvas } from './partials/ImageCanvas'
-import { ImageEditor } from '@/pages/sprite-editor/controller'
+import { Pixoree } from '@/pages/sprite-editor/controller'
 import styles from './ImageViewport.module.scss'
 
 export const ImageViewport: FC = () => {
@@ -9,7 +9,7 @@ export const ImageViewport: FC = () => {
 
   const onViewportSizeChange = (entries: ResizeObserverEntry[]) => {
     const viewportElement = entries[0]
-    ImageEditor.viewport.setSize({
+    Pixoree.viewport.setSize({
       w: viewportElement.contentRect.width,
       h: viewportElement.contentRect.height
     })
