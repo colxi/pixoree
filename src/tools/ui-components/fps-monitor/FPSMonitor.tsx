@@ -1,7 +1,7 @@
 import { useEffect, useState, type FC } from 'react'
 import styles from './FPSMonitor.module.css'
 import { FramerateMonitor } from '../../utils/animation-engine'
-import { useEvent } from '../../hooks'
+import { useEvent } from '@/tools/hooks'
 
 const FPS_UPDATE_INTERVAL_IN_MILLIS = 1000
 

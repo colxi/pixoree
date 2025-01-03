@@ -1,4 +1,4 @@
-import { Coordinates } from '@/pages/sprite-editor/types'
+import { Coordinates } from '@/types'
 
 type EventWithPreventDefault = {
   preventDefault: Event['preventDefault']

@@ -1,4 +1,3 @@
-import classNames from 'classnames'
 import { FC, useState } from 'react'
 import styles from './DropDown.module.scss'
 
@@ -22,17 +21,10 @@ export const DropDown: FC<Props> = ({ options, rowRenderer }) => {
 
   const toggleFold = () => setIsFolded(!isFolded)
 
-  const panelClassNames = classNames(
-    styles.dropdownPanel,
-    {
-      [styles.folded]: isFolded
-    }
-  )
-
   return (
     <div>
       <div onClick={toggleFold}>Select</div>
-      <div className={panelClassNames}>
+      <div className={styles.dropdownPanel} data-folded={isFolded}>
         {
           // Group
           options.groups.map(

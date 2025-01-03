@@ -1,5 +1,7 @@
-import { ApplicationLayout } from './pages/application-layout/presentatin/ApplicationLayout'
+import { FPSMonitor } from './tools/ui-components/fps-monitor/FPSMonitor'
+import styles from './App.module.scss'
 import { disableMouseZoom } from './tools/utils/mouse-zoom'
+import { ImageEditor } from './ui/ImageEditor'
 
 
 export function App() {
@@ -7,7 +9,10 @@ export function App() {
 
   return (
     <>
-      <ApplicationLayout />
+      <div className={styles.app}>
+        <FPSMonitor />
+        <ImageEditor />
+      </div >
     </>
   )
 }

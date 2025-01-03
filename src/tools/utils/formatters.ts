@@ -1,4 +1,4 @@
-import { HexColor, RgbaColor } from '@/pages/sprite-editor/types'
+import { HexColor, RgbaColor } from '@/types'
 
 export function formatBytes(bytes: number, decimals: number = 2) {
   if (!+bytes) return '0 Bytes'

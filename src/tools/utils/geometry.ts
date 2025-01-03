@@ -1,4 +1,4 @@
-import { Box, Coordinates } from '@/pages/sprite-editor/types'
+import { Box, Coordinates } from '@/types'
 
 export const getBoxCenter = (box: Box): Readonly<Coordinates> => {
   return {

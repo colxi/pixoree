@@ -1,7 +1,7 @@
 import { useEffect, useState, type FC } from 'react'
 import { ColorPickerBox } from './partials/ColorPickerBox'
 import { HuePickerBox } from './partials/HuePickerBox'
-import { RgbaColor } from '@/pages/sprite-editor/types'
+import { RgbaColor } from '@/types'
 import { getHslColorFromRgba, getHueFromRgba, getRgbaColorFromHsl } from '@/tools/utils/color'
 import styles from './ColorPicker.module.scss'
 
