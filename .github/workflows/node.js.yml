@@ -22,16 +22,22 @@ jobs:
 
         # extract `engines.node` from package.json and save it to output
       - name: Get Node.JS version from package.json
-        id: get-versions
+        id: get-node-version
         run: echo ::set-output name=node::$(jq -r .engines.node ./package.json)
 
-      - name: Use Node.js ${{steps.get-versions.outputs.node}}
+        # extract `engines.pnpm` from package.json and save it to output
+      - name: Get Pnpm version from package.json
+        id: get-pnpm-version
+        run: echo ::set-output name=pnpm::$(jq -r .engines.pnpm ./package.json)
+
+        # set extracted node version
+      - name: Use Node.js ${{steps.get-node-version.outputs.node}}
         uses: actions/setup-node@v4
         with:
-          node-version: ${{steps.get-versions.outputs.node}}
+          node-version: ${{steps.get-node-version.outputs.node}}
 
       - name: Install PNPM
-        run: npm i -g pnpm
+        run: npm i -g pnpm@${{steps.get-node-version.outputs.node}}
 
       - name: Build app
         run: |
