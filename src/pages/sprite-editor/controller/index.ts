@@ -6,7 +6,7 @@ import { EditorViewport } from './editor-viewport'
 import { EditorEventBus } from './event-bus'
 import { EditorModal } from './editor-modal'
 
-export class ImageEditor {
+export class Pixoree {
   static eventBus = new EditorEventBus()
   static color = new EditorColor({
     eventBus: this.eventBus,

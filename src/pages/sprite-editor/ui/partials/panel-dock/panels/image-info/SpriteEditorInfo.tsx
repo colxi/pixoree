@@ -1,42 +1,42 @@
 import { useForceUpdate } from '@/tools/hooks'
 import { PanelBox } from '@/pages/sprite-editor/ui/partials/panel-dock/panel-box/PanelBox'
-import { ImageEditor } from '../../../../../controller'
 import { FC, useEffect } from 'react'
+import { Pixoree } from '@/pages/sprite-editor/controller'
 
 export const SpriteEditorInfo: FC = () => {
   const { forceUpdate } = useForceUpdate()
 
   const center = {
-    x: Math.floor(ImageEditor.image.viewBox.position.x + ImageEditor.image.viewBox.size.w / 2),
-    y: Math.floor(ImageEditor.image.viewBox.position.y + ImageEditor.image.viewBox.size.h / 2),
+    x: Math.floor(Pixoree.image.viewBox.position.x + Pixoree.image.viewBox.size.w / 2),
+    y: Math.floor(Pixoree.image.viewBox.position.y + Pixoree.image.viewBox.size.h / 2),
   }
-  const viewBoxPositionX = Math.floor(ImageEditor.image.viewBox.position.x)
-  const viewBoxPositionY = Math.floor(ImageEditor.image.viewBox.position.x)
+  const viewBoxPositionX = Math.floor(Pixoree.image.viewBox.position.x)
+  const viewBoxPositionY = Math.floor(Pixoree.image.viewBox.position.x)
 
   useEffect(() => {
-    ImageEditor.eventBus.subscribe([
-      ImageEditor.eventBus.Event.IMAGE_ZOOM_CHANGE,
-      ImageEditor.eventBus.Event.IMAGE_VIEW_BOX_POSITION_CHANGE,
-      ImageEditor.eventBus.Event.HISTORY_CHANGE,
+    Pixoree.eventBus.subscribe([
+      Pixoree.eventBus.Event.IMAGE_ZOOM_CHANGE,
+      Pixoree.eventBus.Event.IMAGE_VIEW_BOX_POSITION_CHANGE,
+      Pixoree.eventBus.Event.HISTORY_CHANGE,
     ], forceUpdate)
 
     return () => {
-      ImageEditor.eventBus.unsubscribe([
-        ImageEditor.eventBus.Event.IMAGE_ZOOM_CHANGE,
-        ImageEditor.eventBus.Event.IMAGE_VIEW_BOX_POSITION_CHANGE,
-        ImageEditor.eventBus.Event.HISTORY_CHANGE,
+      Pixoree.eventBus.unsubscribe([
+        Pixoree.eventBus.Event.IMAGE_ZOOM_CHANGE,
+        Pixoree.eventBus.Event.IMAGE_VIEW_BOX_POSITION_CHANGE,
+        Pixoree.eventBus.Event.HISTORY_CHANGE,
       ], forceUpdate)
     }
   }, [])
 
   return <>
     <PanelBox title="Info">
-      <div>Size:{ImageEditor.image.size.w} x {ImageEditor.image.size.h} </div>
+      <div>Size:{Pixoree.image.size.w} x {Pixoree.image.size.h} </div>
       <div>ViewBox</div>
       <div>Offset: x:{viewBoxPositionX} y:{viewBoxPositionY}</div>
-      <div>Size: w:{ImageEditor.image.viewBox.size.w} h:{ImageEditor.image.viewBox.size.h}</div>
+      <div>Size: w:{Pixoree.image.viewBox.size.w} h:{Pixoree.image.viewBox.size.h}</div>
       <div>Center: x:{center.x} y:{center.y}</div>
-      <div>Zoom: {ImageEditor.image.zoom}</div>
+      <div>Zoom: {Pixoree.image.zoom}</div>
     </PanelBox >
   </>
 }

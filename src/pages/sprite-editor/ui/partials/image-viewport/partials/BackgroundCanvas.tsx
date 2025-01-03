@@ -4,7 +4,7 @@ import styles from './BackgroundCanvas.module.scss'
 import { PersistentPixelatedCanvas } from '@/tools/ui-components/persistent-pixelated-canvas/PersistentPixelatedCanvas'
 import { AnimationEngine } from '@/tools/utils/animation-engine'
 import { useEvent } from '@/tools/hooks'
-import { ImageEditor } from '@/pages/sprite-editor/controller'
+import { Pixoree } from '@/pages/sprite-editor/controller'
 
 export const ImageCanvas: FC = () => {
   const animation = useMemo(() => new AnimationEngine('ImageCanvas'), [])
@@ -17,23 +17,23 @@ export const ImageCanvas: FC = () => {
     canvasContext.fillRect(
       0,
       0,
-      ImageEditor.viewport.size.w,
-      ImageEditor.viewport.size.h
+      Pixoree.viewport.size.w,
+      Pixoree.viewport.size.h
     )
 
     // copy the image fom the buffer to the canvas
     const imageData = new ImageData(
-      ImageEditor.image.imageBuffer,
-      ImageEditor.image.size.w,
-      ImageEditor.image.size.h
+      Pixoree.image.imageBuffer,
+      Pixoree.image.size.w,
+      Pixoree.image.size.h
     )
 
     const bitmap = await createImageBitmap(
       imageData,
-      ImageEditor.viewport.scroll.x,
-      ImageEditor.viewport.scroll.y,
-      ImageEditor.viewport.size.w,
-      ImageEditor.viewport.size.h,
+      Pixoree.viewport.scroll.x,
+      Pixoree.viewport.scroll.y,
+      Pixoree.viewport.size.w,
+      Pixoree.viewport.size.h,
     )
     canvasContext.drawImage(bitmap, 0, 0)
   }
@@ -46,7 +46,7 @@ export const ImageCanvas: FC = () => {
   const setCanvasZoom = () => {
     if (!canvasContext) return
     canvasContext.resetTransform()
-    canvasContext.scale(ImageEditor.image.zoom, ImageEditor.image.zoom)
+    canvasContext.scale(Pixoree.image.zoom, Pixoree.image.zoom)
   }
 
   const updateCanvas = useEvent(() => {
@@ -58,17 +58,17 @@ export const ImageCanvas: FC = () => {
   useEffect(updateCanvas, [canvasContext])
 
   useEffect(() => {
-    ImageEditor.eventBus.subscribe([
-      ImageEditor.eventBus.Event.VIEWPORT_ZOOM_CHANGE,
-      ImageEditor.eventBus.Event.VIEWPORT_SCROLL_CHANGE,
-      ImageEditor.eventBus.Event.HISTORY_CHANGE,
+    Pixoree.eventBus.subscribe([
+      Pixoree.eventBus.Event.VIEWPORT_ZOOM_CHANGE,
+      Pixoree.eventBus.Event.VIEWPORT_SCROLL_CHANGE,
+      Pixoree.eventBus.Event.HISTORY_CHANGE,
     ], updateCanvas)
 
     return () => {
-      ImageEditor.eventBus.unsubscribe([
-        ImageEditor.eventBus.Event.VIEWPORT_ZOOM_CHANGE,
-        ImageEditor.eventBus.Event.VIEWPORT_SCROLL_CHANGE,
-        ImageEditor.eventBus.Event.HISTORY_CHANGE,
+      Pixoree.eventBus.unsubscribe([
+        Pixoree.eventBus.Event.VIEWPORT_ZOOM_CHANGE,
+        Pixoree.eventBus.Event.VIEWPORT_SCROLL_CHANGE,
+        Pixoree.eventBus.Event.HISTORY_CHANGE,
       ], updateCanvas)
       animation.stop()
     }
@@ -79,8 +79,8 @@ export const ImageCanvas: FC = () => {
       <PersistentPixelatedCanvas
         className={styles.imageCanvas}
         contextRef={setCanvasContext}
-        width={ImageEditor.viewport.size.w}
-        height={ImageEditor.viewport.size.w}
+        width={Pixoree.viewport.size.w}
+        height={Pixoree.viewport.size.w}
       />
     </>
   )

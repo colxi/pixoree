@@ -3,7 +3,7 @@ import { Coordinates } from '@/pages/sprite-editor/types'
 import { useEvent } from '@/tools/hooks'
 import { getElementCoordinatesFromMouseEvent } from '@/tools/utils/event'
 import styles from './Modal.module.scss'
-import { ImageEditor } from '@/pages/sprite-editor/controller'
+import { Pixoree } from '@/pages/sprite-editor/controller'
 import { modalCatalog } from '../modals/catalog'
 
 export const Modal = () => {
@@ -28,8 +28,8 @@ export const Modal = () => {
   }
 
   const getModalComponent = () => {
-    return (ImageEditor.modal.activeModal
-      ? modalCatalog[ImageEditor.modal.activeModal.name](ImageEditor.modal.activeModal.params)
+    return (Pixoree.modal.activeModal
+      ? modalCatalog[Pixoree.modal.activeModal.name](Pixoree.modal.activeModal.params)
       : undefined)
   }
 
@@ -60,23 +60,23 @@ export const Modal = () => {
 
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.code === 'Escape') {
-      ImageEditor.eventBus.dispatch(ImageEditor.eventBus.Event.MODAL_CLOSE_REQUEST, {})
+      Pixoree.eventBus.dispatch(Pixoree.eventBus.Event.MODAL_CLOSE_REQUEST, {})
     }
   }
 
   const handleModalTitleChange = () => {
-    setModalTitle(ImageEditor.modal.modalTitle)
+    setModalTitle(Pixoree.modal.modalTitle)
   }
 
   useEffect(() => {
     centerModal()
-    ImageEditor.eventBus.subscribe(ImageEditor.eventBus.Event.MODAL_TITLE_CHANGE, handleModalTitleChange)
+    Pixoree.eventBus.subscribe(Pixoree.eventBus.Event.MODAL_TITLE_CHANGE, handleModalTitleChange)
     window.addEventListener('keydown', handleKeyDown)
     window.addEventListener('mousemove', handleMouseMove)
     window.addEventListener('mouseup', handleMouseUp)
 
     return () => {
-      ImageEditor.eventBus.unsubscribe(ImageEditor.eventBus.Event.MODAL_TITLE_CHANGE, handleModalTitleChange)
+      Pixoree.eventBus.unsubscribe(Pixoree.eventBus.Event.MODAL_TITLE_CHANGE, handleModalTitleChange)
       window.removeEventListener('keydown', handleKeyDown)
       window.removeEventListener('mousemove', handleMouseMove)
       window.removeEventListener('mouseup', handleMouseUp)

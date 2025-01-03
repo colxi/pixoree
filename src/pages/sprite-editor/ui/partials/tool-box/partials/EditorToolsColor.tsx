@@ -1,5 +1,5 @@
 import { useEffect, type FC } from 'react'
-import { ImageEditor } from '@/pages/sprite-editor/controller'
+import { Pixoree } from '@/pages/sprite-editor/controller'
 import { useForceUpdate } from '@/tools/hooks'
 import { SwitchIcon } from '@/tools/ui-components/icons'
 import styles from './EditorToolsColor.module.scss'
@@ -9,42 +9,42 @@ export const EditorToolsColor: FC = () => {
   const { forceUpdate } = useForceUpdate()
 
   const handleBlackAndWhiteClick = () => {
-    ImageEditor.color.setPrimaryColor({ r: 0, g: 0, b: 0, a: 255 })
-    ImageEditor.color.setSecondaryColor({ r: 255, g: 255, b: 255, a: 255 })
+    Pixoree.color.setPrimaryColor({ r: 0, g: 0, b: 0, a: 255 })
+    Pixoree.color.setSecondaryColor({ r: 255, g: 255, b: 255, a: 255 })
   }
 
   const handleSwitchColorsClick = () => {
-    const primaryColor = ImageEditor.color.primaryColor
-    const secondaryColor = ImageEditor.color.secondaryColor
-    ImageEditor.color.setPrimaryColor(secondaryColor)
-    ImageEditor.color.setSecondaryColor(primaryColor)
+    const primaryColor = Pixoree.color.primaryColor
+    const secondaryColor = Pixoree.color.secondaryColor
+    Pixoree.color.setPrimaryColor(secondaryColor)
+    Pixoree.color.setSecondaryColor(primaryColor)
   }
 
   const handlePrimaryColorClick = () => {
-    ImageEditor.modal.openModal('colorPicker', {
+    Pixoree.modal.openModal('colorPicker', {
       type: 'primary',
       allowSecondary: false,
-      color: ImageEditor.color.primaryColor
+      color: Pixoree.color.primaryColor
     })
   }
 
   const handleSecondaryColorClick = () => {
-    ImageEditor.modal.openModal('colorPicker', {
+    Pixoree.modal.openModal('colorPicker', {
       type: 'secondary',
       allowSecondary: false,
-      color: ImageEditor.color.secondaryColor
+      color: Pixoree.color.secondaryColor
     })
   }
 
   useEffect(() => {
-    ImageEditor.eventBus.subscribe([
-      ImageEditor.eventBus.Event.PRIMARY_COLOR_CHANGE,
-      ImageEditor.eventBus.Event.SECONDARY_COLOR_CHANGE
+    Pixoree.eventBus.subscribe([
+      Pixoree.eventBus.Event.PRIMARY_COLOR_CHANGE,
+      Pixoree.eventBus.Event.SECONDARY_COLOR_CHANGE
     ], forceUpdate)
     return () => {
-      ImageEditor.eventBus.unsubscribe([
-        ImageEditor.eventBus.Event.PRIMARY_COLOR_CHANGE,
-        ImageEditor.eventBus.Event.SECONDARY_COLOR_CHANGE
+      Pixoree.eventBus.unsubscribe([
+        Pixoree.eventBus.Event.PRIMARY_COLOR_CHANGE,
+        Pixoree.eventBus.Event.SECONDARY_COLOR_CHANGE
       ], forceUpdate)
     }
   })
@@ -63,10 +63,10 @@ export const EditorToolsColor: FC = () => {
 
       <section className={styles.colors}>
         <div onClick={handlePrimaryColorClick}>
-          <div style={{ backgroundColor: getHexColorFromRgba(ImageEditor.color.primaryColor) }} />
+          <div style={{ backgroundColor: getHexColorFromRgba(Pixoree.color.primaryColor) }} />
         </div>
         <div onClick={handleSecondaryColorClick}>
-          <div style={{ backgroundColor: getHexColorFromRgba(ImageEditor.color.secondaryColor) }} />
+          <div style={{ backgroundColor: getHexColorFromRgba(Pixoree.color.secondaryColor) }} />
         </div>
       </section>
     </main>
