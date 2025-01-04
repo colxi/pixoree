@@ -1,3 +1,0 @@
-- name: TESt ---- Get Node.JS version from package.json
-  id: get-node-version-2
-  run: echo Hellooooooooo!

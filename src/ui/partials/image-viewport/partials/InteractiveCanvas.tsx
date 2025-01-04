@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import styles from './InteractiveCanvas.module.scss'
 import { useSpriteEditorCanvasKeyBindings } from './SpriteEditorCanvas.keyBindings'
 import { AnimationEngine } from '@/tools/utils/animation-engine'

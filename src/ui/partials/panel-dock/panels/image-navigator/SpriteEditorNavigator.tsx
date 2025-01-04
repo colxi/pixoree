@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type FC } from 'react'
+import React, { useEffect, useMemo, useState, type FC } from 'react'
 import { PanelBox } from '../../panel-box/PanelBox'
 import styles from './SpriteEditorNavigator.module.css'
 import { useEvent, useForceUpdate } from '@/tools/hooks'
