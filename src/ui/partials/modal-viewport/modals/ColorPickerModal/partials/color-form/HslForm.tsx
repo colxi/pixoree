@@ -1,8 +1,9 @@
-import { RgbaColor } from '@/types'
-import { FC, useEffect, useState } from 'react'
 import { Input } from '@/tools/ui-components/input/Input'
-import styles from './Styles.module.scss'
 import { getHslColorFromRgba, getRgbaColorFromHsl } from '@/tools/utils/color'
+import { useEffect, useState } from 'react'
+import styles from './Styles.module.scss'
+import type { FC} from 'react';
+import type { RgbaColor } from '@/types'
 
 type Props = {
   color: RgbaColor
@@ -40,17 +41,17 @@ export const HslForm: FC<Props> = ({ onChange, color }) => {
       <div className={styles.formRowTitle}>HSL</div>
       <div className={styles.formRow}>
         <span>H:</span>
-        <Input type='number' value={hslColor.h} min={0} max={360} onInput={handleHueInput} />
+        <Input max={360} min={0} type='number' value={hslColor.h} onInput={handleHueInput} />
         <span>ª</span>
       </div>
       <div className={styles.formRow}>
         <span>S:</span>
-        <Input type='number' value={Math.floor(hslColor.s * 100)} min={0} max={100} onInput={handleSaturationInput} />
+        <Input max={100} min={0} type='number' value={Math.floor(hslColor.s * 100)} onInput={handleSaturationInput} />
         <span>%</span>
       </div>
       <div className={styles.formRow}>
         <span>L:</span>
-        <Input type='number' value={Math.floor(hslColor.l * 100)} min={0} max={100} onInput={handleLuminosityInput} />
+        <Input max={100} min={0} type='number' value={Math.floor(hslColor.l * 100)} onInput={handleLuminosityInput} />
         <span>%</span>
       </div>
     </section>

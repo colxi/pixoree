@@ -1,11 +1,12 @@
-import { Coordinates, RgbaColor, Size } from '@/types'
 import { PersistentPixelatedCanvas } from '@/tools/ui-components/persistent-pixelated-canvas/PersistentPixelatedCanvas'
 import { findCanvasClosestColorCoordinates, getCanvasContextColorFromCoordinates } from '@/tools/utils/canvas'
-import React, { FC, useEffect, useRef, useState } from 'react'
-import styles from './ColorPickerBox.module.scss'
 import { getElementCoordinatesFromMouseEvent } from '@/tools/utils/event'
 import { getHexColorFromRgba, getRgbaColorFromHue } from '@/tools/utils/color'
 import { isColorEqual } from '@/tools/utils/image'
+import React, { useEffect, useRef, useState } from 'react'
+import styles from './ColorPickerBox.module.scss'
+import type { Coordinates, RgbaColor, Size } from '@/types'
+import type { FC} from 'react';
 
 type Props = {
   onColorSelect: (color: RgbaColor, type: 'primary' | 'secondary') => void
@@ -134,8 +135,8 @@ export const ColorPickerBox: FC<Props> = ({ hue, color, onColorSelect }) => {
 
   return (
     <section
-      ref={containerElementRef}
       className={styles.colorPickerContainer}
+      ref={containerElementRef}
       style={{
         cursor: isMouseDown ? 'none' : 'default'
       }}
@@ -150,14 +151,14 @@ export const ColorPickerBox: FC<Props> = ({ hue, color, onColorSelect }) => {
         }}
       />
       <PersistentPixelatedCanvas
+        contextRef={handleContextUpdate}
+        height={canvasSize.h}
         id="ColorPicker"
         width={canvasSize.w}
-        height={canvasSize.h}
         willReadFrequently={true}
-        contextRef={handleContextUpdate}
         onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
         onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
       />
     </section>
   )

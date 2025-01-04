@@ -1,6 +1,6 @@
 import { debounce } from 'lodash-es'
-import { EditorHistoryEntry, EditorHistoryDependencies } from './types'
-import { ReactElement } from 'react'
+import type { EditorHistoryDependencies, EditorHistoryEntry } from './types'
+import type { ReactElement } from 'react'
 
 const MAX_ITEMS = 100
 

@@ -1,6 +1,6 @@
+import { Pixoree } from '@/controller'
 import { useEffect, useState } from 'react'
 import { useEvent } from '@/tools/hooks'
-import { Pixoree } from '@/controller'
 
 interface UseSpriteEditorCanvasKeyBindings {
   redo: () => void | Promise<void>

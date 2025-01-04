@@ -1,8 +1,8 @@
-import { RgbaColor } from '@/types'
-import { FC } from 'react'
 import { Input } from '@/tools/ui-components/input/Input'
-import styles from './Styles.module.scss'
 import { getCmykColorFromRgba, getRgbaColorFromCmyk } from '@/tools/utils/color'
+import styles from './Styles.module.scss'
+import type { FC } from 'react'
+import type { RgbaColor } from '@/types'
 
 type Props = {
   color: RgbaColor
@@ -39,22 +39,22 @@ export const CmykForm: FC<Props> = ({ onChange, color }) => {
       <div className={styles.formRowTitle}>CMYK</div>
       <div className={styles.formRow}>
         <span>C:</span>
-        <Input type='number' value={cmykColor.c} min={0} max={100} onInput={handleOnCyanInput} />
+        <Input max={100} min={0} type='number' value={cmykColor.c} onInput={handleOnCyanInput} />
         <span>%</span>
       </div>
       <div className={styles.formRow}>
         <span>M:</span>
-        <Input type='number' value={cmykColor.m} min={0} max={100} onInput={handleOnMagentaInput} />
+        <Input max={100} min={0} type='number' value={cmykColor.m} onInput={handleOnMagentaInput} />
         <span>%</span>
       </div>
       <div className={styles.formRow}>
         <span>Y:</span>
-        <Input type='number' value={cmykColor.y} min={0} max={100} onInput={handleYellowInput} />
+        <Input max={100} min={0} type='number' value={cmykColor.y} onInput={handleYellowInput} />
         <span>%</span>
       </div>
       <div className={styles.formRow}>
         <span>K:</span>
-        <Input type='number' value={cmykColor.k} min={0} max={100} onInput={handleBlackInput} />
+        <Input max={100} min={0} type='number' value={cmykColor.k} onInput={handleBlackInput} />
         <span>%</span>
       </div>
     </section>

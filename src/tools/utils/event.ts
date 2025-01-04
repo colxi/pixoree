@@ -1,5 +1,5 @@
-import { Coordinates } from '@/types'
-import React from 'react'
+import type { Coordinates } from '@/types'
+import type React from 'react'
 
 type EventWithPreventDefault = {
   preventDefault: Event['preventDefault']

@@ -1,10 +1,10 @@
-import { getLinePoints, isDistanceGreaterThanOne } from '@/tools/utils/geometry'
-import { EditorHistory } from '../../editor-history'
-import { EditorImage } from '../../editor-image'
-import { EditorTool } from '../types'
-import { getImageByteIndexFromCoordinates } from '@/tools/utils/image'
-import { Coordinates } from '@/types'
 import { EraserIcon } from '@/tools/ui-components/icons'
+import { getImageByteIndexFromCoordinates } from '@/tools/utils/image'
+import { getLinePoints, isDistanceGreaterThanOne } from '@/tools/utils/geometry'
+import type { Coordinates } from '@/types'
+import type { EditorHistory } from '../../editor-history'
+import type { EditorImage } from '../../editor-image'
+import type { EditorTool } from '../types'
 
 interface EraserToolDependencies {
   image: EditorImage

@@ -1,6 +1,6 @@
 import { Modal } from './modal/Modal'
-import { useEffect, useState } from 'react'
 import { Pixoree } from '@/controller'
+import { useEffect, useState } from 'react'
 
 export const ModalViewport = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -24,6 +24,7 @@ export const ModalViewport = () => {
   }, [])
 
   return (
+    // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
       {isModalOpen && <Modal />}
     </>

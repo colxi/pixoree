@@ -1,8 +1,8 @@
 import { minMax, toFixed } from '@/tools/utils/math'
-import { Coordinates, Size } from '../../types'
-import { EditorEventBus } from '../event-bus'
-import { EditorImage } from '../editor-image'
-import { EditorViewportOptions } from './types'
+import type { Coordinates, Size } from '../../types'
+import type { EditorEventBus } from '../event-bus'
+import type { EditorImage } from '../editor-image'
+import type { EditorViewportOptions } from './types'
 
 const INITIAL_ZOOM = 1
 const ZOOM_MIN = 1

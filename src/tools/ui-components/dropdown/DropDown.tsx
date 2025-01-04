@@ -1,5 +1,6 @@
-import { FC, ReactElement, useState } from 'react'
+import { useState } from 'react'
 import styles from './DropDown.module.scss'
+import type { FC, ReactElement} from 'react';
 
 type Props = {
   options: DropDownOptions

@@ -1,4 +1,5 @@
-import { createContext, FC, ReactNode, useContext } from 'react'
+import { createContext, useContext } from 'react'
+import type { FC, ReactNode} from 'react';
 
 type ProviderProps = { children: ReactNode }
 

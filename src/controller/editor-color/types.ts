@@ -1,5 +1,5 @@
-import { HexColor } from '../../types'
-import { EditorEventBus } from '../event-bus'
+import type { EditorEventBus } from '../event-bus'
+import type { HexColor } from '../../types'
 
 export interface EditorColorOptions {
   eventBus: EditorEventBus

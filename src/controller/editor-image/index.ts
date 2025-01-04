@@ -1,9 +1,9 @@
-import { Box, Coordinates, Size } from '../../types'
-import { minMax, toFixed, isEven } from '@/tools/utils/math'
-import { DeepReadonly } from '@/types'
 import { getBoxCenter } from '@/tools/utils/geometry'
-import { EditorEventBus } from '../event-bus'
-import { EditorImageOptions } from './types'
+import { isEven, minMax, toFixed } from '@/tools/utils/math'
+import type { Box, Coordinates, Size } from '../../types'
+import type { DeepReadonly } from '@/types'
+import type { EditorEventBus } from '../event-bus'
+import type { EditorImageOptions } from './types'
 
 const BYTES_PER_PIXEL = 4
 const INITIAL_ZOOM = 1

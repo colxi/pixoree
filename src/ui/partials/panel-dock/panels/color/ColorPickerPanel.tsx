@@ -1,9 +1,9 @@
-import { type FC } from 'react'
-import { RgbaColor } from '@/types'
-import { Pixoree } from '@/controller'
-import styles from './ColorPickerPanel.module.scss'
 import { ColorPicker } from '@/tools/ui-components/color-picker/color/ColorPicker'
 import { PanelBox } from '../../panel-box/PanelBox'
+import { Pixoree } from '@/controller'
+import styles from './ColorPickerPanel.module.scss'
+import type { FC } from 'react'
+import type { RgbaColor } from '@/types'
 
 export const ColorPickerPanel: FC = () => {
 
@@ -16,8 +16,8 @@ export const ColorPickerPanel: FC = () => {
     <PanelBox title="Color">
       <section className={styles.colorPicker}>
         <ColorPicker
-          color={Pixoree.color.primaryColor}
           allowSecondary={true}
+          color={Pixoree.color.primaryColor}
           onSelect={handleOnSelect}
         />
       </section>

@@ -1,5 +1,5 @@
-import { Coordinates, HexColor, RgbaColor, Size } from '@/types'
 import { formatHexColorAsRgba } from './formatters'
+import type { Coordinates, HexColor, RgbaColor, Size } from '@/types'
 
 export const getImageByteIndexFromCoordinates = (
   x: number,

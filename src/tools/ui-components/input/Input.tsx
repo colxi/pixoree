@@ -1,6 +1,7 @@
-import React, { FC, useEffect, useState } from 'react'
-import styles from './Input.module.scss'
 import { minMax } from '@/tools/utils/math'
+import React, { useEffect, useState } from 'react'
+import styles from './Input.module.scss'
+import type { FC } from 'react'
 
 type Props = {
   size?: 's' | 'm' | 'l'
@@ -134,13 +135,13 @@ export const Input: FC<Props> = (props) => {
   return (
     <input
       className={styles.input}
-      type='text'
-      onInput={handleOnInput}
-      onBlur={handleOnBlur}
-      value={value}
       data-size={size}
       max={max}
       min={min}
+      type='text'
+      value={value}
+      onBlur={handleOnBlur}
+      onInput={handleOnInput}
     />
   )
 }

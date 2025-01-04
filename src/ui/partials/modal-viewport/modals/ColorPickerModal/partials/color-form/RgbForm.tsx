@@ -1,7 +1,7 @@
-import { RgbaColor } from '@/types'
-import { FC } from 'react'
 import { Input } from '@/tools/ui-components/input/Input'
 import styles from './Styles.module.scss'
+import type { FC } from 'react'
+import type { RgbaColor } from '@/types'
 
 type Props = {
   color: RgbaColor
@@ -26,17 +26,17 @@ export const RgbForm: FC<Props> = ({ onChange, color }) => {
       <div className={styles.formRowTitle}>RGB</div>
       <div className={styles.formRow}>
         <span>R:</span>
-        <Input type='number' value={color.r} min={0} max={255} onInput={handleOnRedInput} />
+        <Input max={255} min={0} type='number' value={color.r} onInput={handleOnRedInput} />
         <span></span>
       </div>
       <div className={styles.formRow}>
         <span>G:</span>
-        <Input type='number' value={color.g} min={0} max={255} onInput={handleOnGreenInput} />
+        <Input max={255} min={0} type='number' value={color.g} onInput={handleOnGreenInput} />
         <span></span>
       </div>
       <div className={styles.formRow}>
         <span>B:</span>
-        <Input type='number' value={color.b} min={0} max={255} onInput={handleBlueInput} />
+        <Input max={255} min={0} type='number' value={color.b} onInput={handleBlueInput} />
         <span></span>
       </div>
     </section>

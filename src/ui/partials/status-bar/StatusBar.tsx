@@ -1,9 +1,9 @@
-import type { FC } from 'react'
-import { useEffect } from 'react'
-import styles from './StatusBar.module.scss'
 import { Pixoree } from '@/controller'
-import { useForceUpdate } from '@/tools/hooks'
 import { toFixed } from '@/tools/utils/math'
+import { useEffect } from 'react'
+import { useForceUpdate } from '@/tools/hooks'
+import styles from './StatusBar.module.scss'
+import type { FC } from 'react'
 
 export const StatusBar: FC = () => {
   const { forceUpdate } = useForceUpdate()

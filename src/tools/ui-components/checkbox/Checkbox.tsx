@@ -1,5 +1,6 @@
-import React, { FC, useState } from 'react'
+import React, { useState } from 'react'
 import styles from './Checkbox.module.scss'
+import type { FC} from 'react';
 
 type Props = {
   checked: boolean
@@ -24,10 +25,10 @@ export const Checkbox: FC<Props> = (props: Props) => {
       className={styles.checkbox}
     >
       <input
+        checked={checked}
         className={styles.realCheckbox}
         type="checkbox"
         onChange={onChange}
-        checked={checked}
       />
       <div
         className={styles.box}

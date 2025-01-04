@@ -1,19 +1,19 @@
-import { hasKeyModifiers } from '@/tools/utils/keyboard'
+import { FillDripIcon } from '@/tools/ui-components/icons'
 import { getColorFromByteIndex } from '@/tools/utils/image'
 import {
   getImageByteIndexFromCoordinates,
   getImageColorFromCoordinates,
+  getImageCoordinatesFromByteIndex,
   isColorEqual,
   isTransparentColor,
   setColorInCoordinates,
-  getImageCoordinatesFromByteIndex,
 } from '@/tools/utils/image'
-import { Coordinates, RgbaColor } from '@/types'
-import { EditorHistory } from '../../editor-history'
-import { EditorImage } from '../../editor-image'
-import { EditorColor } from '../../editor-color'
-import { EditorTool } from '../types'
-import { FillDripIcon } from '@/tools/ui-components/icons'
+import { hasKeyModifiers } from '@/tools/utils/keyboard'
+import type { Coordinates, RgbaColor } from '@/types'
+import type { EditorColor } from '../../editor-color'
+import type { EditorHistory } from '../../editor-history'
+import type { EditorImage } from '../../editor-image'
+import type { EditorTool } from '../types'
 
 interface PaintBucketToolDependencies {
   color: EditorColor

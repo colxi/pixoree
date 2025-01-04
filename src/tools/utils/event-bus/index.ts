@@ -1,4 +1,4 @@
-import { EmptyObject } from '@/types'
+import type { EmptyObject } from '@/types'
 
 type EventDictionary = Record<PropertyKey, Record<PropertyKey, unknown>>
 

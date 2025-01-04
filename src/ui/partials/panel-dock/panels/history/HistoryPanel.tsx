@@ -1,10 +1,11 @@
-import { useEffect, useRef, type FC } from 'react'
-import { useForceUpdate } from '@/tools/hooks'
-import { formatBytes } from '@/tools/utils/formatters'
 import { PanelBox } from '../../panel-box/PanelBox'
-import styles from './HistoryPanel.module.scss'
-import { TrashCanIcon } from '@/tools/ui-components/icons'
 import { Pixoree } from '@/controller'
+import { TrashCanIcon } from '@/tools/ui-components/icons'
+import { formatBytes } from '@/tools/utils/formatters'
+import { useEffect, useRef } from 'react'
+import { useForceUpdate } from '@/tools/hooks'
+import styles from './HistoryPanel.module.scss'
+import type { FC } from 'react'
 
 export const HistoryPanel: FC = () => {
   const { forceUpdate, afterForceUpdate } = useForceUpdate()
@@ -31,33 +32,31 @@ export const HistoryPanel: FC = () => {
   }, [])
 
   return (
-    <>
-      <PanelBox title="History">
-        <section
-          className={styles.historyEntries}
-          ref={entriesContainerElementRef}
-        >
-          {Pixoree.history.entries.map(
-            (item, index) =>
-              <div
-                key={index}
-                onClick={() => Pixoree.history.load(index)}
-                className={styles.historyRow}
-                data-active={index === Pixoree.history.currentIndex ? 'true' : 'false'}
-              >
-                <div className={styles.historyRowIcon}>{item.icon}</div>
-                <div className={styles.historyRowAction}>{item.action}</div>
-              </div>
-          )}
-        </section>
-        <section className={styles.statusBar}>
-          <div>History size: {getHistorySize()}</div>
-          <div onClick={() => Pixoree.history.deleteEntry(Pixoree.history.currentIndex)}>
-            <TrashCanIcon />
-          </div>
-        </section>
-      </PanelBox>
-    </>
+    <PanelBox title="History">
+      <section
+        className={styles.historyEntries}
+        ref={entriesContainerElementRef}
+      >
+        {Pixoree.history.entries.map(
+          (item, index) =>
+            <div
+              className={styles.historyRow}
+              data-active={index === Pixoree.history.currentIndex ? 'true' : 'false'}
+              key={index}
+              onClick={() => Pixoree.history.load(index)}
+            >
+              <div className={styles.historyRowIcon}>{item.icon}</div>
+              <div className={styles.historyRowAction}>{item.action}</div>
+            </div>
+        )}
+      </section>
+      <section className={styles.statusBar}>
+        <div>History size: {getHistorySize()}</div>
+        <div onClick={() => Pixoree.history.deleteEntry(Pixoree.history.currentIndex)}>
+          <TrashCanIcon />
+        </div>
+      </section>
+    </PanelBox>
   )
 }
 
