@@ -73,6 +73,9 @@
         "noSortAlphabetically": false
       }
     ],
-    "react/jsx-no-useless-fragment": "error"
+    "react/jsx-no-useless-fragment": "error",
+    "react/hook-use-state": "error",
+    "react/jsx-closing-bracket-location": ["error", "tag-aligned"],
+    "react/jsx-closing-tag-location": ["error", "tag-aligned"]
   }
 }

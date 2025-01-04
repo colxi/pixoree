@@ -29,17 +29,19 @@ export const PalettePanel: FC = () => {
   const rowRenderer = (item: DropDownItem) => {
     const palette = Pixoree.color.palettes.find((palette) => palette.id === item.value)
     if (!palette) throw new Error('Palette not found')
-    return <>
-      <div>{palette.name}</div>
-      <div className={styles.dropDownItem}>
-        {
-          palette.colors.map(
-            (color, i) => (
-              <div className={styles.color} key={i} style={{ backgroundColor: color }} />
-            ))
-        }
-      </div>
-    </>
+    return (
+      <>
+        <div>{palette.name}</div>
+        <div className={styles.dropDownItem}>
+          {
+            palette.colors.map(
+              (color, i) => (
+                <div className={styles.color} key={i} style={{ backgroundColor: color }} />
+              ))
+          }
+        </div>
+      </>
+    )
   }
 
   const handleColorLeftClick = (color: HexColor) => {
