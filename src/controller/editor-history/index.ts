@@ -28,7 +28,7 @@ export class EditorHistory {
     return this.#entries
   }
 
-  private createEntry(action: string, icon: ReactElement, test: any) {
+  private createEntry(action: string, icon: ReactElement) {
     // create history data
     const arrayBuffer = new ArrayBuffer(
       this.#dependencies.image.size.w * this.#dependencies.image.size.h * 4
