@@ -1,12 +1,13 @@
-import React, { useEffect, useMemo, useState, type FC } from 'react'
-import { PanelBox } from '../../panel-box/PanelBox'
-import styles from './SpriteEditorNavigator.module.css'
-import { useEvent, useForceUpdate } from '@/tools/hooks'
-import { PersistentPixelatedCanvas } from '@/tools/ui-components/persistent-pixelated-canvas/PersistentPixelatedCanvas'
-import { Coordinates, Size } from '@/types'
 import { AnimationEngine } from '@/tools/utils/animation-engine'
-import { minMax } from '@/tools/utils/math'
+import { PanelBox } from '../../panel-box/PanelBox'
+import { PersistentPixelatedCanvas } from '@/tools/ui-components/persistent-pixelated-canvas/PersistentPixelatedCanvas'
 import { Pixoree } from '@/controller'
+import { minMax } from '@/tools/utils/math'
+import { useEvent, useForceUpdate } from '@/tools/hooks'
+import React, { useEffect, useMemo, useState } from 'react'
+import styles from './SpriteEditorNavigator.module.css'
+import type { Coordinates, Size } from '@/types'
+import type { FC } from 'react'
 
 const getCanvasClickMouseCoords = (
   e: React.MouseEvent | MouseEvent,
@@ -143,22 +144,22 @@ export const SpriteEditorNavigator: FC = () => {
   return <>
     <PanelBox title={`Navigator (${Pixoree.image.zoom})`}>
       <PersistentPixelatedCanvas
-        width={NAVIGATOR_CANVAS_SIZE.w}
-        height={NAVIGATOR_CANVAS_SIZE.h}
         contextRef={setCanvasContext}
+        height={NAVIGATOR_CANVAS_SIZE.h}
+        width={NAVIGATOR_CANVAS_SIZE.w}
+        onClick={handleOnClick}
         onMouseDown={setMouseDown}
         onMouseMove={handleMouseMove}
-        onClick={handleOnClick}
       />
       <div className={styles.controls}>
         <button onClick={handleDecrementZoom}>-</button>
         <input
-          type="range"
-          onChange={handleZoomChange}
-          min={1}
           max={30}
+          min={1}
           step={ZOOM_STEP}
+          type="range"
           value={Pixoree.image.zoom}
+          onChange={handleZoomChange}
         />
         <button onClick={handleZoomIncrement}>+</button>
       </div>

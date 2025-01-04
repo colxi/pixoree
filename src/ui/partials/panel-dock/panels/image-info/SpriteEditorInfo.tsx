@@ -1,7 +1,8 @@
-import { useForceUpdate } from '@/tools/hooks'
 import { PanelBox } from '../../panel-box/PanelBox'
-import { FC, useEffect } from 'react'
 import { Pixoree } from '@/controller'
+import { useEffect } from 'react'
+import { useForceUpdate } from '@/tools/hooks'
+import type { FC} from 'react';
 
 export const SpriteEditorInfo: FC = () => {
   const { forceUpdate } = useForceUpdate()

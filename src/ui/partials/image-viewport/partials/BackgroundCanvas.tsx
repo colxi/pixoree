@@ -1,10 +1,10 @@
-import type { FC } from 'react'
-import { useEffect, useMemo, useState } from 'react'
-import styles from './BackgroundCanvas.module.scss'
-import { PersistentPixelatedCanvas } from '@/tools/ui-components/persistent-pixelated-canvas/PersistentPixelatedCanvas'
 import { AnimationEngine } from '@/tools/utils/animation-engine'
-import { useEvent } from '@/tools/hooks'
+import { PersistentPixelatedCanvas } from '@/tools/ui-components/persistent-pixelated-canvas/PersistentPixelatedCanvas'
 import { Pixoree } from '@/controller'
+import { useEffect, useMemo, useState } from 'react'
+import { useEvent } from '@/tools/hooks'
+import styles from './BackgroundCanvas.module.scss'
+import type { FC } from 'react'
 
 export const ImageCanvas: FC = () => {
   const animation = useMemo(() => new AnimationEngine('ImageCanvas'), [])
@@ -79,8 +79,8 @@ export const ImageCanvas: FC = () => {
       <PersistentPixelatedCanvas
         className={styles.imageCanvas}
         contextRef={setCanvasContext}
-        width={Pixoree.viewport.size.w}
         height={Pixoree.viewport.size.w}
+        width={Pixoree.viewport.size.w}
       />
     </>
   )

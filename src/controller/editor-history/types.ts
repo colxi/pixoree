@@ -1,6 +1,6 @@
-import { ReactElement } from 'react'
-import { EditorImage } from '../editor-image'
-import { EditorEventBus } from '../event-bus'
+import type { EditorEventBus } from '../event-bus'
+import type { EditorImage } from '../editor-image'
+import type { ReactElement } from 'react'
 
 export interface EditorHistoryEntry {
   action: string

@@ -1,5 +1,5 @@
-import { RgbaColor } from '../../types'
-import { EditorEventBus } from '../event-bus'
+import type { EditorEventBus } from '../event-bus'
+import type { RgbaColor } from '../../types'
 // import { modalsCatalog } from './catalog'
 
 export interface EditorModalDependencies {

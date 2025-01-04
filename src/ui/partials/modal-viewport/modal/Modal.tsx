@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { Coordinates } from '@/types'
-import { useEvent } from '@/tools/hooks'
-import { getElementCoordinatesFromMouseEvent } from '@/tools/utils/event'
-import styles from './Modal.module.scss'
 import { Pixoree } from '@/controller'
+import { getElementCoordinatesFromMouseEvent } from '@/tools/utils/event'
 import { modalCatalog } from '../modals/catalog'
+import { useEvent } from '@/tools/hooks'
+import React, { useEffect, useRef, useState } from 'react'
+import styles from './Modal.module.scss'
+import type { Coordinates } from '@/types'
 
 export const Modal = () => {
   const modalElementRef = useRef<HTMLDivElement | null>(null)
@@ -85,19 +85,19 @@ export const Modal = () => {
 
   return (
     <main
-      ref={overlayElementRef}
       className={styles.modalOverlay}
+      ref={overlayElementRef}
     >
       <section
-        ref={modalElementRef}
         className={styles.modalContainer}
         data-visible={isModalVisible}
+        ref={modalElementRef}
         style={{
           top: modalCoordinates.y,
           left: modalCoordinates.x,
         }}
       >
-        <div onMouseDown={handleMouseDown} className={styles.modalTitle}>{modalTitle}</div>
+        <div className={styles.modalTitle} onMouseDown={handleMouseDown}>{modalTitle}</div>
         <div className={styles.modalContent}>{getModalComponent()}</div>
       </section>
     </main>

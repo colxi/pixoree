@@ -1,12 +1,14 @@
-import { useEffect, type FC } from 'react'
+import { DropDown } from '@/tools/ui-components/dropdown/DropDown'
 import { PanelBox } from '../../panel-box/PanelBox'
-import { DropDown, DropDownItem, DropDownOptions } from '@/tools/ui-components/dropdown/DropDown'
 import { Pixoree } from '@/controller'
-import { useForceUpdate } from '@/tools/hooks'
-import { HexColor } from '@/types'
 import { formatHexColorAsRgba } from '@/tools/utils/formatters'
 import { isColorEqual } from '@/tools/utils/image'
+import { useEffect } from 'react'
+import { useForceUpdate } from '@/tools/hooks'
 import styles from './PalettePanel.module.scss'
+import type { DropDownItem, DropDownOptions } from '@/tools/ui-components/dropdown/DropDown'
+import type { FC } from 'react'
+import type { HexColor } from '@/types'
 
 export const PalettePanel: FC = () => {
   const { forceUpdate } = useForceUpdate()
@@ -33,7 +35,7 @@ export const PalettePanel: FC = () => {
         {
           palette.colors.map(
             (color, i) => (
-              <div key={i} className={styles.color} style={{ backgroundColor: color }} />
+              <div className={styles.color} key={i} style={{ backgroundColor: color }} />
             ))
         }
       </div>
@@ -67,8 +69,8 @@ export const PalettePanel: FC = () => {
               <div
                 className={styles.item}
                 data-active={isColorEqual(color, Pixoree.color.primaryColor)}
-                style={{ backgroundColor: color }}
                 key={i}
+                style={{ backgroundColor: color }}
                 onClick={() => handleColorLeftClick(color)}
                 onContextMenu={() => handleColorRightClick(color)}
               />

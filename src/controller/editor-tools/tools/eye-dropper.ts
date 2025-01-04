@@ -1,12 +1,12 @@
-import { Coordinates } from '@/types'
-import { EditorImage } from '../../editor-image'
-import { EditorColor } from '../../editor-color'
-import { EditorTool } from '../types'
+import { EyeDropperIcon } from '@/tools/ui-components/icons'
 import {
   getImageColorFromCoordinates,
   isTransparentColor,
 } from '@/tools/utils/image'
-import { EyeDropperIcon } from '@/tools/ui-components/icons'
+import type { Coordinates } from '@/types'
+import type { EditorColor } from '../../editor-color'
+import type { EditorImage } from '../../editor-image'
+import type { EditorTool } from '../types'
 
 interface EyeDropperToolDependencies {
   color: EditorColor

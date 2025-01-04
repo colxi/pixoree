@@ -1,9 +1,10 @@
-import { useEffect, useState, type FC } from 'react'
 import { ColorPickerBox } from './partials/ColorPickerBox'
 import { HuePickerBox } from './partials/HuePickerBox'
-import { RgbaColor } from '@/types'
 import { getHslColorFromRgba, getHueFromRgba, getRgbaColorFromHsl } from '@/tools/utils/color'
+import { useEffect, useState } from 'react'
 import styles from './ColorPicker.module.scss'
+import type { FC } from 'react'
+import type { RgbaColor } from '@/types'
 
 type Props = {
   onSelect: (color: RgbaColor, type: 'primary' | 'secondary') => void
@@ -47,7 +48,7 @@ export const ColorPicker: FC<Props> = ({ onSelect, color, allowSecondary }) => {
 
   return (
     <section className={styles.colorPicker}>
-      <ColorPickerBox hue={selectedHue} color={selectedColor} onColorSelect={handleColorSelect} />
+      <ColorPickerBox color={selectedColor} hue={selectedHue} onColorSelect={handleColorSelect} />
       <HuePickerBox hue={selectedHue} onHueSelect={handleHueSelect} />
     </section>
   )

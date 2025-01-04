@@ -17,7 +17,16 @@
     }
   },
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "react", "react-hooks", "prettier", "jest"],
+  "plugins": [
+    "@typescript-eslint",
+    "react",
+    "react-hooks",
+    "prettier",
+    "jest",
+    "json-format",
+    "react-refresh",
+    "sort-imports-es6-autofix"
+  ],
   "settings": {
     "react": {
       "version": "detect"
@@ -25,6 +34,7 @@
   },
   "rules": {
     "no-unused-vars": "off",
+    "react-refresh/only-export-components": "error",
     "react-hooks/exhaustive-deps": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-uses-react": "off",
@@ -34,6 +44,33 @@
         "argsIgnorePattern": "^_",
         "varsIgnorePattern": "^_",
         "caughtErrorsIgnorePattern": "^_"
+      }
+    ],
+    "sort-imports-es6-autofix/sort-imports-es6": [
+      2,
+      {
+        "ignoreCase": false,
+        "ignoreMemberSort": false,
+        "memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
+      }
+    ],
+    "@typescript-eslint/consistent-type-imports": [
+      "error",
+      {
+        "disallowTypeAnnotations": true,
+        "fixStyle": "separate-type-imports",
+        "prefer": "type-imports"
+      }
+    ],
+    "no-multiple-empty-lines": ["error", { "max": 2 }],
+    "react/jsx-sort-props": [
+      "error",
+      {
+        "callbacksLast": true,
+        "shorthandFirst": false,
+        "shorthandLast": true,
+        "ignoreCase": true,
+        "noSortAlphabetically": false
       }
     ]
   }

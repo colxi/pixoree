@@ -1,10 +1,10 @@
-import { Coordinates } from '../../types'
-import { EditorHistory } from '../editor-history'
-import { EditorColor } from '../editor-color'
-import { EditorImage } from '../editor-image'
-import { EditorViewport } from '../editor-viewport'
-import { EditorEventBus } from '../event-bus'
-import { ReactElement } from 'react'
+import type { Coordinates } from '../../types'
+import type { EditorColor } from '../editor-color'
+import type { EditorEventBus } from '../event-bus'
+import type { EditorHistory } from '../editor-history'
+import type { EditorImage } from '../editor-image'
+import type { EditorViewport } from '../editor-viewport'
+import type { ReactElement } from 'react'
 
 export interface EditorToolsDependencies {
   image: EditorImage

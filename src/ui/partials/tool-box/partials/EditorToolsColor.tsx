@@ -1,9 +1,11 @@
-import { useEffect, type FC } from 'react'
 import { Pixoree } from '@/controller'
-import { useForceUpdate } from '@/tools/hooks'
 import { SwitchIcon } from '@/tools/ui-components/icons'
-import styles from './EditorToolsColor.module.scss'
 import { getHexColorFromRgba } from '@/tools/utils/color'
+import { useEffect } from 'react'
+import { useForceUpdate } from '@/tools/hooks'
+import styles from './EditorToolsColor.module.scss'
+import type { FC } from 'react'
+
 
 export const EditorToolsColor: FC = () => {
   const { forceUpdate } = useForceUpdate()

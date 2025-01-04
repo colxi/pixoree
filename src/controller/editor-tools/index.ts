@@ -1,13 +1,14 @@
 import { BrushTool } from './tools/brush'
-import { HandTool } from './tools/hand'
-import { EditorToolsDependencies, SpriteEditorTool, ToolsMap } from './types'
-import { EyeDropperTool } from './tools/eye-dropper'
-import { hasKeyModifiers } from '@/tools/utils/keyboard'
-import { PaintBucketTool } from './tools/paint-bucket'
 import { EraserTool } from './tools/eraser'
-import { ZoomTool } from './tools/zoom'
+import { EyeDropperTool } from './tools/eye-dropper'
+import { HandTool } from './tools/hand'
 import { MoveTool } from './tools/move'
-import { ReactElement } from 'react'
+import { PaintBucketTool } from './tools/paint-bucket'
+import { SpriteEditorTool } from './types'
+import { ZoomTool } from './tools/zoom'
+import { hasKeyModifiers } from '@/tools/utils/keyboard'
+import type { EditorToolsDependencies, ToolsMap } from './types';
+import type { ReactElement } from 'react'
 
 export class EditorTools {
   constructor({

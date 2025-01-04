@@ -1,7 +1,7 @@
-import { RgbaColor } from '../../types'
-import { EditorEventBus } from '../event-bus'
 import { palettes } from './constants'
-import { EditorColorOptions, EditorPalette } from './types'
+import type { EditorColorOptions, EditorPalette } from './types'
+import type { EditorEventBus } from '../event-bus'
+import type { RgbaColor } from '../../types'
 
 export class EditorColor {
   constructor({ eventBus }: EditorColorOptions) {

@@ -1,16 +1,16 @@
-import { getLinePoints, isDistanceGreaterThanOne } from '@/tools/utils/geometry'
-import { hasKeyModifiers } from '@/tools/utils/keyboard'
+import { BrushIcon } from '@/tools/ui-components/icons'
 import {
   getImageByteIndexFromCoordinates,
   getImageColorFromCoordinates,
   isTransparentColor,
 } from '@/tools/utils/image'
-import { Coordinates } from '@/types'
-import { EditorHistory } from '../../editor-history'
-import { EditorImage } from '../../editor-image'
-import { EditorColor } from '../../editor-color'
-import { EditorTool } from '../types'
-import { BrushIcon } from '@/tools/ui-components/icons'
+import { getLinePoints, isDistanceGreaterThanOne } from '@/tools/utils/geometry'
+import { hasKeyModifiers } from '@/tools/utils/keyboard'
+import type { Coordinates } from '@/types'
+import type { EditorColor } from '../../editor-color'
+import type { EditorHistory } from '../../editor-history'
+import type { EditorImage } from '../../editor-image'
+import type { EditorTool } from '../types'
 
 interface BrushToolDependencies {
   color: EditorColor

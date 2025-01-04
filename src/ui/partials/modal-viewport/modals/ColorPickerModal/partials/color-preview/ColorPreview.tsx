@@ -1,7 +1,7 @@
-import { RgbaColor } from '@/types'
-import { FC } from 'react'
 import { getHexColorFromRgba } from '@/tools/utils/color'
 import styles from './ColorPreview.module.scss'
+import type { FC } from 'react'
+import type { RgbaColor } from '@/types'
 
 type Props = {
   newColor: RgbaColor

@@ -1,10 +1,10 @@
-import { EditorHistory } from './editor-history'
 import { EditorColor } from './editor-color'
+import { EditorEventBus } from './event-bus'
+import { EditorHistory } from './editor-history'
 import { EditorImage } from './editor-image'
+import { EditorModal } from './editor-modal'
 import { EditorTools } from './editor-tools'
 import { EditorViewport } from './editor-viewport'
-import { EditorEventBus } from './event-bus'
-import { EditorModal } from './editor-modal'
 
 export class Pixoree {
   static eventBus = new EditorEventBus()
