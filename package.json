@@ -3,7 +3,7 @@
   "private": false,
   "license": "MIT-advertising",
   "homepage": "https://colxi.info/pixoree/",
-  "version": "0.0.5-alpha",
+  "version": "0.0.6-alpha",
   "type": "module",
   "scripts": {
     "test": "jest",
