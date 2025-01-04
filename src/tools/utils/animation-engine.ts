@@ -1,3 +1,4 @@
+type FrameRequestCallback = (time: number) => void
 export class AnimationEngine {
   constructor(instanceId: string) {
     this.instanceId = instanceId

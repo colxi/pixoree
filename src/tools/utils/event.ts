@@ -1,4 +1,5 @@
 import { Coordinates } from '@/types'
+import React from 'react'
 
 type EventWithPreventDefault = {
   preventDefault: Event['preventDefault']

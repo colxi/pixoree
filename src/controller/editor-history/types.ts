@@ -1,9 +1,10 @@
+import { ReactElement } from 'react'
 import { EditorImage } from '../editor-image'
 import { EditorEventBus } from '../event-bus'
 
 export interface EditorHistoryEntry {
   action: string
-  icon: JSX.Element
+  icon: ReactElement
   data: Uint8ClampedArray
 }
 

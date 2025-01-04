@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import styles from './Input.module.scss'
 import { minMax } from '@/tools/utils/math'
 

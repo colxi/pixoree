@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Coordinates } from '@/types'
 import { useEvent } from '@/tools/hooks'
 import { getElementCoordinatesFromMouseEvent } from '@/tools/utils/event'

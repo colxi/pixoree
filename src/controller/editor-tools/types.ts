@@ -4,6 +4,7 @@ import { EditorColor } from '../editor-color'
 import { EditorImage } from '../editor-image'
 import { EditorViewport } from '../editor-viewport'
 import { EditorEventBus } from '../event-bus'
+import { ReactElement } from 'react'
 
 export interface EditorToolsDependencies {
   image: EditorImage
@@ -14,7 +15,7 @@ export interface EditorToolsDependencies {
 }
 
 export type EditorTool = {
-  icon: () => JSX.Element
+  icon: () => ReactElement
   enable: () => void
   disable: () => void
   onMouseMove: (coordinates: Coordinates) => void | Promise<void>

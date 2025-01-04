@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import React, { FC, useState } from 'react'
 import styles from './Checkbox.module.scss'
 
 type Props = {

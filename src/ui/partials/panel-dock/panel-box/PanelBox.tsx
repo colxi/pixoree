@@ -1,3 +1,4 @@
+import React from 'react'
 import styles from './PanelBox.module.scss'
 import type { FC } from 'react'
 

@@ -1,7 +1,7 @@
 import { Coordinates, RgbaColor, Size } from '@/types'
 import { PersistentPixelatedCanvas } from '@/tools/ui-components/persistent-pixelated-canvas/PersistentPixelatedCanvas'
 import { findCanvasClosestColorCoordinates, getCanvasContextColorFromCoordinates } from '@/tools/utils/canvas'
-import { FC, useEffect, useRef, useState } from 'react'
+import React, { FC, useEffect, useRef, useState } from 'react'
 import styles from './ColorPickerBox.module.scss'
 import { getElementCoordinatesFromMouseEvent } from '@/tools/utils/event'
 import { getHexColorFromRgba, getRgbaColorFromHue } from '@/tools/utils/color'

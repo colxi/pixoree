@@ -1,9 +1,9 @@
-import { FC, useState } from 'react'
+import { FC, ReactElement, useState } from 'react'
 import styles from './DropDown.module.scss'
 
 type Props = {
   options: DropDownOptions
-  rowRenderer: (item: DropDownItem, index: number, group: number) => JSX.Element
+  rowRenderer: (item: DropDownItem, index: number, group: number) => ReactElement
 }
 
 export interface DropDownItem {

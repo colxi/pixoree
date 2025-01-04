@@ -1,6 +1,6 @@
 import { PersistentPixelatedCanvas } from '@/tools/ui-components/persistent-pixelated-canvas/PersistentPixelatedCanvas'
 import { getElementCoordinatesFromMouseEvent } from '@/tools/utils/event'
-import { FC, useEffect, useRef, useState } from 'react'
+import React, { FC, useEffect, useRef, useState } from 'react'
 import { getCanvasContextColorFromCoordinates, findCanvasClosestColorCoordinates } from '@/tools/utils/canvas'
 import { Coordinates, Size } from '@/types'
 import { getHueFromRgba, getRgbaColorFromHue } from '@/tools/utils/color'

@@ -7,6 +7,7 @@ import { PaintBucketTool } from './tools/paint-bucket'
 import { EraserTool } from './tools/eraser'
 import { ZoomTool } from './tools/zoom'
 import { MoveTool } from './tools/move'
+import { ReactElement } from 'react'
 
 export class EditorTools {
   constructor({
@@ -46,7 +47,7 @@ export class EditorTools {
     return this.#activeToolName
   }
 
-  public getToolIcon(tool: SpriteEditorTool): JSX.Element {
+  public getToolIcon(tool: SpriteEditorTool): ReactElement {
     return this.#tools[tool].icon()
   }
 

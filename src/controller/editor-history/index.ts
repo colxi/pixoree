@@ -1,5 +1,6 @@
 import { debounce } from 'lodash-es'
 import { EditorHistoryEntry, EditorHistoryDependencies } from './types'
+import { ReactElement } from 'react'
 
 const MAX_ITEMS = 100
 
@@ -27,7 +28,7 @@ export class EditorHistory {
     return this.#entries
   }
 
-  private createEntry(action: string, icon: JSX.Element) {
+  private createEntry(action: string, icon: ReactElement) {
     // create history data
     const arrayBuffer = new ArrayBuffer(
       this.#dependencies.image.size.w * this.#dependencies.image.size.h * 4
