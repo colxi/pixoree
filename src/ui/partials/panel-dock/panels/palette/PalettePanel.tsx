@@ -60,26 +60,24 @@ export const PalettePanel: FC = () => {
   })
 
   return (
-    <>
-      <PanelBox title="Palette">
-        <DropDown options={options} rowRenderer={rowRenderer} />
-        <section className={styles.container}>
-          {colors.map(
-            (color, i) => (
-              <div
-                className={styles.item}
-                data-active={isColorEqual(color, Pixoree.color.primaryColor)}
-                key={i}
-                style={{ backgroundColor: color }}
-                onClick={() => handleColorLeftClick(color)}
-                onContextMenu={() => handleColorRightClick(color)}
-              />
-            ))
-          }
-          <div className={styles.addItem}>+</div>
-        </section>
-      </PanelBox>
-    </>
+    <PanelBox title="Palette">
+      <DropDown options={options} rowRenderer={rowRenderer} />
+      <section className={styles.container}>
+        {colors.map(
+          (color, i) => (
+            <div
+              className={styles.item}
+              data-active={isColorEqual(color, Pixoree.color.primaryColor)}
+              key={i}
+              style={{ backgroundColor: color }}
+              onClick={() => handleColorLeftClick(color)}
+              onContextMenu={() => handleColorRightClick(color)}
+            />
+          ))
+        }
+        <div className={styles.addItem}>+</div>
+      </section>
+    </PanelBox>
   )
 }
 

@@ -24,6 +24,7 @@ export const ModalViewport = () => {
   }, [])
 
   return (
+    // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
       {isModalOpen && <Modal />}
     </>

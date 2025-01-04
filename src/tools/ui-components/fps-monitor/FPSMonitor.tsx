@@ -25,10 +25,8 @@ export const FPSMonitor: FC = () => {
   }, [])
 
   return (
-    <>
-      <div className={styles.fpsMonitorContainer} style={{ backgroundColor: color }}>
-        FPS: {fps}
-      </div >
-    </>
+    <div className={styles.fpsMonitorContainer} style={{ backgroundColor: color }}>
+      FPS: {fps}
+    </div >
   )
 }

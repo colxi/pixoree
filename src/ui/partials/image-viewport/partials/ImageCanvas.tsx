@@ -83,15 +83,13 @@ export const ImageCanvas: FC = () => {
   }, [])
 
   return (
-    <>
-      <PersistentPixelatedCanvas
-        className={styles.imageCanvas}
-        contextRef={updateCanvasContext}
-        height={Pixoree.viewport.size.h}
-        id='ImageCanvas'
-        width={Pixoree.viewport.size.w}
-      />
-    </>
+    <PersistentPixelatedCanvas
+      className={styles.imageCanvas}
+      contextRef={updateCanvasContext}
+      height={Pixoree.viewport.size.h}
+      id='ImageCanvas'
+      width={Pixoree.viewport.size.w}
+    />
   )
 }
 

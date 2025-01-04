@@ -25,12 +25,10 @@ export const ImageViewport: FC = () => {
 
 
   return (
-    <>
-      <main className={styles.viewport} ref={viewportRef}>
-        <ImageCanvas />
-        <InteractiveCanvas />
-      </main>
-    </>
+    <main className={styles.viewport} ref={viewportRef}>
+      <ImageCanvas />
+      <InteractiveCanvas />
+    </main>
   )
 }
 

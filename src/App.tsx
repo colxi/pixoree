@@ -8,12 +8,10 @@ export function App() {
   disableMouseZoom()
 
   return (
-    <>
-      <div className={styles.app}>
-        <FPSMonitor />
-        <ImageEditor />
-      </div >
-    </>
+    <div className={styles.app}>
+      <FPSMonitor />
+      <ImageEditor />
+    </div >
   )
 }
 

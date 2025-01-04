@@ -125,18 +125,16 @@ export const InteractiveCanvas: FC = () => {
   }, [])
 
   return (
-    <>
-      <PersistentPixelatedCanvas
-        className={styles.hudCanvas}
-        contextRef={setContext}
-        height={Pixoree.viewport.size.h}
-        width={Pixoree.viewport.size.w}
-        onMouseDown={handleCanvasClick}
-        onMouseMove={handleCanvasMouseMove}
-        onMouseOut={handleOnMouseOut}
-        onWheel={handleWheelGesture}
-      />
-    </>
+    <PersistentPixelatedCanvas
+      className={styles.hudCanvas}
+      contextRef={setContext}
+      height={Pixoree.viewport.size.h}
+      width={Pixoree.viewport.size.w}
+      onMouseDown={handleCanvasClick}
+      onMouseMove={handleCanvasMouseMove}
+      onMouseOut={handleOnMouseOut}
+      onWheel={handleWheelGesture}
+    />
   )
 }
 

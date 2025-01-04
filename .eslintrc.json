@@ -72,6 +72,7 @@
         "ignoreCase": true,
         "noSortAlphabetically": false
       }
-    ]
+    ],
+    "react/jsx-no-useless-fragment": "error"
   }
 }

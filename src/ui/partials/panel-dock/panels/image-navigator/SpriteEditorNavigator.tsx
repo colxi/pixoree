@@ -141,7 +141,7 @@ export const SpriteEditorNavigator: FC = () => {
     }
   }, [])
 
-  return <>
+  return (
     <PanelBox title={`Navigator (${Pixoree.image.zoom})`}>
       <PersistentPixelatedCanvas
         contextRef={setCanvasContext}
@@ -165,6 +165,6 @@ export const SpriteEditorNavigator: FC = () => {
       </div>
       w:{Pixoree.image.viewBox.size.w}/ h:{Pixoree.image.viewBox.size.w}
     </PanelBox >
-  </>
+  )
 }
 

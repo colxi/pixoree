@@ -2,7 +2,7 @@ import { PanelBox } from '../../panel-box/PanelBox'
 import { Pixoree } from '@/controller'
 import { useEffect } from 'react'
 import { useForceUpdate } from '@/tools/hooks'
-import type { FC} from 'react';
+import type { FC } from 'react'
 
 export const SpriteEditorInfo: FC = () => {
   const { forceUpdate } = useForceUpdate()
@@ -30,7 +30,7 @@ export const SpriteEditorInfo: FC = () => {
     }
   }, [])
 
-  return <>
+  return (
     <PanelBox title="Info">
       <div>Size:{Pixoree.image.size.w} x {Pixoree.image.size.h} </div>
       <div>ViewBox</div>
@@ -39,6 +39,6 @@ export const SpriteEditorInfo: FC = () => {
       <div>Center: x:{center.x} y:{center.y}</div>
       <div>Zoom: {Pixoree.image.zoom}</div>
     </PanelBox >
-  </>
+  )
 }
 
