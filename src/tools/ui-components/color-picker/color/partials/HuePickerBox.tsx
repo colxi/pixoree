@@ -1,10 +1,11 @@
 import { PersistentPixelatedCanvas } from '@/tools/ui-components/persistent-pixelated-canvas/PersistentPixelatedCanvas'
+import { findCanvasClosestColorCoordinates, getCanvasContextColorFromCoordinates } from '@/tools/utils/canvas'
 import { getElementCoordinatesFromMouseEvent } from '@/tools/utils/event'
-import React, { FC, useEffect, useRef, useState } from 'react'
-import { getCanvasContextColorFromCoordinates, findCanvasClosestColorCoordinates } from '@/tools/utils/canvas'
-import { Coordinates, Size } from '@/types'
 import { getHueFromRgba, getRgbaColorFromHue } from '@/tools/utils/color'
+import React, { useEffect, useRef, useState } from 'react'
 import styles from './HuePickerBox.module.scss'
+import type { Coordinates, Size } from '@/types'
+import type { FC} from 'react';
 
 const PICKER_WIDTH = 15
 
@@ -104,14 +105,14 @@ export const HuePickerBox: FC<Props> = ({ onHueSelect, hue }) => {
         style={{ top: `${selectionCoordinates.y}px` }}
       />
       <PersistentPixelatedCanvas
+        contextRef={onContextUpdate}
+        height={canvasSize.h}
         id="ColorPickerRainbow"
         width={canvasSize.w}
-        height={canvasSize.h}
         willReadFrequently={true}
-        contextRef={onContextUpdate}
         onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
         onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
       />
     </section>
   )

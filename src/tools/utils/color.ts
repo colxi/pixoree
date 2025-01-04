@@ -1,4 +1,4 @@
-import { CmykColor, HexColor, HslColor, RgbaColor } from '@/types'
+import type { CmykColor, HexColor, HslColor, RgbaColor } from '@/types'
 
 /**
  *

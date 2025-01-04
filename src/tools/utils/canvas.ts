@@ -1,6 +1,6 @@
-import { Coordinates, RgbaColor } from '@/types'
 import { getColorDistance } from './color'
 import { getImageCoordinatesFromByteIndex } from './image'
+import type { Coordinates, RgbaColor } from '@/types'
 
 export const clearCanvas = (canvasContext: CanvasRenderingContext2D) => {
   canvasContext.clearRect(

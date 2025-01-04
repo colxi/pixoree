@@ -2,15 +2,15 @@
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-  faPaintBrush,
   faArrowsUpDownLeftRight,
   faEraser,
+  faEyeDropper,
+  faFileLines,
+  faFillDrip,
   faHand,
   faMagnifyingGlass,
-  faEyeDropper,
-  faFillDrip,
+  faPaintBrush,
   faRepeat,
-  faFileLines,
   faTrashCan
 } from '@fortawesome/free-solid-svg-icons'
 

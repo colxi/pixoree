@@ -130,22 +130,22 @@ export class PersistentPixelatedCanvas extends React.Component<Props> {
 
   render() {
     return (
+      // Render as "block" to prevent extra 5px at the bottom
+      // Details: https://stackoverflow.com/questions/15807833/div-containing-canvas-have-got-a-strange-bottom-margin-of-5px
       <canvas
-        id={this.props.id}
         className={this.props.className}
-        width={this.props.width}
         height={this.props.height}
+        id={this.props.id}
         ref={this.setCanvasRef}
-        onMouseDown={this.handleOnMouseDown}
-        onMouseUp={this.handleOnMouseUp}
-        onMouseMove={this.handleOnMouseMove}
-        onMouseOut={this.handleOnMouseOut}
-        onWheel={this.handleOnWheel}
+        style={{ display: 'block' }}
+        width={this.props.width}
         onClick={this.handleOnClick}
         onContextMenu={this.handleContextMenu}
-        // Render as "block" to prevent extra 5px at the bottom
-        // Details: https://stackoverflow.com/questions/15807833/div-containing-canvas-have-got-a-strange-bottom-margin-of-5px
-        style={{ display: 'block' }}
+        onMouseDown={this.handleOnMouseDown}
+        onMouseMove={this.handleOnMouseMove}
+        onMouseOut={this.handleOnMouseOut}
+        onMouseUp={this.handleOnMouseUp}
+        onWheel={this.handleOnWheel}
       />
     )
   }

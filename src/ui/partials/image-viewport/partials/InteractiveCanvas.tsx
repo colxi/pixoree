@@ -1,13 +1,13 @@
-import type { FC } from 'react'
-import React, { useEffect, useMemo, useState } from 'react'
-import styles from './InteractiveCanvas.module.scss'
-import { useSpriteEditorCanvasKeyBindings } from './SpriteEditorCanvas.keyBindings'
 import { AnimationEngine } from '@/tools/utils/animation-engine'
 import { PersistentPixelatedCanvas } from '@/tools/ui-components/persistent-pixelated-canvas/PersistentPixelatedCanvas'
 import { Pixoree } from '@/controller'
-import { useEvent, useForceUpdate } from '@/tools/hooks'
 import { clearCanvas } from '@/tools/utils/canvas'
 import { getElementCoordinatesFromMouseEvent } from '@/tools/utils/event'
+import { useEvent, useForceUpdate } from '@/tools/hooks'
+import { useSpriteEditorCanvasKeyBindings } from './SpriteEditorCanvas.keyBindings'
+import React, { useEffect, useMemo, useState } from 'react'
+import styles from './InteractiveCanvas.module.scss'
+import type { FC } from 'react'
 
 enum ScrollMode {
   NORMAL = 1,
@@ -125,18 +125,16 @@ export const InteractiveCanvas: FC = () => {
   }, [])
 
   return (
-    <>
-      <PersistentPixelatedCanvas
-        className={styles.hudCanvas}
-        contextRef={setContext}
-        onMouseMove={handleCanvasMouseMove}
-        onMouseDown={handleCanvasClick}
-        onMouseOut={handleOnMouseOut}
-        onWheel={handleWheelGesture}
-        width={Pixoree.viewport.size.w}
-        height={Pixoree.viewport.size.h}
-      />
-    </>
+    <PersistentPixelatedCanvas
+      className={styles.hudCanvas}
+      contextRef={setContext}
+      height={Pixoree.viewport.size.h}
+      width={Pixoree.viewport.size.w}
+      onMouseDown={handleCanvasClick}
+      onMouseMove={handleCanvasMouseMove}
+      onMouseOut={handleOnMouseOut}
+      onWheel={handleWheelGesture}
+    />
   )
 }
 

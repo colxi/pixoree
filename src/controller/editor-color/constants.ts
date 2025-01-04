@@ -1,4 +1,4 @@
-import { EditorPalette } from './types'
+import type { EditorPalette } from './types'
 
 export const palettes: EditorPalette[] = [
   {

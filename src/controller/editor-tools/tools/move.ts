@@ -1,7 +1,7 @@
-import { Coordinates } from '@/types'
-import { EditorImage } from '../../editor-image'
-import { EditorTool } from '../types'
 import { CrossIcon } from '@/tools/ui-components/icons'
+import type { Coordinates } from '@/types'
+import type { EditorImage } from '../../editor-image'
+import type { EditorTool } from '../types'
 
 interface MoveToolDependencies {
   image: EditorImage

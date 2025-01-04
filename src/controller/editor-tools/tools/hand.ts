@@ -1,7 +1,7 @@
-import { Coordinates } from '@/types'
-import { EditorTool } from '../types'
-import { EditorViewport } from '../../editor-viewport'
 import { HandIcon } from '@/tools/ui-components/icons'
+import type { Coordinates } from '@/types'
+import type { EditorTool } from '../types'
+import type { EditorViewport } from '../../editor-viewport'
 
 interface HandToolDependencies {
   viewport: EditorViewport

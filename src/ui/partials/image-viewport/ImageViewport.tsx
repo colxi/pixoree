@@ -1,8 +1,9 @@
-import { useEffect, useRef, type FC } from 'react'
-import { InteractiveCanvas } from './partials/InteractiveCanvas'
 import { ImageCanvas } from './partials/ImageCanvas'
+import { InteractiveCanvas } from './partials/InteractiveCanvas'
 import { Pixoree } from '@/controller'
+import { useEffect, useRef } from 'react'
 import styles from './ImageViewport.module.scss'
+import type { FC } from 'react'
 
 export const ImageViewport: FC = () => {
   const viewportRef = useRef<HTMLElement>(null)
@@ -24,12 +25,10 @@ export const ImageViewport: FC = () => {
 
 
   return (
-    <>
-      <main className={styles.viewport} ref={viewportRef}>
-        <ImageCanvas />
-        <InteractiveCanvas />
-      </main>
-    </>
+    <main className={styles.viewport} ref={viewportRef}>
+      <ImageCanvas />
+      <InteractiveCanvas />
+    </main>
   )
 }
 

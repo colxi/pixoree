@@ -1,5 +1,6 @@
-import React, { FC, ReactNode } from 'react'
+import React from 'react'
 import styles from './Button.module.scss'
+import type { FC, ReactNode } from 'react';
 
 type Props = {
   size?: 's' | 'm' | 'l'
@@ -19,9 +20,9 @@ export const Button: FC<Props> = (props) => {
   return (
     <button
       className={styles.button}
-      onClick={handleOnClick}
       data-size={size}
       data-variant={variant}
+      onClick={handleOnClick}
     >
       {props.children}
     </button>

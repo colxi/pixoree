@@ -1,8 +1,9 @@
-import { RgbaColor } from '@/types'
-import { FC, useEffect, useState } from 'react'
 import { Input } from '@/tools/ui-components/input/Input'
-import styles from './Styles.module.scss'
 import { getHexColorFromRgba, getRgbaColorFromHex } from '@/tools/utils/color'
+import { useEffect, useState } from 'react'
+import styles from './Styles.module.scss'
+import type { FC} from 'react';
+import type { RgbaColor } from '@/types'
 
 type Props = {
   color: RgbaColor
@@ -32,9 +33,9 @@ export const HexForm: FC<Props> = ({ onChange, color }) => {
       <div className={styles.formRow}>
         <span>#</span>
         <Input
+          length={6}
           type='hex'
           value={hexColor}
-          length={6}
           onInput={handleOnInput}
         />
         <span></span>

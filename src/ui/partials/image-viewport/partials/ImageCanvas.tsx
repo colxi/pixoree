@@ -1,12 +1,12 @@
-import type { FC } from 'react'
-import { useEffect, useMemo, useState } from 'react'
-import styles from './ImageCanvas.module.scss'
-import { PersistentPixelatedCanvas } from '@/tools/ui-components/persistent-pixelated-canvas/PersistentPixelatedCanvas'
 import { AnimationEngine } from '@/tools/utils/animation-engine'
-import { useEvent, useForceUpdate } from '@/tools/hooks'
+import { FileTextIcon } from '@/tools/ui-components/icons'
+import { PersistentPixelatedCanvas } from '@/tools/ui-components/persistent-pixelated-canvas/PersistentPixelatedCanvas'
 import { Pixoree } from '@/controller'
 import { clearCanvas } from '@/tools/utils/canvas'
-import { FileTextIcon } from '@/tools/ui-components/icons'
+import { useEffect, useMemo, useState } from 'react'
+import { useEvent, useForceUpdate } from '@/tools/hooks'
+import styles from './ImageCanvas.module.scss'
+import type { FC } from 'react'
 
 export const ImageCanvas: FC = () => {
   const { forceUpdate } = useForceUpdate()
@@ -83,15 +83,13 @@ export const ImageCanvas: FC = () => {
   }, [])
 
   return (
-    <>
-      <PersistentPixelatedCanvas
-        id='ImageCanvas'
-        className={styles.imageCanvas}
-        contextRef={updateCanvasContext}
-        width={Pixoree.viewport.size.w}
-        height={Pixoree.viewport.size.h}
-      />
-    </>
+    <PersistentPixelatedCanvas
+      className={styles.imageCanvas}
+      contextRef={updateCanvasContext}
+      height={Pixoree.viewport.size.h}
+      id='ImageCanvas'
+      width={Pixoree.viewport.size.w}
+    />
   )
 }
 
