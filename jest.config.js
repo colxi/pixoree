@@ -18,11 +18,6 @@ export default {
 
   moduleNameMapper: {
     //   // '\\.(gif|ttf|eot|svg|png)$': '<rootDir>/test/__ mocks __/fileMock.js',
-    //   // '^@/(.*)$': '<rootDir>/$1',
-    //   // '@/(.*)': '<rootDir>/src/$1',
-    //   // '@/(.*)': '<rootDir>/$1',
-    //   '@/(.*)': '<rootDir>/src/$1',
-    // '@/(.*)': './src/types/index.ts',
     '^@/(.*)$': '<rootDir>/src/$1',
   },
   setupFilesAfterEnv: ['<rootDir>/setup-tests.ts'],
