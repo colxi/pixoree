@@ -19,7 +19,7 @@ interface BrushToolDependencies {
 }
 
 export class BrushTool implements EditorTool {
-  constructor({ image, history, color }: BrushToolDependencies) {
+  public constructor({ image, history, color }: BrushToolDependencies) {
     this.#dependencies = { image, history, color }
     this.#isEyeDropperModeEnabled = false
     this.#isMOuseDown = false

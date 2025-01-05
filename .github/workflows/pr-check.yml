@@ -36,11 +36,14 @@ jobs:
           pnpm i
           pnpm i gh-pages
 
-      - name: Run tests
-        run: pnpm test
+      - name: Run Type Check
+        run: pnpm type-check
 
       - name: Run linter
         run: pnpm lint
+
+      - name: Run tests
+        run: pnpm test
 
       - name: Build app
         run: pnpm run build

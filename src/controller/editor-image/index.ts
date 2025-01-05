@@ -10,13 +10,11 @@ const INITIAL_ZOOM = 1
 const ZOOM_DECIMALS_RESOLUTION = 2
 
 export class EditorImage {
-  constructor({ eventBus }: EditorImageOptions) {
+  public constructor({ eventBus }: EditorImageOptions) {
     this.#eventBus = eventBus
     this.#zoom = INITIAL_ZOOM
     this.#size = { w: 500, h: 500 }
-    const arrayBuffer = new Uint8ClampedArray(
-      new ArrayBuffer(this.#size.w * this.#size.h * BYTES_PER_PIXEL)
-    )
+    const arrayBuffer = new Uint8ClampedArray(new ArrayBuffer(this.#size.w * this.#size.h * BYTES_PER_PIXEL))
     arrayBuffer.fill(255)
     this.#imageBuffer = arrayBuffer
   }
@@ -50,7 +48,7 @@ export class EditorImage {
   public setImageSize(size: Size) {
     this.#size = size
     // TODO: update image buffer
-    this.#eventBus.dispatch(this.#eventBus.Event.IMAGE_SIZE_CHANGE, {})
+    this.#eventBus.dispatch('IMAGE_SIZE_CHANGE', {})
   }
 
   /** @deprecated */
@@ -66,18 +64,12 @@ export class EditorImage {
   public setViewBoxPosition(coords: Coordinates) {
     this.#viewBoxPosition.x = coords.x
     this.#viewBoxPosition.y = coords.y
-    this.#eventBus.dispatch(
-      this.#eventBus.Event.IMAGE_VIEW_BOX_POSITION_CHANGE,
-      {}
-    )
+    this.#eventBus.dispatch('IMAGE_VIEW_BOX_POSITION_CHANGE', {})
   }
 
   /** @deprecated */
   public setZoom(zoomLevel: number, zoomAt?: Coordinates): void {
-    const zoomNew = toFixed(
-      minMax({ value: zoomLevel, min: 1, max: 30 }),
-      ZOOM_DECIMALS_RESOLUTION
-    )
+    const zoomNew = toFixed(minMax({ value: zoomLevel, min: 1, max: 30 }), ZOOM_DECIMALS_RESOLUTION)
 
     const viewBox = this.viewBox
     const viewBoxCenter = getBoxCenter(viewBox)
@@ -90,6 +82,6 @@ export class EditorImage {
 
     this.setViewBoxPosition(viewBoxPositionNew)
     this.#zoom = zoomNew
-    this.#eventBus.dispatch(this.#eventBus.Event.IMAGE_ZOOM_CHANGE, {})
+    this.#eventBus.dispatch('IMAGE_ZOOM_CHANGE', {})
   }
 }

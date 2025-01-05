@@ -3,33 +3,47 @@ import { EditorEventBus } from './event-bus'
 import { EditorHistory } from './editor-history'
 import { EditorImage } from './editor-image'
 import { EditorModal } from './editor-modal'
+import { EditorShortcuts } from './editor-shortcuts'
 import { EditorTools } from './editor-tools'
 import { EditorViewport } from './editor-viewport'
 
 export class Pixoree {
-  static eventBus = new EditorEventBus()
-  static color = new EditorColor({
+  public static eventBus = new EditorEventBus()
+
+  public static color = new EditorColor({
     eventBus: this.eventBus,
   })
-  static image = new EditorImage({
+
+  public static image = new EditorImage({
     eventBus: this.eventBus,
   })
-  static viewport = new EditorViewport({
+
+  public static viewport = new EditorViewport({
     eventBus: this.eventBus,
     image: this.image,
   })
-  static history = new EditorHistory({
+
+  public static history = new EditorHistory({
     eventBus: this.eventBus,
     image: this.image,
   })
-  static tools = new EditorTools({
+
+  public static tools = new EditorTools({
     image: this.image,
     history: this.history,
     eventBus: this.eventBus,
     color: this.color,
     viewport: this.viewport,
   })
-  static modal = new EditorModal({
+
+  public static modal = new EditorModal({
     eventBus: this.eventBus,
+  })
+
+  public static shortcuts = new EditorShortcuts({
+    history: this.history,
+    color: this.color,
+    tools: this.tools,
+    modal: this.modal,
   })
 }

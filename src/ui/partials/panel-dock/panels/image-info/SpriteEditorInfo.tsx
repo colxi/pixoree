@@ -16,16 +16,16 @@ export const SpriteEditorInfo: FC = () => {
 
   useEffect(() => {
     Pixoree.eventBus.subscribe([
-      Pixoree.eventBus.Event.IMAGE_ZOOM_CHANGE,
-      Pixoree.eventBus.Event.IMAGE_VIEW_BOX_POSITION_CHANGE,
-      Pixoree.eventBus.Event.HISTORY_CHANGE,
+      'IMAGE_ZOOM_CHANGE',
+      'IMAGE_VIEW_BOX_POSITION_CHANGE',
+      'HISTORY_CHANGE',
     ], forceUpdate)
 
     return () => {
       Pixoree.eventBus.unsubscribe([
-        Pixoree.eventBus.Event.IMAGE_ZOOM_CHANGE,
-        Pixoree.eventBus.Event.IMAGE_VIEW_BOX_POSITION_CHANGE,
-        Pixoree.eventBus.Event.HISTORY_CHANGE,
+        'IMAGE_ZOOM_CHANGE',
+        'IMAGE_VIEW_BOX_POSITION_CHANGE',
+        'HISTORY_CHANGE',
       ], forceUpdate)
     }
   }, [])

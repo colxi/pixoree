@@ -8,7 +8,7 @@ interface MoveToolDependencies {
 }
 
 export class MoveTool implements EditorTool {
-  constructor({ image }: MoveToolDependencies) {
+  public constructor({ image }: MoveToolDependencies) {
     this.#dependencies = { image }
   }
 

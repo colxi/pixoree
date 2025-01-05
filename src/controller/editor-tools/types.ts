@@ -23,14 +23,6 @@ export type EditorTool = {
   onMouseUp: (coordinates: Coordinates) => void | Promise<void>
 }
 
-export type ToolsMap = Record<SpriteEditorTool, EditorTool>
+export type ToolsMap = Record<ToolName, EditorTool>
 
-export enum SpriteEditorTool {
-  MOVE = 'MOVE',
-  BRUSH = 'BRUSH',
-  ERASER = 'ERASER',
-  HAND = 'HAND',
-  ZOOM = 'ZOOM',
-  EYE_DROPPER = 'EYE_DROPPER',
-  PAINT_BUCKET = 'PAINT_BUCKET',
-}
+export type ToolName = 'MOVE' | 'BRUSH' | 'ERASER' | 'HAND' | 'ZOOM' | 'EYE_DROPPER' | 'PAINT_BUCKET'

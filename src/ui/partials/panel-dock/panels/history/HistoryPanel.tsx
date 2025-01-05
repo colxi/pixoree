@@ -26,9 +26,9 @@ export const HistoryPanel: FC = () => {
 
   useEffect(() => {
     afterForceUpdate(updateScrollPosition)
-    Pixoree.eventBus.subscribe(Pixoree.eventBus.Event.HISTORY_CHANGE, forceUpdate)
+    Pixoree.eventBus.subscribe('HISTORY_CHANGE', forceUpdate)
 
-    return () => Pixoree.eventBus.unsubscribe(Pixoree.eventBus.Event.HISTORY_CHANGE, forceUpdate)
+    return () => Pixoree.eventBus.unsubscribe('HISTORY_CHANGE', forceUpdate)
   }, [])
 
   return (

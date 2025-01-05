@@ -10,7 +10,7 @@ const ZOOM_MAX = 30
 const ZOOM_DECIMALS_RESOLUTION = 2
 
 export class EditorViewport {
-  constructor({ eventBus, image }: EditorViewportOptions) {
+  public constructor({ eventBus, image }: EditorViewportOptions) {
     this.#eventBus = eventBus
     this.#image = image
   }
@@ -41,7 +41,7 @@ export class EditorViewport {
   public setSize(size: Size) {
     this.#size.w = size.w
     this.#size.h = size.h
-    this.#eventBus.dispatch(this.#eventBus.Event.VIEWPORT_SIZE_CHANGE, {})
+    this.#eventBus.dispatch('VIEWPORT_SIZE_CHANGE', {})
   }
 
   public setScroll(coords: Coordinates) {
@@ -57,17 +57,14 @@ export class EditorViewport {
     })
     this.#scroll.x = scrollX
     this.#scroll.y = scrollY
-    this.#eventBus.dispatch(this.#eventBus.Event.VIEWPORT_SCROLL_CHANGE, {})
+    this.#eventBus.dispatch('VIEWPORT_SCROLL_CHANGE', {})
   }
 
   public setZoom(zoomLevel: number): void {
-    const zoomNew = toFixed(
-      minMax({ value: zoomLevel, min: ZOOM_MIN, max: ZOOM_MAX }),
-      ZOOM_DECIMALS_RESOLUTION
-    )
+    const zoomNew = toFixed(minMax({ value: zoomLevel, min: ZOOM_MIN, max: ZOOM_MAX }), ZOOM_DECIMALS_RESOLUTION)
     if (zoomNew < ZOOM_MIN || zoomNew > ZOOM_MAX) return
     this.#zoom = zoomNew
-    this.#eventBus.dispatch(this.#eventBus.Event.VIEWPORT_ZOOM_CHANGE, {})
+    this.#eventBus.dispatch('VIEWPORT_ZOOM_CHANGE', {})
   }
 
   /**

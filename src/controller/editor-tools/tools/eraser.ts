@@ -12,7 +12,7 @@ interface EraserToolDependencies {
 }
 
 export class EraserTool implements EditorTool {
-  constructor({ image, history }: EraserToolDependencies) {
+  public constructor({ image, history }: EraserToolDependencies) {
     this.#dependencies = { image, history }
     this.#isMOuseDown = false
     this.#eraserLastCoords = null

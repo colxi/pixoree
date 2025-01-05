@@ -1,6 +1,6 @@
 type FrameRequestCallback = (time: number) => void
 export class AnimationEngine {
-  constructor(instanceId: string) {
+  public constructor(instanceId: string) {
     this.instanceId = instanceId
     this.requestAnimationFrameId = -1
     console.log(`[AnimationEngine]: Start instance '${instanceId}'`)
@@ -21,7 +21,7 @@ export class AnimationEngine {
 }
 
 export class FramerateMonitor {
-  constructor() {
+  public constructor() {
     this.animationEngine = new AnimationEngine('fpsMonitor')
     this.fpsHistory = []
     this.lastTime = 0
@@ -47,11 +47,11 @@ export class FramerateMonitor {
     return Number(average.toFixed(2))
   }
 
-  start(): void {
+  public start(): void {
     this.tick(0)
   }
 
-  stop(): void {
+  public stop(): void {
     this.animationEngine.stop()
   }
 }

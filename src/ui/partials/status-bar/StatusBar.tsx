@@ -20,18 +20,18 @@ export const StatusBar: FC = () => {
 
   useEffect(() => {
     Pixoree.eventBus.subscribe([
-      Pixoree.eventBus.Event.VIEWPORT_ZOOM_CHANGE,
-      Pixoree.eventBus.Event.VIEWPORT_SCROLL_CHANGE,
-      Pixoree.eventBus.Event.VIEWPORT_SIZE_CHANGE,
-      Pixoree.eventBus.Event.IMAGE_SIZE_CHANGE
+      'VIEWPORT_ZOOM_CHANGE',
+      'VIEWPORT_SCROLL_CHANGE',
+      'VIEWPORT_SIZE_CHANGE',
+      'IMAGE_SIZE_CHANGE'
     ], forceUpdate)
 
     return () => {
       Pixoree.eventBus.unsubscribe([
-        Pixoree.eventBus.Event.VIEWPORT_ZOOM_CHANGE,
-        Pixoree.eventBus.Event.VIEWPORT_SCROLL_CHANGE,
-        Pixoree.eventBus.Event.VIEWPORT_SIZE_CHANGE,
-        Pixoree.eventBus.Event.IMAGE_SIZE_CHANGE
+        'VIEWPORT_ZOOM_CHANGE',
+        'VIEWPORT_SCROLL_CHANGE',
+        'VIEWPORT_SIZE_CHANGE',
+        'IMAGE_SIZE_CHANGE'
       ], forceUpdate)
     }
   }, [])

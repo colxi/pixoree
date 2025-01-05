@@ -40,13 +40,13 @@ export const EditorToolsColor: FC = () => {
 
   useEffect(() => {
     Pixoree.eventBus.subscribe([
-      Pixoree.eventBus.Event.PRIMARY_COLOR_CHANGE,
-      Pixoree.eventBus.Event.SECONDARY_COLOR_CHANGE
+      'PRIMARY_COLOR_CHANGE',
+      'SECONDARY_COLOR_CHANGE'
     ], forceUpdate)
     return () => {
       Pixoree.eventBus.unsubscribe([
-        Pixoree.eventBus.Event.PRIMARY_COLOR_CHANGE,
-        Pixoree.eventBus.Event.SECONDARY_COLOR_CHANGE
+        'PRIMARY_COLOR_CHANGE',
+        'SECONDARY_COLOR_CHANGE'
       ], forceUpdate)
     }
   })

@@ -4,7 +4,7 @@ import type { EditorEventBus } from '../event-bus'
 import type { RgbaColor } from '../../types'
 
 export class EditorColor {
-  constructor({ eventBus }: EditorColorOptions) {
+  public constructor({ eventBus }: EditorColorOptions) {
     this.#eventBus = eventBus
     this.#palettes = palettes
     this.#paletteId = this.#palettes[0].id
@@ -27,9 +27,7 @@ export class EditorColor {
   }
 
   public get palette(): Readonly<EditorPalette> {
-    const palette = this.#palettes.find(
-      (palette) => palette.id === this.#paletteId
-    )
+    const palette = this.#palettes.find((palette) => palette.id === this.#paletteId)
     if (!palette) throw new Error('Current palette ID not found')
     return palette
   }
@@ -38,18 +36,18 @@ export class EditorColor {
     return this.#palettes
   }
 
-  setPrimaryColor(color: RgbaColor) {
+  public setPrimaryColor(color: RgbaColor) {
     this.#primaryColor = color
-    this.#eventBus.dispatch(this.#eventBus.Event.PRIMARY_COLOR_CHANGE, {})
+    this.#eventBus.dispatch('PRIMARY_COLOR_CHANGE', {})
   }
 
-  setSecondaryColor(color: RgbaColor) {
+  public setSecondaryColor(color: RgbaColor) {
     this.#secondaryColor = color
-    this.#eventBus.dispatch(this.#eventBus.Event.SECONDARY_COLOR_CHANGE, {})
+    this.#eventBus.dispatch('SECONDARY_COLOR_CHANGE', {})
   }
 
-  setPalette(paletteId: string) {
+  public setPalette(paletteId: string) {
     this.#paletteId = paletteId
-    this.#eventBus.dispatch(this.#eventBus.Event.COLOR_PALETTE_CHANGE, {})
+    this.#eventBus.dispatch('COLOR_PALETTE_CHANGE', {})
   }
 }

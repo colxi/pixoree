@@ -59,16 +59,16 @@ export const ImageCanvas: FC = () => {
 
   useEffect(() => {
     Pixoree.eventBus.subscribe([
-      Pixoree.eventBus.Event.VIEWPORT_ZOOM_CHANGE,
-      Pixoree.eventBus.Event.VIEWPORT_SCROLL_CHANGE,
-      Pixoree.eventBus.Event.HISTORY_CHANGE,
+      'VIEWPORT_ZOOM_CHANGE',
+      'VIEWPORT_SCROLL_CHANGE',
+      'HISTORY_CHANGE',
     ], updateCanvas)
 
     return () => {
       Pixoree.eventBus.unsubscribe([
-        Pixoree.eventBus.Event.VIEWPORT_ZOOM_CHANGE,
-        Pixoree.eventBus.Event.VIEWPORT_SCROLL_CHANGE,
-        Pixoree.eventBus.Event.HISTORY_CHANGE,
+        'VIEWPORT_ZOOM_CHANGE',
+        'VIEWPORT_SCROLL_CHANGE',
+        'HISTORY_CHANGE',
       ], updateCanvas)
       animation.stop()
     }

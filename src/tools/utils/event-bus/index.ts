@@ -1,27 +1,27 @@
+import type { CustomEventCallback, EventDictionary, EventDictionaryWithEventName } from './types'
 import type { EmptyObject } from '@/types'
 
-type EventDictionary = Record<PropertyKey, Record<PropertyKey, unknown>>
-
-type EventDictionaryWithEventName<EVENT_DICTIONARY> = {
-  [K in keyof EVENT_DICTIONARY]: EVENT_DICTIONARY[K] & { eventName: K }
-}
-
-type CustomEventCallback<DATA extends Record<PropertyKey, unknown>> = (
-  event: CustomEvent<DATA>
-) => void | Promise<void>
-
+/**
+ *
+ * The EventBus Class implements a simple event bus system that allows you to dispatch
+ * and subscribe/unsubscribe to typed events, provided by the EventDictionary
+ *
+ * @Usage
+ * ```
+ * class MyEventBus extends EventBus<MyEventDictionary>{
+ *   constructor(){
+ *     super()
+ *   }
+ *
+ *   // ...custom methods
+ * }
+ *
+ */
 export class EventBus<
-  EVENT_DICTIONARY_BASE extends EventDictionary,
-  EVENT_DICTIONARY extends
-    EventDictionary = EventDictionaryWithEventName<EVENT_DICTIONARY_BASE>,
-  EVENT_NAME extends keyof EVENT_DICTIONARY_BASE = keyof EVENT_DICTIONARY_BASE,
+  EVENT_DICTIONARY extends EventDictionary,
+  EVENT_DICTIONARY_ENRICHED extends EventDictionary = EventDictionaryWithEventName<EVENT_DICTIONARY>,
+  EVENT_NAME extends keyof EVENT_DICTIONARY = keyof EVENT_DICTIONARY,
 > {
-  constructor(events: { [T in EVENT_NAME]: T }) {
-    this.Event = events
-  }
-
-  public readonly Event: Readonly<{ [T in EVENT_NAME]: T }>
-
   /**
    *
    * Dispatch an event
@@ -29,9 +29,7 @@ export class EventBus<
    */
   public dispatch<T extends EVENT_NAME>(
     eventName: T,
-    data: EVENT_DICTIONARY_BASE[T] extends EmptyObject
-      ? EmptyObject
-      : EVENT_DICTIONARY_BASE[T]
+    data: EVENT_DICTIONARY[T] extends EmptyObject ? EmptyObject : EVENT_DICTIONARY[T],
   ) {
     const event = new CustomEvent(eventName as string, {
       detail: {
@@ -50,10 +48,10 @@ export class EventBus<
   public subscribe<T extends EVENT_NAME | EVENT_NAME[]>(
     eventName: T,
     callback: T extends Array<any>
-      ? CustomEventCallback<EVENT_DICTIONARY[T[number]]>
-      : T extends keyof EVENT_DICTIONARY
-        ? CustomEventCallback<EVENT_DICTIONARY[T]>
-        : never
+      ? CustomEventCallback<EVENT_DICTIONARY_ENRICHED[T[number]]>
+      : T extends keyof EVENT_DICTIONARY_ENRICHED
+        ? CustomEventCallback<EVENT_DICTIONARY_ENRICHED[T]>
+        : never,
   ) {
     if (Array.isArray(eventName)) {
       const uniqueEvents = [...new Set(eventName)]
@@ -73,10 +71,10 @@ export class EventBus<
   public unsubscribe<T extends EVENT_NAME | EVENT_NAME[]>(
     eventName: T,
     callback: T extends Array<any>
-      ? CustomEventCallback<EVENT_DICTIONARY[T[number]]>
-      : T extends keyof EVENT_DICTIONARY
-        ? CustomEventCallback<EVENT_DICTIONARY[T]>
-        : never
+      ? CustomEventCallback<EVENT_DICTIONARY_ENRICHED[T[number]]>
+      : T extends keyof EVENT_DICTIONARY_ENRICHED
+        ? CustomEventCallback<EVENT_DICTIONARY_ENRICHED[T]>
+        : never,
   ) {
     if (Array.isArray(eventName)) {
       const uniqueEvents = [...new Set(eventName)]
