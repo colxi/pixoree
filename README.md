@@ -3,7 +3,7 @@
 Pixoree is a Browser-based image editor that provides an Adobe Photoshop® look and feel and published under a MIT-advertising licence.
 Currently the project is in early stages and it only implements very fundamental aspects of an image editor.
 
-Test it here: http://www.pixoree.com/
+Test it here: https://colxi.info/pixoree/
 
 > This project has ANY relation with Adobe Inc., and its name/products are only referenced for descriptive purposes
 
