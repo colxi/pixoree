@@ -132,10 +132,10 @@ export const SpriteEditorNavigator: FC = () => {
 
 
   useEffect(() => {
-    Pixoree.eventBus.subscribe(Pixoree.eventBus.Event.IMAGE_ZOOM_CHANGE, forceUpdate)
+    Pixoree.eventBus.subscribe('IMAGE_ZOOM_CHANGE', forceUpdate)
     window.addEventListener('mouseup', setMouseUp)
     return () => {
-      Pixoree.eventBus.unsubscribe(Pixoree.eventBus.Event.IMAGE_ZOOM_CHANGE, forceUpdate)
+      Pixoree.eventBus.unsubscribe('IMAGE_ZOOM_CHANGE', forceUpdate)
       window.removeEventListener('mouseup', setMouseUp)
       animation.stop()
     }

@@ -8,7 +8,7 @@ interface ZoomToolDependencies {
 }
 
 export class ZoomTool implements EditorTool {
-  constructor({ image }: ZoomToolDependencies) {
+  public constructor({ image }: ZoomToolDependencies) {
     this.#dependencies = { image }
   }
 

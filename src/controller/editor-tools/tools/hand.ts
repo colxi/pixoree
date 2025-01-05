@@ -8,7 +8,7 @@ interface HandToolDependencies {
 }
 
 export class HandTool implements EditorTool {
-  constructor({ viewport }: HandToolDependencies) {
+  public constructor({ viewport }: HandToolDependencies) {
     this.#dependencies = { viewport }
     this.#isMouseDown = false
     this.#handLastCoords = null

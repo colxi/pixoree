@@ -22,7 +22,7 @@ interface PaintBucketToolDependencies {
 }
 
 export class PaintBucketTool implements EditorTool {
-  constructor({ image, history, color }: PaintBucketToolDependencies) {
+  public constructor({ image, history, color }: PaintBucketToolDependencies) {
     this.#dependencies = { image, history, color }
 
     this.#isMouseDown = false

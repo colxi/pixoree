@@ -4,28 +4,25 @@ import { Pixoree } from '@/controller'
 import { clearCanvas } from '@/tools/utils/canvas'
 import { getElementCoordinatesFromMouseEvent } from '@/tools/utils/event'
 import { useEvent, useForceUpdate } from '@/tools/hooks'
-import { useSpriteEditorCanvasKeyBindings } from './SpriteEditorCanvas.keyBindings'
 import React, { useEffect, useMemo, useState } from 'react'
 import styles from './InteractiveCanvas.module.scss'
 import type { FC } from 'react'
 
-enum ScrollMode {
-  NORMAL = 1,
-  INVERTED = -1
+
+type ScrollMode = 'normal' | 'inverted'
+
+const scrollModeModifier: Record<ScrollMode, number> = {
+  'normal': 1,
+  'inverted': -1
 }
 
 export const InteractiveCanvas: FC = () => {
-  useSpriteEditorCanvasKeyBindings({
-    undo: Pixoree.history.undo,
-    redo: Pixoree.history.redo
-  })
-
   const { forceUpdate } = useForceUpdate()
   const [isMOuseOverCanvas, setIsMOuseOverCanvas] = useState<boolean>(false)
   const [canvasMouseCoords, setCanvasMouseCoords] = useState({ x: 0, y: 0 })
   const [canvasContext, setCanvasContext] = useState<CanvasRenderingContext2D | null>()
   const animation = useMemo(() => new AnimationEngine('HudCanvas'), [])
-  const scrollMode = ScrollMode.INVERTED
+  const scrollMode: ScrollMode = 'inverted'
 
 
   const handleOnMouseOut = async (_: React.MouseEvent | MouseEvent) => {
@@ -54,9 +51,10 @@ export const InteractiveCanvas: FC = () => {
 
   const handleScrollGesture = (event: React.WheelEvent | WheelEvent) => {
     if (!canvasContext) return
+    const scrollModifier = scrollModeModifier[scrollMode]
     Pixoree.viewport.setScroll({
-      x: Pixoree.viewport.scroll.x + ((event.deltaX / Pixoree.viewport.zoom) * scrollMode),
-      y: Pixoree.viewport.scroll.y + ((event.deltaY / Pixoree.viewport.zoom) * scrollMode)
+      x: Pixoree.viewport.scroll.x + ((event.deltaX / Pixoree.viewport.zoom) * scrollModifier),
+      y: Pixoree.viewport.scroll.y + ((event.deltaY / Pixoree.viewport.zoom) * scrollModifier)
     })
   }
 
@@ -102,23 +100,23 @@ export const InteractiveCanvas: FC = () => {
   useEffect(() => {
     window.addEventListener('mouseup', handleMouseUp)
     Pixoree.eventBus.subscribe([
-      Pixoree.eventBus.Event.VIEWPORT_ZOOM_CHANGE,
-      Pixoree.eventBus.Event.VIEWPORT_SCROLL_CHANGE,
-      Pixoree.eventBus.Event.HISTORY_CHANGE,
+      'VIEWPORT_ZOOM_CHANGE',
+      'VIEWPORT_SCROLL_CHANGE',
+      'HISTORY_CHANGE',
     ], render)
     Pixoree.eventBus.subscribe([
-      Pixoree.eventBus.Event.VIEWPORT_SIZE_CHANGE,
+      'VIEWPORT_SIZE_CHANGE',
     ], forceUpdate)
 
     return () => {
       animation.stop()
       Pixoree.eventBus.unsubscribe([
-        Pixoree.eventBus.Event.VIEWPORT_ZOOM_CHANGE,
-        Pixoree.eventBus.Event.VIEWPORT_SCROLL_CHANGE,
-        Pixoree.eventBus.Event.HISTORY_CHANGE,
+        'VIEWPORT_ZOOM_CHANGE',
+        'VIEWPORT_SCROLL_CHANGE',
+        'HISTORY_CHANGE',
       ], render)
       Pixoree.eventBus.unsubscribe([
-        Pixoree.eventBus.Event.VIEWPORT_SIZE_CHANGE
+        'VIEWPORT_SIZE_CHANGE'
       ], forceUpdate)
       window.removeEventListener('mouseup', handleMouseUp)
     }

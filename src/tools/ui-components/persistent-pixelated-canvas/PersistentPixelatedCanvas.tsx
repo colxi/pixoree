@@ -23,12 +23,12 @@ type Props = {
  * 
  */
 export class PersistentPixelatedCanvas extends React.Component<Props> {
-  constructor(props: Props) {
+  public constructor(props: Props) {
     super(props)
     this.canvasRef = null
   }
 
-  static defaultProps = {
+  public static defaultProps = {
     className: 'PersistentPixelatedCanvas',
     willReadFrequently: false
   }
@@ -38,7 +38,7 @@ export class PersistentPixelatedCanvas extends React.Component<Props> {
    * Track mouseUp event on the document and treat it as a mouseUp event on the canvas
    * 
    */
-  componentDidMount(): void {
+  public componentDidMount(): void {
     document.addEventListener('mouseup', this.handleOnMouseUp)
   }
 
@@ -47,7 +47,7 @@ export class PersistentPixelatedCanvas extends React.Component<Props> {
    * Remove the document mouseUp event listener
    * 
    */
-  componentWillUnmount() {
+  public componentWillUnmount() {
     document.removeEventListener('mouseup', this.handleOnMouseUp)
   }
 
@@ -86,7 +86,7 @@ export class PersistentPixelatedCanvas extends React.Component<Props> {
    * Only update the component then canvas dimensions have changed
    * 
    */
-  shouldComponentUpdate(newProps: Props) {
+  public shouldComponentUpdate(newProps: Props) {
     if (newProps.width !== this.props.width || newProps.height !== this.props.height) return true
     return false
   }
@@ -96,39 +96,39 @@ export class PersistentPixelatedCanvas extends React.Component<Props> {
    * After component updated expose the canvas context to the parent component
    * 
    */
-  componentDidUpdate(): void {
+  public componentDidUpdate(): void {
     this.configureAndPropagateContext()
   }
 
-  handleOnMouseDown = (e: React.MouseEvent<HTMLCanvasElement, MouseEvent>) => {
+  public handleOnMouseDown = (e: React.MouseEvent<HTMLCanvasElement, MouseEvent>) => {
     if (this.props.onMouseDown) this.props.onMouseDown(e)
   }
 
-  handleOnMouseUp = (e: React.MouseEvent<HTMLCanvasElement, MouseEvent> | MouseEvent) => {
+  public handleOnMouseUp = (e: React.MouseEvent<HTMLCanvasElement, MouseEvent> | MouseEvent) => {
     if (this.props.onMouseUp) this.props.onMouseUp(e)
   }
 
-  handleOnMouseMove = (e: React.MouseEvent<HTMLCanvasElement, MouseEvent>) => {
+  public handleOnMouseMove = (e: React.MouseEvent<HTMLCanvasElement, MouseEvent>) => {
     if (this.props.onMouseMove) this.props.onMouseMove(e)
   }
 
-  handleOnMouseOut = (e: React.MouseEvent<HTMLCanvasElement, MouseEvent>) => {
+  public handleOnMouseOut = (e: React.MouseEvent<HTMLCanvasElement, MouseEvent>) => {
     if (this.props.onMouseOut) this.props.onMouseOut(e)
   }
 
-  handleOnClick = (e: React.MouseEvent<HTMLCanvasElement, MouseEvent>) => {
+  public handleOnClick = (e: React.MouseEvent<HTMLCanvasElement, MouseEvent>) => {
     if (this.props.onClick) this.props.onClick(e)
   }
 
-  handleContextMenu = (e: React.MouseEvent<HTMLCanvasElement, MouseEvent>) => {
+  public handleContextMenu = (e: React.MouseEvent<HTMLCanvasElement, MouseEvent>) => {
     if (this.props.onContextMenu) this.props.onContextMenu(e)
   }
 
-  handleOnWheel = (e: React.WheelEvent<HTMLCanvasElement>) => {
+  public handleOnWheel = (e: React.WheelEvent<HTMLCanvasElement>) => {
     if (this.props.onWheel) this.props.onWheel(e)
   }
 
-  render() {
+  public render() {
     return (
       // Render as "block" to prevent extra 5px at the bottom
       // Details: https://stackoverflow.com/questions/15807833/div-containing-canvas-have-got-a-strange-bottom-margin-of-5px

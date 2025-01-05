@@ -11,7 +11,8 @@
     "build": "tsc --build && vite build --base=./",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "type-check": "tsc -b"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
@@ -24,7 +25,6 @@
     "uuid": "^11.0.3"
   },
   "devDependencies": {
-    "vite-tsconfig-paths": "^5.0.1",
     "@stylistic/eslint-plugin": "^2.1.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
@@ -51,8 +51,9 @@
     "jsonc-eslint-parser": "^2.4.0",
     "prettier": "^3.2.5",
     "ts-jest": "^29.2.5",
-    "typescript": "^5.2.2",
-    "vite": "^5.3.4"
+    "typescript": "^5.5.4",
+    "vite": "^5.3.4",
+    "vite-tsconfig-paths": "^5.0.1"
   },
   "engines": {
     "node": "20.9.0",

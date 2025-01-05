@@ -14,12 +14,12 @@ export const ModalViewport = () => {
   }
 
   useEffect(() => {
-    Pixoree.eventBus.subscribe(Pixoree.eventBus.Event.MODAL_OPEN, handleOpenModal)
-    Pixoree.eventBus.subscribe(Pixoree.eventBus.Event.MODAL_CLOSE, handleCloseModal)
+    Pixoree.eventBus.subscribe('MODAL_OPEN', handleOpenModal)
+    Pixoree.eventBus.subscribe('MODAL_CLOSE', handleCloseModal)
 
     return () => {
-      Pixoree.eventBus.unsubscribe(Pixoree.eventBus.Event.MODAL_OPEN, handleOpenModal)
-      Pixoree.eventBus.unsubscribe(Pixoree.eventBus.Event.MODAL_CLOSE, handleCloseModal)
+      Pixoree.eventBus.unsubscribe('MODAL_OPEN', handleOpenModal)
+      Pixoree.eventBus.unsubscribe('MODAL_CLOSE', handleCloseModal)
     }
   }, [])
 

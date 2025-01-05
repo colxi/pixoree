@@ -1,12 +1,7 @@
-import type {
-  ActiveModalDescriptor,
-  EditorModalDependencies,
-  ModalCatalog,
-  ModalName,
-} from './types'
+import type { ActiveModalDescriptor, EditorModalDependencies, ModalCatalog, ModalName } from './types'
 
 export class EditorModal {
-  constructor({ eventBus }: EditorModalDependencies) {
+  public constructor({ eventBus }: EditorModalDependencies) {
     this.#dependencies = { eventBus }
     this.#activeModal = null
     this.#modalTitle = ''
@@ -17,35 +12,26 @@ export class EditorModal {
   #modalTitle: string
   #activeModal: ActiveModalDescriptor | null
 
-  get activeModal() {
+  public get activeModal() {
     return this.#activeModal
   }
 
-  get modalTitle() {
+  public get modalTitle() {
     return this.#modalTitle
   }
 
-  openModal<MODAL extends ModalName>(name: MODAL, params: ModalCatalog[MODAL]) {
+  public openModal<MODAL extends ModalName>(name: MODAL, params: ModalCatalog[MODAL]) {
     this.#activeModal = { name, params }
-    this.#dependencies.eventBus.dispatch(
-      this.#dependencies.eventBus.Event.MODAL_OPEN,
-      {}
-    )
+    this.#dependencies.eventBus.dispatch('MODAL_OPEN', {})
   }
 
-  closeModal() {
+  public closeModal() {
     this.#activeModal = null
-    this.#dependencies.eventBus.dispatch(
-      this.#dependencies.eventBus.Event.MODAL_CLOSE,
-      {}
-    )
+    this.#dependencies.eventBus.dispatch('MODAL_CLOSE', {})
   }
 
-  setModalTitle(title: string) {
+  public setModalTitle(title: string) {
     this.#modalTitle = title
-    this.#dependencies.eventBus.dispatch(
-      this.#dependencies.eventBus.Event.MODAL_TITLE_CHANGE,
-      {}
-    )
+    this.#dependencies.eventBus.dispatch('MODAL_TITLE_CHANGE', {})
   }
 }

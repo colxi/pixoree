@@ -8,7 +8,7 @@ import { Pixoree } from '@/controller'
 import { RgbForm } from './partials/color-form/RgbForm'
 import { useEffect, useState } from 'react'
 import styles from './ColorPickerModal.module.scss'
-import type { FC} from 'react';
+import type { FC } from 'react'
 import type { ModalCatalog } from '@/controller/editor-modal/types'
 import type { RgbaColor } from '@/types'
 
@@ -35,10 +35,10 @@ export const ColorPickerModal: FC<ModalCatalog['colorPicker']> = ({ type, color,
 
   useEffect(() => {
     Pixoree.modal.setModalTitle('Color Picker')
-    Pixoree.eventBus.subscribe(Pixoree.eventBus.Event.MODAL_CLOSE_REQUEST, handleCancelClick)
+    Pixoree.eventBus.subscribe('MODAL_CLOSE_REQUEST', handleCancelClick)
 
     return () => {
-      Pixoree.eventBus.unsubscribe(Pixoree.eventBus.Event.MODAL_CLOSE_REQUEST, handleCancelClick)
+      Pixoree.eventBus.unsubscribe('MODAL_CLOSE_REQUEST', handleCancelClick)
     }
   }, [])
 

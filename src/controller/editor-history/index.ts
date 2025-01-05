@@ -5,7 +5,7 @@ import type { ReactElement } from 'react'
 const MAX_ITEMS = 100
 
 export class EditorHistory {
-  constructor({ eventBus, image }: EditorHistoryDependencies) {
+  public constructor({ eventBus, image }: EditorHistoryDependencies) {
     this.#dependencies = { eventBus, image }
     this.#currentIndex = 0
     this.#maxItems = MAX_ITEMS
@@ -30,9 +30,7 @@ export class EditorHistory {
 
   private createEntry(action: string, icon: ReactElement) {
     // create history data
-    const arrayBuffer = new ArrayBuffer(
-      this.#dependencies.image.size.w * this.#dependencies.image.size.h * 4
-    )
+    const arrayBuffer = new ArrayBuffer(this.#dependencies.image.size.w * this.#dependencies.image.size.h * 4)
     const imageData = new Uint8ClampedArray(arrayBuffer)
     imageData.set(this.#dependencies.image.imageBuffer)
     const entry = { action, icon, data: imageData }
@@ -65,10 +63,7 @@ export class EditorHistory {
   }
 
   private emitHistoryChangeEvent() {
-    this.#dependencies.eventBus.dispatch(
-      this.#dependencies.eventBus.Event.HISTORY_CHANGE,
-      {}
-    )
+    this.#dependencies.eventBus.dispatch('HISTORY_CHANGE', {})
   }
 
   public deleteEntry(index: number) {

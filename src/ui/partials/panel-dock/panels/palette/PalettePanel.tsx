@@ -55,9 +55,9 @@ export const PalettePanel: FC = () => {
   }
 
   useEffect(() => {
-    Pixoree.eventBus.subscribe(Pixoree.eventBus.Event.PRIMARY_COLOR_CHANGE, forceUpdate)
+    Pixoree.eventBus.subscribe('PRIMARY_COLOR_CHANGE', forceUpdate)
     return () => {
-      Pixoree.eventBus.unsubscribe(Pixoree.eventBus.Event.PRIMARY_COLOR_CHANGE, forceUpdate)
+      Pixoree.eventBus.unsubscribe('PRIMARY_COLOR_CHANGE', forceUpdate)
     }
   })
 

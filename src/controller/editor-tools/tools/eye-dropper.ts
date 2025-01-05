@@ -14,7 +14,7 @@ interface EyeDropperToolDependencies {
 }
 
 export class EyeDropperTool implements EditorTool {
-  constructor({ image, color }: EyeDropperToolDependencies) {
+  public constructor({ image, color }: EyeDropperToolDependencies) {
     this.#dependencies = { image, color }
     this.#isMOuseDown = false
   }

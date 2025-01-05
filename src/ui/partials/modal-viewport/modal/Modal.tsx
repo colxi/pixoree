@@ -60,7 +60,7 @@ export const Modal = () => {
 
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.code === 'Escape') {
-      Pixoree.eventBus.dispatch(Pixoree.eventBus.Event.MODAL_CLOSE_REQUEST, {})
+      Pixoree.eventBus.dispatch('MODAL_CLOSE_REQUEST', {})
     }
   }
 
@@ -70,13 +70,13 @@ export const Modal = () => {
 
   useEffect(() => {
     centerModal()
-    Pixoree.eventBus.subscribe(Pixoree.eventBus.Event.MODAL_TITLE_CHANGE, handleModalTitleChange)
+    Pixoree.eventBus.subscribe('MODAL_TITLE_CHANGE', handleModalTitleChange)
     window.addEventListener('keydown', handleKeyDown)
     window.addEventListener('mousemove', handleMouseMove)
     window.addEventListener('mouseup', handleMouseUp)
 
     return () => {
-      Pixoree.eventBus.unsubscribe(Pixoree.eventBus.Event.MODAL_TITLE_CHANGE, handleModalTitleChange)
+      Pixoree.eventBus.unsubscribe('MODAL_TITLE_CHANGE', handleModalTitleChange)
       window.removeEventListener('keydown', handleKeyDown)
       window.removeEventListener('mousemove', handleMouseMove)
       window.removeEventListener('mouseup', handleMouseUp)
