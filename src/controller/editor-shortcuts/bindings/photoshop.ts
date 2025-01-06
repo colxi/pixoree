@@ -6,6 +6,8 @@ export const bindings: ShortcutBindingsCatalog = {
   colorSwap: 'KeyX',
   canvasMove: 'Space',
   selectBrushTool: 'KeyB',
+  fileOpen: 'Meta--KeyO',
+  fileSave: 'Meta--KeyS',
 }
 
 /**

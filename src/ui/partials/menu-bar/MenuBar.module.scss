@@ -1,0 +1,38 @@
+@use '/styles';
+
+.menuBar {
+  display: flex;
+  gap: 20px;
+  place-items: center;
+  padding-left: 10px;
+
+  .pixoree {
+    font-weight: 800;
+  }
+
+  .menuItem {
+    display: inline-block;
+    padding-left: 9px;
+    padding-right: 9px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    &[data-active='true'] {
+      background-color: styles.$color-background-dark;
+
+      border-radius: 5px;
+      font-weight: 800;
+    }
+  }
+}
+
+.menuDropdown {
+  position: fixed;
+  background: red;
+  padding: 10px;
+  z-index: 99999;
+  top: 32px;
+  border-radius: 5px;
+  border: 2px solid styles.$color-border-brighter;
+  outline: 1px solid styles.$color-border-darker;
+  background-color: styles.$color-background;
+}

@@ -45,5 +45,6 @@ export class Pixoree {
     color: this.color,
     tools: this.tools,
     modal: this.modal,
+    image: this.image,
   })
 }

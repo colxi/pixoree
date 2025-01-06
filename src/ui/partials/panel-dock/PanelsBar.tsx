@@ -7,15 +7,13 @@ import styles from './PanelDock.module.scss'
 
 export const PanelDock = () => {
   return (
-    <div>
-      <aside className={styles.panelDock}>
-        <SpriteEditorInfo />
-        <SpriteEditorNavigator />
-        <ColorPickerPanel />
-        <PalettePanel />
-        <HistoryPanel />
-      </aside>
-    </div>
+    <aside className={styles.panelDock}>
+      <SpriteEditorInfo />
+      <SpriteEditorNavigator />
+      <ColorPickerPanel />
+      <PalettePanel />
+      <HistoryPanel />
+    </aside>
   )
 }
 

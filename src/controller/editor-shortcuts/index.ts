@@ -4,19 +4,26 @@ import { findObjectKey } from '@/tools/utils/object'
 import type {
   EditorShortcutDependencies,
   ShortcutBindingsCatalog,
+  ShortcutEventHandler,
   ShortcutEventHandlerCatalog,
   ShortcutName,
 } from './types'
 
+/**
+ *
+ * EditorShortcuts Controller Class handles keyboard shortcuts for the editor, by listening to
+ * key-press and key-up events, and calling the corresponding event handlers.
+ *
+ */
 export class EditorShortcuts {
   public constructor(dependencies: EditorShortcutDependencies) {
     this.#dependencies = dependencies
     this.#activeShortcut = null
     this.#shortcutBindings = bindings
     this.#shortcutEventHandlers = eventHandlers
-    this.onKeyPress = this.onKeyPress.bind(this)
+    this.onKeyDown = this.onKeyDown.bind(this)
     this.onKeyUp = this.onKeyUp.bind(this)
-    window.addEventListener('keydown', this.onKeyPress)
+    window.addEventListener('keydown', this.onKeyDown)
     window.addEventListener('keyup', this.onKeyUp)
   }
 
@@ -36,24 +43,64 @@ export class EditorShortcuts {
     'MetaRight',
   ]
 
-  public getShortcutCode(event: KeyboardEvent) {
-    const keys = []
-    if (event.shiftKey) keys.push('Shift') // Shift key
-    if (event.ctrlKey) keys.push('Ctrl') // Control key
-    if (event.altKey) keys.push('Alt') // altKey =  Option(Mac) | Alt(Windows)
-    if (event.metaKey) keys.push('Meta') // metaKey = Command(Mac) | Windows key(Windows)
-    if (!this.#ignoredKeyCodes.includes(event.code)) keys.push(event.code)
-    const shortcut = keys.join('--')
-    return shortcut
+  /**
+   *
+   *  Get the shortcut keys for a given shortcut name or keyboard event.
+   *
+   */
+  public getShortcutKeys(data: KeyboardEvent | ShortcutName): string {
+    // When input is a shortcutName (string)...
+    if (typeof data === 'string') {
+      const shortcutName = data
+      // obtain the keys from the catalog
+      const shortcutKeysAsString = this.#shortcutBindings[shortcutName]
+      return shortcutKeysAsString
+    }
+    // When input is a keyboard event...
+    else {
+      const event = data
+      const keys = []
+      // track modifier keys
+      if (event.shiftKey) keys.push('Shift') // Shift key
+      if (event.ctrlKey) keys.push('Ctrl') // Control key
+      if (event.altKey) keys.push('Alt') // altKey =  Option (on Mac) | Alt (on Windows)
+      if (event.metaKey) keys.push('Meta') // metaKey = Command (on Mac) | Windows key (on Windows)
+      // track the main key (ignoring modifier keys as have been already been tracked)
+      if (!this.#ignoredKeyCodes.includes(event.code)) keys.push(event.code)
+      const shortcutKeys = keys.join('--')
+      // done!
+      return shortcutKeys
+    }
   }
 
-  private getShortcutName(shortcutCode: string): ShortcutName | null {
-    const eventName = findObjectKey(this.#shortcutBindings, (value) => value === shortcutCode)
-    return eventName as ShortcutName
+  /**
+   *
+   * Get the shortcut name for a given shortcut keys string.
+   *
+   */
+  private getShortcutName(shortcutKeys: string): ShortcutName | null {
+    const shortcutName = findObjectKey(this.#shortcutBindings, (value) => value === shortcutKeys)
+    return shortcutName as ShortcutName
   }
 
-  private onKeyPress(event: KeyboardEvent) {
-    const shortcutCode = this.getShortcutCode(event)
+  /**
+   *
+   * Get the shortcut handler for a given shortcut keys.
+   *
+   */
+  private getShortcutHandler(shortcutKeys: string): ShortcutEventHandler | null {
+    const shortcutName = this.getShortcutName(shortcutKeys)
+    if (!shortcutName) return null
+    const shortcutHandler = this.#shortcutEventHandlers[shortcutName]
+    return shortcutHandler
+  }
+
+  /**
+   *
+   * Handle key-press events and execute the corresponding shortcut handler.
+   *
+   */
+  private onKeyDown(event: KeyboardEvent) {
     // DEV: allow page reload with metaKey+R, but disable the rest of browser shortcuts
     if (event.metaKey && event.code === 'KeyR') return
     else event.preventDefault()
@@ -63,14 +110,22 @@ export class EditorShortcuts {
     // ignore key-presses when modal is open
     if (this.#dependencies.modal.activeModal) return
 
-    // Disable default browser shortcuts
-    const shortcutName = this.getShortcutName(shortcutCode)
-    if (!shortcutName) return
-    const shortcutHandler = this.#shortcutEventHandlers[shortcutName]
+    // Call the shortcut handler handler (if it exists)
+    const shortcutKeys = this.getShortcutKeys(event)
+    const shortcutName = this.getShortcutName(shortcutKeys)
+    const shortcutHandler = this.getShortcutHandler(shortcutKeys)
+    if (!shortcutHandler) return
     shortcutHandler('press', this.#dependencies)
+
+    // set the active shortcut in order to handle key-up events
     this.#activeShortcut = shortcutName
   }
 
+  /**
+   *
+   * Handle key-up events and execute the corresponding shortcut handler.
+   *
+   */
   private onKeyUp(event: KeyboardEvent) {
     event.preventDefault()
     if (!this.#activeShortcut) return
