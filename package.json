@@ -4,9 +4,6 @@
   "license": "MIT-advertising",
   "homepage": "https://colxi.info/pixoree/",
   "version": "0.0.6-alpha",
-  "pre-commit": [
-    "test"
-  ],
   "type": "module",
   "scripts": {
     "test": "jest",
@@ -15,8 +12,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "deploy": "gh-pages -d dist",
-    "type-check": "tsc -b",
-    "updateCommitId": "node updateVersion.js"
+    "type-check": "tsc -b"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
@@ -24,7 +20,6 @@
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "lodash-es": "^4.17.21",
-    "pre-commit": "^1.2.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "uuid": "^11.0.3"

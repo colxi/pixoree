@@ -1,4 +1,4 @@
-import { Pixoree } from '@/controller'
+import { Pixoree } from '@/controllers'
 import { toFixed } from '@/tools/utils/math'
 import { useEffect } from 'react'
 import { useForceUpdate } from '@/tools/hooks'

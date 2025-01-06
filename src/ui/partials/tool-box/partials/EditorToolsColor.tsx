@@ -1,4 +1,4 @@
-import { Pixoree } from '@/controller'
+import { Pixoree } from '@/controllers'
 import { SwitchIcon } from '@/tools/ui-components/icons'
 import { getHexColorFromRgba } from '@/tools/utils/color'
 import { useEffect } from 'react'

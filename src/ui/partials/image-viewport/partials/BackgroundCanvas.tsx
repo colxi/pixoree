@@ -1,6 +1,6 @@
 import { AnimationEngine } from '@/tools/utils/animation-engine'
 import { PersistentPixelatedCanvas } from '@/tools/ui-components/persistent-pixelated-canvas/PersistentPixelatedCanvas'
-import { Pixoree } from '@/controller'
+import { Pixoree } from '@/controllers'
 import { useEffect, useMemo, useState } from 'react'
 import { useEvent } from '@/tools/hooks'
 import styles from './BackgroundCanvas.module.scss'

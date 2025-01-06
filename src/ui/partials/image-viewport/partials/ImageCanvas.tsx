@@ -1,7 +1,7 @@
 import { AnimationEngine } from '@/tools/utils/animation-engine'
 import { FileTextIcon } from '@/tools/ui-components/icons'
 import { PersistentPixelatedCanvas } from '@/tools/ui-components/persistent-pixelated-canvas/PersistentPixelatedCanvas'
-import { Pixoree } from '@/controller'
+import { Pixoree } from '@/controllers'
 import { clearCanvas } from '@/tools/utils/canvas'
 import { useEffect, useMemo, useState } from 'react'
 import { useEvent, useForceUpdate } from '@/tools/hooks'

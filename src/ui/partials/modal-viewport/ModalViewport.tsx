@@ -1,5 +1,5 @@
 import { Modal } from './modal/Modal'
-import { Pixoree } from '@/controller'
+import { Pixoree } from '@/controllers'
 import { useEffect, useState } from 'react'
 
 export const ModalViewport = () => {

@@ -45,6 +45,32 @@ export class EditorShortcuts {
 
   /**
    *
+   * Get an array with all the available shortcut names.
+   *
+   */
+  public getAvailableShortcutNames(): string[] {
+    return Object.keys(this.#shortcutBindings)
+  }
+
+  /**
+   *
+   * Get the formatted shortcut keys string.
+   *
+   */
+  public getFormattedShortcutKeys(shortcutKeys: string): string {
+    const parts = shortcutKeys.split('--')
+    const formatted = parts.map((part) => {
+      if (part === 'Shift') return '⇧'
+      if (part === 'Ctrl') return '⌃'
+      if (part === 'Alt') return '⌥'
+      if (part === 'Meta') return '⌘'
+      return part.replace('Key', '')
+    })
+    return formatted.join('')
+  }
+
+  /**
+   *
    *  Get the shortcut keys for a given shortcut name or keyboard event.
    *
    */

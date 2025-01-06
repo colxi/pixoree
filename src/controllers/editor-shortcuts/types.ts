@@ -1,4 +1,5 @@
 import type { EditorColor } from '../editor-color'
+import type { EditorFile } from '../editor-files'
 import type { EditorHistory } from '../editor-history'
 import type { EditorImage } from '../editor-image'
 import type { EditorModal } from '../editor-modal'
@@ -10,6 +11,7 @@ export interface EditorShortcutDependencies {
   color: EditorColor
   modal: EditorModal
   image: EditorImage
+  file: EditorFile
 }
 
 export type ShortcutEventPhase = 'press' | 'release'
@@ -20,8 +22,14 @@ export type ShortcutBindingsCatalog = Record<ShortcutName, string>
 export type ShortcutName =
   | 'historyUndo'
   | 'historyRedo'
-  | 'selectBrushTool'
   | 'colorSwap'
   | 'canvasMove'
   | 'fileOpen'
   | 'fileSave'
+  | 'toolSelectBrush'
+  | 'toolSelectEraser'
+  | 'toolSelectMove'
+  | 'toolSelectHand'
+  | 'toolSelectZoom'
+  | 'toolSelectPaintBucket'
+  | 'toolSelectEyeDropper'

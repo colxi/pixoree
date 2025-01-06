@@ -4,12 +4,12 @@ import { ColorPicker } from '@/tools/ui-components/color-picker/color/ColorPicke
 import { ColorPreview } from './partials/color-preview/ColorPreview'
 import { HexForm } from './partials/color-form/HexForm'
 import { HslForm } from './partials/color-form/HslForm'
-import { Pixoree } from '@/controller'
+import { Pixoree } from '@/controllers'
 import { RgbForm } from './partials/color-form/RgbForm'
 import { useEffect, useState } from 'react'
 import styles from './ColorPickerModal.module.scss'
 import type { FC } from 'react'
-import type { ModalCatalog } from '@/controller/editor-modal/types'
+import type { ModalCatalog } from '@/controllers/editor-modal/types'
 import type { RgbaColor } from '@/types'
 
 export const ColorPickerModal: FC<ModalCatalog['colorPicker']> = ({ type, color, allowSecondary }) => {

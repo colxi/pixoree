@@ -1,9 +1,9 @@
-import { Pixoree } from '@/controller'
+import { Pixoree } from '@/controllers'
 import type { ShortcutEventHandler } from '../../types'
 
 export const fileSave: ShortcutEventHandler = (phase, _dependencies) => {
   if (phase === 'press') {
-    Pixoree.image.save()
+    Pixoree.file.save()
   } else if (phase === 'release') {
     // Noop
   }

@@ -1,5 +1,5 @@
 import type { ShortcutEventHandler } from '../../types'
-import type { ToolName } from '@/controller/editor-tools/types'
+import type { ToolName } from '@/controllers/editor-tools/types'
 
 let previousToolName: ToolName = 'BRUSH'
 

@@ -1,6 +1,6 @@
 import { AnimationEngine } from '@/tools/utils/animation-engine'
 import { PersistentPixelatedCanvas } from '@/tools/ui-components/persistent-pixelated-canvas/PersistentPixelatedCanvas'
-import { Pixoree } from '@/controller'
+import { Pixoree } from '@/controllers'
 import { clearCanvas } from '@/tools/utils/canvas'
 import { getElementCoordinatesFromMouseEvent } from '@/tools/utils/event'
 import { useEvent, useForceUpdate } from '@/tools/hooks'

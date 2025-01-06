@@ -1,38 +1,29 @@
 @use '/styles';
 
+.menuOverlay {
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  width: 100%;
+  z-index: calc(styles.$z-index-max - 1);
+}
+
 .menuBar {
   display: flex;
-  gap: 20px;
   place-items: center;
   padding-left: 10px;
+  z-index: styles.$z-index-max;
 
   .pixoree {
     font-weight: 800;
-  }
-
-  .menuItem {
-    display: inline-block;
-    padding-left: 9px;
-    padding-right: 9px;
-    padding-top: 3px;
-    padding-bottom: 3px;
-    &[data-active='true'] {
-      background-color: styles.$color-background-dark;
-
-      border-radius: 5px;
-      font-weight: 800;
-    }
+    margin-right: 10px;
   }
 }
 
-.menuDropdown {
-  position: fixed;
-  background: red;
-  padding: 10px;
-  z-index: 99999;
-  top: 32px;
-  border-radius: 5px;
-  border: 2px solid styles.$color-border-brighter;
-  outline: 1px solid styles.$color-border-darker;
-  background-color: styles.$color-background;
+.disclaimer {
+  width: 100%;
+  text-align: right;
+  color: #c0b200;
+  font-weight: 800;
+  margin-right: 10px;
 }

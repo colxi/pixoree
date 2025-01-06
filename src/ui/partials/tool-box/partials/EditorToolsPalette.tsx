@@ -1,9 +1,9 @@
-import { Pixoree } from '@/controller'
+import { Pixoree } from '@/controllers'
 import { useEffect } from 'react'
 import { useForceUpdate } from '@/tools/hooks'
 import styles from './EditorToolsPalette.module.scss'
 import type { FC } from 'react'
-import type { ToolName } from '@/controller/editor-tools/types'
+import type { ToolName } from '@/controllers/editor-tools/types'
 
 export const EditorToolsPalette: FC = () => {
   const { forceUpdate } = useForceUpdate()

@@ -1,0 +1,54 @@
+@use '/styles';
+
+.menuItemLabel {
+  display: inline-block;
+  padding: 2px 15px;
+}
+
+.menuDropdown {
+  display: none;
+  position: fixed;
+  padding: 5px;
+  // z-index: 99999;
+  top: 33px;
+  min-width: 200px;
+  border-radius: 5px;
+  border: 2px solid styles.$color-border-brighter;
+  outline: 1px solid styles.$color-border-darker;
+  background-color: styles.$color-background;
+
+  .menuDropdownItem {
+    display: grid;
+    gap: 30px;
+    padding: 4px 7px;
+    grid-template-columns: auto auto;
+
+    &:hover {
+      background-color: styles.$color-background-dark;
+      border-radius: 5px;
+    }
+
+    .menuDropdownItemLabel {
+      text-align: left;
+    }
+
+    .menuDropdownItemShortcut {
+      text-align: right;
+      font-weight: 800;
+    }
+  }
+}
+
+.menuItem {
+  &[data-active='true'] {
+    .menuItemLabel {
+      background-color: styles.$color-background-dark;
+      border-radius: 5px;
+      font-weight: 800;
+    }
+
+    .menuDropdown {
+      display: block;
+    }
+  }
+}

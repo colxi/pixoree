@@ -1,5 +1,5 @@
 import { PanelBox } from '../../panel-box/PanelBox'
-import { Pixoree } from '@/controller'
+import { Pixoree } from '@/controllers'
 import { useEffect } from 'react'
 import { useForceUpdate } from '@/tools/hooks'
 import type { FC } from 'react'
