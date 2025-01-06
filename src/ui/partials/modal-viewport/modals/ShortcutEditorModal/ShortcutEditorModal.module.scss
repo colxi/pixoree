@@ -1,0 +1,19 @@
+@use '/styles';
+
+.container {
+  display: grid;
+  grid-template-columns: 350px 250px;
+  gap: 17px;
+}
+
+.shortcut {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px;
+}
+
+.action {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+}

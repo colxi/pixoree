@@ -45,6 +45,10 @@ export class EditorImage {
     return this.#size
   }
 
+  public setImageData(data: Uint8ClampedArray) {
+    this.#imageBuffer = data
+  }
+
   public setImageSize(size: Size) {
     this.#size = size
     // TODO: update image buffer

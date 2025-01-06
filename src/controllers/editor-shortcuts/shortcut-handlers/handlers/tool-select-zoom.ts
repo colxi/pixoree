@@ -1,8 +1,8 @@
 import type { ShortcutEventHandler } from '../../types'
 
-export const selectBrushTool: ShortcutEventHandler = (phase, dependencies) => {
+export const toolSelectZoom: ShortcutEventHandler = (phase, dependencies) => {
   if (phase === 'press') {
-    dependencies.tools.setActiveToolName('BRUSH')
+    dependencies.tools.setActiveToolName('ZOOM')
   } else if (phase === 'release') {
     // Noop
   }

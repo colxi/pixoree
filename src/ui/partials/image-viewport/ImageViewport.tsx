@@ -1,6 +1,6 @@
 import { ImageCanvas } from './partials/ImageCanvas'
 import { InteractiveCanvas } from './partials/InteractiveCanvas'
-import { Pixoree } from '@/controller'
+import { Pixoree } from '@/controllers'
 import { useEffect, useRef } from 'react'
 import styles from './ImageViewport.module.scss'
 import type { FC } from 'react'

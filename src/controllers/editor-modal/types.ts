@@ -13,6 +13,7 @@ export interface ActiveModalDescriptor {
 }
 
 export type ModalCatalog = {
+  shortcutEditor: {}
   colorPicker: {
     type: 'primary' | 'secondary'
     allowSecondary: false

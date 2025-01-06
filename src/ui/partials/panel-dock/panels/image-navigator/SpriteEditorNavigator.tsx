@@ -1,7 +1,7 @@
 import { AnimationEngine } from '@/tools/utils/animation-engine'
 import { PanelBox } from '../../panel-box/PanelBox'
 import { PersistentPixelatedCanvas } from '@/tools/ui-components/persistent-pixelated-canvas/PersistentPixelatedCanvas'
-import { Pixoree } from '@/controller'
+import { Pixoree } from '@/controllers'
 import { minMax } from '@/tools/utils/math'
 import { useEvent, useForceUpdate } from '@/tools/hooks'
 import React, { useEffect, useMemo, useState } from 'react'

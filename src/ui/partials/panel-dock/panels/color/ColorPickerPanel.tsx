@@ -1,6 +1,6 @@
 import { ColorPicker } from '@/tools/ui-components/color-picker/color/ColorPicker'
 import { PanelBox } from '../../panel-box/PanelBox'
-import { Pixoree } from '@/controller'
+import { Pixoree } from '@/controllers'
 import styles from './ColorPickerPanel.module.scss'
 import type { FC } from 'react'
 import type { RgbaColor } from '@/types'

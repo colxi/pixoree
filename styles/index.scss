@@ -1,2 +1,9 @@
-@forward 'color';
-@forward 'size';
+/** 
+ *
+ * This file is used to export all the styles in the project in a way that the import path 
+ * does not need to include the /src prefix, and styles can still are declared inside the src/ folder.
+ * Theoretically, this should be achievable by setting the base url somewhere on teh configuration
+ * of Sass, however I was not able to make it work, so I'm using this workaround.
+ *
+ */
+@forward '/src/styles';

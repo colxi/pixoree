@@ -1,5 +1,6 @@
 import { EditorColor } from './editor-color'
 import { EditorEventBus } from './event-bus'
+import { EditorFile } from './editor-files'
 import { EditorHistory } from './editor-history'
 import { EditorImage } from './editor-image'
 import { EditorModal } from './editor-modal'
@@ -40,10 +41,16 @@ export class Pixoree {
     eventBus: this.eventBus,
   })
 
+  public static file = new EditorFile({
+    image: this.image,
+  })
+
   public static shortcuts = new EditorShortcuts({
     history: this.history,
     color: this.color,
     tools: this.tools,
     modal: this.modal,
+    image: this.image,
+    file: this.file,
   })
 }

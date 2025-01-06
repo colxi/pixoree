@@ -1,5 +1,5 @@
 import { PanelBox } from '../../panel-box/PanelBox'
-import { Pixoree } from '@/controller'
+import { Pixoree } from '@/controllers'
 import { TrashCanIcon } from '@/tools/ui-components/icons'
 import { formatBytes } from '@/tools/utils/formatters'
 import { useEffect, useRef } from 'react'

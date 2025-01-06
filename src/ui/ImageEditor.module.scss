@@ -1,16 +1,21 @@
 @use '/styles';
 
 .imageEditor {
-  border: 1px solid styles.$color-background;
-  border-bottom: 0px;
-  background-color: styles.$color-background;
-  height: 100%;
   display: grid;
-  grid-template-columns: 50px 1fr 250px;
+  grid-template-rows: 30px 1fr;
+  border-bottom: 0px;
+  height: 100%;
+  border: 1px solid styles.$color-background;
+  background-color: styles.$color-background;
 
-  .middleColumn {
+  .body {
     display: grid;
-    grid-template-rows: 1fr 20px;
+    grid-template-columns: 50px 1fr 250px;
+
+    .middleColumn {
+      display: grid;
+      grid-template-rows: 1fr 20px;
+    }
   }
 
   * {

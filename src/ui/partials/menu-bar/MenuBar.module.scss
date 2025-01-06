@@ -1,0 +1,29 @@
+@use '/styles';
+
+.menuOverlay {
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  width: 100%;
+  z-index: calc(styles.$z-index-max - 1);
+}
+
+.menuBar {
+  display: flex;
+  place-items: center;
+  padding-left: 10px;
+  z-index: styles.$z-index-max;
+
+  .pixoree {
+    font-weight: 800;
+    margin-right: 10px;
+  }
+}
+
+.disclaimer {
+  width: 100%;
+  text-align: right;
+  color: #c0b200;
+  font-weight: 800;
+  margin-right: 10px;
+}

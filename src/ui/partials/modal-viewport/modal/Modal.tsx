@@ -1,4 +1,4 @@
-import { Pixoree } from '@/controller'
+import { Pixoree } from '@/controllers'
 import { getElementCoordinatesFromMouseEvent } from '@/tools/utils/event'
 import { modalCatalog } from '../modals/catalog'
 import { useEvent } from '@/tools/hooks'
@@ -29,7 +29,7 @@ export const Modal = () => {
 
   const getModalComponent = () => {
     return (Pixoree.modal.activeModal
-      ? modalCatalog[Pixoree.modal.activeModal.name](Pixoree.modal.activeModal.params)
+      ? modalCatalog[Pixoree.modal.activeModal.name](Pixoree.modal.activeModal.params as any)
       : undefined)
   }
 

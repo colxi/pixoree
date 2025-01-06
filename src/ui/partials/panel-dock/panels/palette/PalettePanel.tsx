@@ -1,6 +1,6 @@
 import { DropDown } from '@/tools/ui-components/dropdown/DropDown'
 import { PanelBox } from '../../panel-box/PanelBox'
-import { Pixoree } from '@/controller'
+import { Pixoree } from '@/controllers'
 import { formatHexColorAsRgba } from '@/tools/utils/formatters'
 import { isColorEqual } from '@/tools/utils/image'
 import { useEffect } from 'react'

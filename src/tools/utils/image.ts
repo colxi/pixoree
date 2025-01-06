@@ -1,11 +1,7 @@
 import { formatHexColorAsRgba } from './formatters'
 import type { Coordinates, HexColor, RgbaColor, Size } from '@/types'
 
-export const getImageByteIndexFromCoordinates = (
-  x: number,
-  y: number,
-  imageWidth: number
-): number => {
+export const getImageByteIndexFromCoordinates = (x: number, y: number, imageWidth: number): number => {
   x = Math.floor(x)
   y = Math.floor(y)
   imageWidth = Math.floor(imageWidth)
@@ -13,10 +9,7 @@ export const getImageByteIndexFromCoordinates = (
   return byteOffset
 }
 
-export const getImageCoordinatesFromByteIndex = (
-  byteIndex: number,
-  imageSize: Size
-): Coordinates => {
+export const getImageCoordinatesFromByteIndex = (byteIndex: number, imageSize: Size): Coordinates => {
   const bytesPerRow = imageSize.w * 4
   const y = Math.floor(byteIndex / bytesPerRow)
   const x = (byteIndex % bytesPerRow) / 4
@@ -31,13 +24,9 @@ export const isTransparentColor = (color: RgbaColor | HexColor): boolean => {
 export const getImageColorFromCoordinates = (
   coordinates: Coordinates,
   size: Size,
-  imageBuffer: Uint8ClampedArray
+  imageBuffer: Uint8ClampedArray,
 ): RgbaColor => {
-  const byteIndex = getImageByteIndexFromCoordinates(
-    coordinates.x,
-    coordinates.y,
-    size.w
-  )
+  const byteIndex = getImageByteIndexFromCoordinates(coordinates.x, coordinates.y, size.w)
   const color = {
     r: imageBuffer[byteIndex + 0],
     g: imageBuffer[byteIndex + 1],
@@ -47,10 +36,7 @@ export const getImageColorFromCoordinates = (
   return color
 }
 
-export const getColorFromByteIndex = (
-  byteIndex: number,
-  imageBuffer: Uint8ClampedArray
-): RgbaColor => {
+export const getColorFromByteIndex = (byteIndex: number, imageBuffer: Uint8ClampedArray): RgbaColor => {
   const color: RgbaColor = {
     r: imageBuffer[byteIndex + 0],
     g: imageBuffer[byteIndex + 1],
@@ -65,7 +51,7 @@ export const setColorInCoordinates = (
   y: number,
   imageWidth: number,
   imageBuffer: Uint8ClampedArray,
-  color: RgbaColor
+  color: RgbaColor,
 ): void => {
   const byteIndex = getImageByteIndexFromCoordinates(x, y, imageWidth)
   imageBuffer[byteIndex + 0] = color.r
@@ -74,16 +60,27 @@ export const setColorInCoordinates = (
   imageBuffer[byteIndex + 3] = color.a
 }
 
-export const isColorEqual = (
-  color1: RgbaColor | HexColor,
-  color2: RgbaColor | HexColor
-): boolean => {
+export const isColorEqual = (color1: RgbaColor | HexColor, color2: RgbaColor | HexColor): boolean => {
   if (typeof color1 === 'string') color1 = formatHexColorAsRgba(color1)
   if (typeof color2 === 'string') color2 = formatHexColorAsRgba(color2)
-  return (
-    color1.r === color2.r &&
-    color1.g === color2.g &&
-    color1.b === color2.b &&
-    color1.a === color2.a
-  )
+  return color1.r === color2.r && color1.g === color2.g && color1.b === color2.b && color1.a === color2.a
+}
+
+export const getImageDataFromImage = (imageEl: HTMLImageElement): ImageData => {
+  let canvas = new OffscreenCanvas(imageEl.width, imageEl.height)
+  const context = canvas.getContext('2d')
+  if (!context) throw new Error('Could not get 2d context')
+  context.drawImage(imageEl, 0, 0)
+  const data = context.getImageData(0, 0, imageEl.width, imageEl.height)
+  return data
+}
+
+export const getImageDataFromBuffer = (buffer: Uint8ClampedArray, size: Size): ImageData => {
+  let canvas = new OffscreenCanvas(size.w, size.h)
+  const context = canvas.getContext('2d')
+  const imageData = new ImageData(buffer, size.w, size.h)
+  if (!context) throw new Error('Could not get 2d context')
+  context.putImageData(imageData, 0, 0)
+  const data = context.getImageData(0, 0, size.w, size.h)
+  return data
 }
