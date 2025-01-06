@@ -5,7 +5,7 @@
   "homepage": "https://colxi.info/pixoree/",
   "version": "0.0.6-alpha",
   "pre-commit": [
-    "updateCommitId"
+    "test"
   ],
   "type": "module",
   "scripts": {
