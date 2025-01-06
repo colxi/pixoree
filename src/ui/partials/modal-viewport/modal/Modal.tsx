@@ -29,7 +29,7 @@ export const Modal = () => {
 
   const getModalComponent = () => {
     return (Pixoree.modal.activeModal
-      ? modalCatalog[Pixoree.modal.activeModal.name](Pixoree.modal.activeModal.params)
+      ? modalCatalog[Pixoree.modal.activeModal.name](Pixoree.modal.activeModal.params as any)
       : undefined)
   }
 
